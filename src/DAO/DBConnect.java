@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBConnect {
 
@@ -109,6 +110,51 @@ public class DBConnect {
 		}
 		ps.close();
 		conn.close();
+	}
+	
+	public Item getItem(String itemid) throws Exception {		
+		String str = "Select * from item where itemid = " + itemid ;
+		Connection conn = this.Connect2MySQL();	
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		Item i = new Item();
+		if(rs.next()){
+		i.setitemname(rs.getString("itemname"));
+		i.setitemcate(rs.getString("itemcate"));
+		i.setitemcond(rs.getString("itemcond"));
+		i.setitemprice(rs.getString("itemprice"));
+		i.setitemcount(rs.getString("itemcount"));
+		i.setiteminfo(rs.getString("iteminfo"));
+		i.setitemseller(rs.getString("itemseller"));
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return i;
+	}
+	
+	public ArrayList<Item> getAllItem() throws Exception {
+		ArrayList<Item> itemlist = new ArrayList<Item>();
+		String Str = "SELECT * FROM item";	
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);	
+		while(rs.next()){
+			Item i = new Item();
+			i.setitemid(rs.getString("itemid"));
+			i.setitemname(rs.getString("itemname"));
+			i.setitemcate(rs.getString("itemcate"));
+			i.setitemcond(rs.getString("itemcond"));
+			i.setitemprice(rs.getString("itemprice"));
+			i.setitemcount(rs.getString("itemcount"));
+			i.setiteminfo(rs.getString("iteminfo"));
+			i.setitemseller(rs.getString("itemseller"));
+			itemlist.add(i);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return itemlist;
 	}
 	
 }

@@ -8,9 +8,7 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>购物车</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="iecss.css" />
-<![endif]-->
+
 <script type="text/javascript" src="js/boxOver.js"></script>
 <script>
 PositionX = 100;
@@ -44,7 +42,6 @@ else writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();do
 writeln('<img name="George" src='+imageURL+' style="display:block"></body></html>');
 close();		
 }}
-
 </script>
 </head>
 <body>

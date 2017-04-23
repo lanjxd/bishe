@@ -120,21 +120,19 @@ close();
     
     	<div class="prod_box_big">
 
-            <div class="center_prod_box_big">            
-                 
+            <div class="center_prod_box_big">       
                  <div class="product_img_big">
-                 <a href="javascript:popImage('images/p1.jpg')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="images/p1.jpg" alt="" title="" border="0" /></a>
-                 
+                 	<a href="javascript:popImage('images/p1.jpg')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="images/p1.jpg" alt="" title="" border="0" /></a>
                  </div>
-                     <div class="details_big_box">
-                         <a href="details.jsp" class="product_title_big">长袖连衣裙</a>
-                         <div class="specifications">
-                            卖家: <span class="blue">系统管理员</span><br/>
-							价格: <span class="blue">￥ 150</span><br/>
-                         </div>
-                         <a href="addtocart.jsp" class="prod_buy">添加到购物车</a>
-                         <a href="details.jsp" class="prod_favor">删 除</a>
-                     </div>                        
+                 <div class="details_big_box">
+                 	<a href="details.jsp" class="product_title_big">长袖连衣裙</a>
+                    <div class="specifications">
+                    	卖家: <span class="blue">系统管理员</span><br/>
+						价格: <span class="blue">￥ 150</span><br/>
+                    </div>
+                    <a href="addtocart.jsp" class="prod_buy">添加到购物车</a>
+                    <a href="details.jsp" class="prod_favor">删 除</a>
+                 </div>                        
             </div>
                               
         </div>

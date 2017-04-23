@@ -1,12 +1,14 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" %>
-
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*" %>
+<% 
+request.setCharacterEncoding("UTF-8"); 
+response.setCharacterEncoding("UTF-8"); 
+response.setContentType("text/html; charset=utf-8"); 
+%>
 <html>
 <head>
-<title>长袖连衣裙</title>
+<title>商品详情</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="iecss.css" />
-<![endif]-->
+
 <script type="text/javascript" src="js/boxOver.js"></script>
 <script>
 PositionX = 100;
@@ -40,10 +42,15 @@ else writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();do
 writeln('<img name="George" src='+imageURL+' style="display:block"></body></html>');
 close();		
 }}
-
 </script>
 </head>
 <body>
+
+<%
+	DBConnect conn = new DBConnect(); 
+	Item i = new Item();
+	i = conn.getItem(request.getParameter("itemid"));
+%>
 
 <div id="main_container">
 
@@ -98,7 +105,7 @@ close();
 
    <div class="center_content">
    
-   	<div class="center_title_bar">长袖连衣裙</div>
+   	<div class="center_title_bar"><%=i.getitemname() %></div>
     
     	<div class="prod_box_big">
 
@@ -109,23 +116,23 @@ close();
                  
                  </div>
                      <div class="details_big_box">
-                         <div class="product_title_big">长袖连衣裙</div>
+                         <div class="product_title_big"><%=i.getitemname() %></div>
                          <div class="specifications">
-							卖家: <span class="blue">系统管理员</span><br/>
+							卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
 							
-                            库存: <span class="blue">99</span><br/>
-
-                            成色: <span class="blue">9成新</span><br/>
+							库存: <span class="blue"><%=i.getitemcount() %></span><br/>
+							
+							成色: <span class="blue"><%=i.getitemcond() %></span><br/>
                             
-                            商品描述: <span class="blue"> </span><br/>
+							 商品描述: <span class="blue"><%=i.getiteminfo() %></span><br/>
                          </div>
-                         <div class="prod_price_big">单价：<span class="price">￥ 150</span></div>
+                         <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
 						 <br/><br/>
                          <label>数量: </label>
 						 <input type="text" name="number" class="number_input" value="1"/>
 						 <br/><br/>
-                         <a href="addtocart.jsp" class="prod_buy">加入购物车</a>
-                         <a href="myfavor.jsp" class="prod_favor">收 藏</a>
+                         <a href="login.jsp" class="prod_buy">加入购物车</a>
+                         <a href="login.jsp" class="prod_favor">收 藏</a>
                      </div>                        
             </div>
                               
@@ -144,7 +151,7 @@ close();
         	<div class="title_box">购 物 车</div>
             
             <div class="cart_details">
-            ~ 空空如也 ~<br/>
+            <br/>
             <span class="border_cart"></span>
             总 价:<span class="price">￥ 0</span>
             </div>

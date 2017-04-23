@@ -6,11 +6,9 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <html>
 <head>
-<title>长袖连衣裙</title>
+<title>商品详情</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="iecss.css" />
-<![endif]-->
+
 <script type="text/javascript" src="js/boxOver.js"></script>
 <script>
 PositionX = 100;
@@ -44,7 +42,6 @@ else writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();do
 writeln('<img name="George" src='+imageURL+' style="display:block"></body></html>');
 close();		
 }}
-
 </script>
 </head>
 <body>
@@ -53,6 +50,10 @@ close();
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();
+	
+	DBConnect conn = new DBConnect(); 
+	Item i = new Item();
+	i = conn.getItem(request.getParameter("itemid"));
 %>
 
 <div id="main_container">
@@ -116,7 +117,7 @@ close();
 
    <div class="center_content">
    
-   	<div class="center_title_bar">长袖连衣裙</div>
+   	<div class="center_title_bar"><%=i.getitemname() %></div>
     
     	<div class="prod_box_big">
 
@@ -127,17 +128,17 @@ close();
                  
                  </div>
                      <div class="details_big_box">
-                         <div class="product_title_big">长袖连衣裙</div>
+                         <div class="product_title_big"><%=i.getitemname() %></div>
                          <div class="specifications">
-							卖家: <span class="blue">系统管理员</span><br/>
+							卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
 							
-                            库存: <span class="blue">99</span><br/>
-
-                            成色: <span class="blue">9成新</span><br/>
+							库存: <span class="blue"><%=i.getitemcount() %></span><br/>
+							
+							成色: <span class="blue"><%=i.getitemcond() %></span><br/>
                             
-                            商品描述: <span class="blue"> </span><br/>
+							 商品描述: <span class="blue"><%=i.getiteminfo() %></span><br/>
                          </div>
-                         <div class="prod_price_big">单价：<span class="price">￥ 150</span></div>
+                         <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
 						 <br/><br/>
                          <label>数量: </label>
 						 <input type="text" name="number" class="number_input" value="1"/>
@@ -164,7 +165,7 @@ close();
             <div class="cart_details">
             <br/>
             <span class="border_cart"></span>
-            总 价:<span class="price">￥ 0</span>
+           	 总 价:<span class="price">￥ 0</span>
             </div>
             
             <div class="cart_icon"><a href="#" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
