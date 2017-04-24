@@ -49,7 +49,7 @@ close();
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">

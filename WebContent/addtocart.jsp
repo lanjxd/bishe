@@ -57,7 +57,7 @@ close();
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -131,8 +131,8 @@ close();
                          </div>
                          
 						 <br/><br/>
-                         <a href="index2.jsp" class="prod_buy">继续购物</a>
-                         <a href="details.jsp" class="prod_favor">删 除</a>
+                         <a href="index1.jsp" class="prod_buy">继续购物</a>
+                         <a href="item1.jsp" class="prod_favor">删 除</a>
                      </div>                        
             </div>
                               
@@ -151,7 +151,7 @@ close();
         	<div class="title_box">购 物 车</div>
             
             <div class="cart_details">
-            <a href="details1.jsp" class="product_title_big">长袖连衣裙</a> ×1
+            <a href="item1.jsp" class="product_title_big">长袖连衣裙</a> ×1
 			<br/>
             <span class="border_cart"></span>
             总 价:<span class="price">￥ 150</span>

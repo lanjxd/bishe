@@ -29,7 +29,7 @@ response.setContentType("text/html; charset=utf-8");
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -99,7 +99,7 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<div class='center_prod_box'>");
             out.println("<div class='product_title'>");
             out.println(i.getitemname());
-            out.println("</a></div>");
+            out.println("</div>");
             out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
             out.println("<div class='prod_price'><span class='price'>￥");
             out.println(i.getitemprice());
@@ -107,7 +107,7 @@ response.setContentType("text/html; charset=utf-8");
             out.println("</div>");
             out.println("<div class='prod_details_tab'>");
             out.println("<a href='addtocart.jsp' class='prod_buy'>加入购物车</a>");
-            out.println("<a href='details1.jsp?itemid=");
+            out.println("<a href='item1.jsp?itemid=");
             out.println(j);
             out.println("' class='prod_details'>详情</a>");
             out.println("</div>");

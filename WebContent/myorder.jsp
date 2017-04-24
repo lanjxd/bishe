@@ -60,7 +60,7 @@ close();
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -127,7 +127,7 @@ close();
                  
                  </div>
                      <div class="details_big_box">
-                         <a href="details.jsp" class="product_title_big">长袖连衣裙</a>
+                         <a href="item.jsp" class="product_title_big">长袖连衣裙</a>
                          <div class="specifications">
                             卖家: <span class="blue">系统管理员</span><br/>
 							价格: <span class="blue">￥ 150</span><br/>

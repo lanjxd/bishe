@@ -25,7 +25,7 @@ response.setContentType("text/html; charset=utf-8");
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -93,7 +93,7 @@ response.setContentType("text/html; charset=utf-8");
             out.println("</div>");
             out.println("<div class='prod_details_tab'>");
             out.println("<a href='login.jsp' class='prod_buy'>加入购物车</a>");
-            out.println("<a href='details.jsp?itemid=");
+            out.println("<a href='item.jsp?itemid=");
             out.println(j);
             out.println("' class='prod_details'>详情</a>");
             out.println("</div>");

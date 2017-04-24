@@ -157,4 +157,38 @@ public class DBConnect {
 		return itemlist;
 	}
 	
+	public void favor(String favoruser, String favoritem) throws Exception {
+		java.util.Date now = new java.util.Date();
+		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
+		String str = "INSERT INTO `bishe`.`favor` (`favoruser`, `favoritem`, `favortime`) VALUES (?,?,?);";		
+		Connection conn = this.Connect2MySQL();
+		PreparedStatement ps = conn.prepareStatement(str);
+		ps.setString(1, favoruser);
+		ps.setString(2, favoritem);
+		ps.setTimestamp(3, ts);
+		if(ps.executeUpdate()==1){
+			System.out.println("itemid " + favoritem + " favored by user <" + favoruser + ">");
+		}
+		ps.close();
+		conn.close();
+	}
+	
+	public ArrayList<Favor> getMyfavor(String favoruser) throws Exception {
+		ArrayList<Favor> myfavor = new ArrayList<Favor>();
+		String Str = "SELECT * FROM favor where favoruser = '" + favoruser + "'";	
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);	
+		while(rs.next()){
+			Favor f = new Favor();
+			f.setfavoritem(rs.getString("favoritem"));
+			f.setfavortime(rs.getString("favortime"));
+			myfavor.add(f);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return myfavor;
+	}
+	
 }

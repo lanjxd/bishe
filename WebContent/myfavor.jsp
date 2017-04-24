@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*, java.util.ArrayList" %>
 <% 
 request.setCharacterEncoding("UTF-8"); 
 response.setCharacterEncoding("UTF-8"); 
@@ -15,7 +15,6 @@ response.setContentType("text/html; charset=utf-8");
 <script>
 PositionX = 100;
 PositionY = 100;
-
 
 defaultWidth  = 500;
 defaultHeight = 500;
@@ -53,6 +52,11 @@ close();
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();
+	
+	DBConnect conn = new DBConnect();
+	ArrayList<Favor> favorlist = new ArrayList<Favor>();
+    favorlist = conn.getMyfavor(username);
+    Favor f = new Favor();
 %>
 
 <div id="main_container">
@@ -60,7 +64,7 @@ close();
 	<div id="header">
 
         <div class="top_right">
-			<h1>中 财 二 手 服 装 交 易 网</h1>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -73,7 +77,7 @@ close();
    
             <div id="menu_tab">
                     <ul class="menu">
-                         <li><a href="index2.jsp" class="nav">首 页</a></li>
+                         <li><a href="index1.jsp" class="nav">首 页</a></li>
                          <li class="divider"></li>
                          <li><a href="upload.jsp" class="nav">发 布 新 商 品</a></li>
                          <li class="divider"></li>
@@ -118,24 +122,40 @@ close();
    
    	<div class="center_title_bar">我收藏的商品</div>
     
-    	<div class="prod_box_big">
-
-            <div class="center_prod_box_big">       
-                 <div class="product_img_big">
-                 	<a href="javascript:popImage('images/p1.jpg')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="images/p1.jpg" alt="" title="" border="0" /></a>
-                 </div>
-                 <div class="details_big_box">
-                 	<a href="details.jsp" class="product_title_big">长袖连衣裙</a>
-                    <div class="specifications">
-                    	卖家: <span class="blue">系统管理员</span><br/>
-						价格: <span class="blue">￥ 150</span><br/>
-                    </div>
-                    <a href="addtocart.jsp" class="prod_buy">添加到购物车</a>
-                    <a href="details.jsp" class="prod_favor">删 除</a>
-                 </div>                        
-            </div>
-                              
-        </div>
+    	<%
+    
+    	for(int i = favorlist.size(); i > 0 ; i--){
+    		
+    		f = favorlist.get(i-1);
+    		String itemname = conn.getItem(f.getfavoritem()).getitemname();
+    		String itemseller = conn.getItem(f.getfavoritem()).getitemseller();
+    		String itemprice = conn.getItem(f.getfavoritem()).getitemprice();
+    		
+    		out.println("<div class='prod_box'>");
+            out.println("<div class='center_prod_box'>");
+            out.println("<a href='item1.jsp?itemid=");
+            out.println(f.getfavoritem());
+            out.println("' class='product_title'>");
+            out.println(itemname);
+            out.println("</a>");
+            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
+            out.println("<div class='specifications'>卖家: <span class='blue'>");
+            out.println(itemseller);
+            out.println("</span><br/>价格: <span class='blue'>￥");	
+            out.println(itemprice);
+            out.println("</span><br/>收藏时间: <span class='blue'>");	
+            out.println(f.getfavortime());
+            out.println("</span><br/></div>");	
+            out.println("<a href='addtocart.jsp' class='prod_buy'>添加到购物车</a>");
+            out.println("<a href='dealUnfavor.jsp?id=");
+            out.println(f.getfavoritem());
+            out.println("' class='prod_details'>取消收藏</a>");
+            out.println("</div>");
+            out.println("</div>");
+            
+    	}
+    
+ 	%>
     
    </div><!-- end of center content -->
 

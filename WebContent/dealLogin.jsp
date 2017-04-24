@@ -25,7 +25,7 @@ response.setContentType("text/html; charset=utf-8");
 	}
 	else {
 		System.out.println("login fail");
-		out.println("<script language='javascript'>alert('用户名或密码错误，请重新输入！');window.location.href='login.jsp';</script>");
+		out.println("<script language='javascript'>alert('用户名或密码错误，请重新输入！');window.location.href = document.referrer;</script>");
 	}
 %>
 </body>

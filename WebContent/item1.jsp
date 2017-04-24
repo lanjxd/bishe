@@ -47,9 +47,14 @@ close();
 <body>
 
 <%
+	User u = new User();
+	u = (User)session.getAttribute("currentUser");
+	String username = u.getUsername();
+	
 	DBConnect conn = new DBConnect(); 
 	Item i = new Item();
-	i = conn.getItem(request.getParameter("itemid"));
+	String id = request.getParameter("itemid");
+	i = conn.getItem(id);
 %>
 
 <div id="main_container">
@@ -57,7 +62,7 @@ close();
 	<div id="header">
 
         <div class="top_right">
-			<p>中 财 二 手 服 装 交 易 网</p>        
+			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
         <div id="logo">
@@ -70,11 +75,19 @@ close();
    
             <div id="menu_tab">
                     <ul class="menu">
-                         <li><a href="index.jsp" class="nav">首 页</a></li>
+                         <li><a href="index1.jsp" class="nav">首 页</a></li>
                          <li class="divider"></li>
-                         <li><a href="login.jsp" class="nav">登 录</a></li>
+                         <li><a href="upload.jsp" class="nav">发 布 新 商 品</a></li>
                          <li class="divider"></li>
-                         <li><a href="register.jsp" class="nav">注 册</a></li>
+                         <li><a href="myorder.jsp" class="nav">我 的 订 单</a></li>
+						 <li class="divider"></li>
+                         <li><a href="myfavor.jsp" class="nav">收 藏 夹</a></li>
+                         <li class="divider"></li>
+                         <li><a href="myinfor.jsp" class="nav">个 人 信 息</a></li>
+						 <li class="divider"></li>
+                         <li><a href="index.jsp" class="nav">登 出</a></li>
+						 <li class="divider"></li>
+						 <li class="username"><%=username %></li>
                      </ul>
 
             </div><!-- end of menu tab -->
@@ -129,10 +142,10 @@ close();
                          <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
 						 <br/><br/>
                          <label>数量: </label>
-						 <input type="text" name="number" class="number_input" value="1"/>
+						 <input type="text" name="buynumber" class="number_input" value="1"/>
 						 <br/><br/>
-                         <a href="login.jsp" class="prod_buy">加入购物车</a>
-                         <a href="login.jsp" class="prod_favor">收 藏</a>
+                         <a href="addtocart.jsp" class="prod_buy">加入购物车</a>
+                         <a href="dealFavor.jsp?id=<%=id %>" class="prod_favor">收 藏</a>
                      </div>                        
             </div>
                               
@@ -153,7 +166,7 @@ close();
             <div class="cart_details">
             <br/>
             <span class="border_cart"></span>
-            总 价:<span class="price">￥ 0</span>
+           	 总 价:<span class="price">￥ 0</span>
             </div>
             
             <div class="cart_icon"><a href="#" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
