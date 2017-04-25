@@ -20,7 +20,7 @@ response.setContentType("text/html; charset=utf-8");
 
 	conn.alterUserInfo(username, userpwd, usernick, usermail, userphone, useradd);
 	
-	out.println("<script language='javascript'>alert('用户信息修改成功！');window.location.href = document.referrer;</script>");
+	out.println("<script language='javascript'>alert('用户信息修改成功！请重新登录！');window.location.href='login.jsp';</script>");
 %>
 </body>
 </html>

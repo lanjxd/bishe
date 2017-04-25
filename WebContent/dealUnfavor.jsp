@@ -15,8 +15,8 @@ response.setContentType("text/html; charset=utf-8");
 	String favoritem = request.getParameter("id");
 	
 	DBConnect conn = new DBConnect();	
-	conn.favor(favoruser, favoritem);	
-	out.println("<script language='javascript'>alert('收藏成功！');window.location.replace(document.referrer);</script>");
+	conn.unfavor(favoruser, favoritem);	
+	out.println("<script language='javascript'>alert('已取消收藏！');window.location.replace(document.referrer);</script>");
 %>
 </body>
 </html>

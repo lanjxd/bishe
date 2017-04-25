@@ -6,10 +6,8 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <html>
 <head>
-<title>中财二手服装交易网</title>
+<title>中 财 二 手 义 卖</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-
-<script type="text/javascript" src="js/boxOver.js"></script>
 </head>
 <body>
 
@@ -98,20 +96,15 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
             out.println("<div class='product_title'>");
+            out.println("<a href='item1.jsp?itemid=");
+            out.println(j);
+            out.println("'>");
             out.println(i.getitemname());
-            out.println("</div>");
+            out.println("</a></div>");
             out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
             out.println("<div class='prod_price'><span class='price'>￥");
             out.println(i.getitemprice());
-            out.println("</span></div>");
-            out.println("</div>");
-            out.println("<div class='prod_details_tab'>");
-            out.println("<a href='addtocart.jsp' class='prod_buy'>加入购物车</a>");
-            out.println("<a href='item1.jsp?itemid=");
-            out.println(j);
-            out.println("' class='prod_details'>详情</a>");
-            out.println("</div>");
-            out.println("</div>");
+            out.println("</span></div></div></div>");
             
     	}
     
@@ -129,23 +122,12 @@ response.setContentType("text/html; charset=utf-8");
 
  <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div>  
-		<input type="text" name="search" class="search_input" value=""/>
-		<a href="search.jsp" class="prod_details">搜 索</a>
-        <br/><br/>
-     
-   		<div class="shopping_cart">
-        	<div class="title_box">购 物 车</div>
-            
-            <div class="cart_details">
-            ~ 空空如也 ~<br/>
-            <span class="border_cart"></span>
-            总 价:<span class="price">￥ 0</span>
-            </div>
-            
-            <div class="cart_icon"><a href="#" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
-        
-        </div>
+		<div class="title_box">商 品 搜 索</div><br/>		
+		<form method="post" action="dealSearch.jsp">				  
+			<input type="text" name="search"/>
+			<br/><br/>
+			<input type="submit" value="搜索"/>			
+        </form>
    
    </div><!-- end of right content -->   
         
@@ -153,7 +135,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中财二手服装交易网. All Rights Reserved 2017</p>
+        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
 

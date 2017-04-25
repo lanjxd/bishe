@@ -8,44 +8,6 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>结算</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="iecss.css" />
-<![endif]-->
-<script type="text/javascript" src="js/boxOver.js"></script>
-<script>
-PositionX = 100;
-PositionY = 100;
-
-
-defaultWidth  = 500;
-defaultHeight = 500;
-var AutoClose = true;
-
-if (parseInt(navigator.appVersion.charAt(0))>=4){
-var isNN=(navigator.appName=="Netscape")?1:0;
-var isIE=(navigator.appName.indexOf("Microsoft")!=-1)?1:0;}
-var optNN='scrollbars=no,width='+defaultWidth+',height='+defaultHeight+',left='+PositionX+',top='+PositionY;
-var optIE='scrollbars=no,width=150,height=100,left='+PositionX+',top='+PositionY;
-function popImage(imageURL,imageTitle){
-if (isNN){imgWin=window.open('about:blank','',optNN);}
-if (isIE){imgWin=window.open('about:blank','',optIE);}
-with (imgWin.document){
-writeln('<html><head><title>Loading...</title><style>body{margin:0px;}</style>');writeln('<sc'+'ript>');
-writeln('var isNN,isIE;');writeln('if (parseInt(navigator.appVersion.charAt(0))>=4){');
-writeln('isNN=(navigator.appName=="Netscape")?1:0;');writeln('isIE=(navigator.appName.indexOf("Microsoft")!=-1)?1:0;}');
-writeln('function reSizeToImage(){');writeln('if (isIE){');writeln('window.resizeTo(300,300);');
-writeln('width=300-(document.body.clientWidth-document.images[0].width);');
-writeln('height=300-(document.body.clientHeight-document.images[0].height);');
-writeln('window.resizeTo(width,height);}');writeln('if (isNN){');       
-writeln('window.innerWidth=document.images["George"].width;');writeln('window.innerHeight=document.images["George"].height;}}');
-writeln('function doTitle(){document.title="'+imageTitle+'";}');writeln('</sc'+'ript>');
-if (!AutoClose) writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();doTitle();self.focus()">')
-else writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();doTitle();self.focus()" onblur="self.close()">');
-writeln('<img name="George" src='+imageURL+' style="display:block"></body></html>');
-close();		
-}}
-
-</script>
 </head>
 <body>
 
@@ -53,6 +15,7 @@ close();
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();
+	String id = request.getParameter("id");
 %>
 
 <div id="main_container">
@@ -73,7 +36,7 @@ close();
    
             <div id="menu_tab">
                     <ul class="menu">
-                         <li><a href="index2.jsp" class="nav">首 页</a></li>
+                         <li><a href="index1.jsp" class="nav">首 页</a></li>
                          <li class="divider"></li>
                          <li><a href="upload.jsp" class="nav">发 布 新 商 品</a></li>
                          <li class="divider"></li>
@@ -116,16 +79,44 @@ close();
 
    <div class="center_content">
    
-   	<div class="center_title_bar"></div>
+   	<div class="center_title_bar">选 择 支 付 方 式</div>
     
     	<div class="prod_box_big">
 
             <div class="center_prod_box_big">   
 			
-					<label><strong>支付成功！</strong></label>
-					<br/><br/>
-                    <a href="myorder.jsp" class="prod_buy">我的订单</a>
-                       
+                <div class="contact_form">
+                    
+					<form>
+					
+                    <div class="form_row">
+                    <input type="radio" name="pay" value="alipay" class="number_input" checked/>
+					<label><strong>支 付 宝</strong></label>
+                    </div> 
+					
+					<div class="form_row">
+                    <input type="radio" name="pay" value="wechat" class="number_input" />
+					<label><strong>微 信</strong></label>
+                    </div>
+					
+                    <div class="form_row">
+                    <input type="radio" name="pay" value="credit" class="number_input" />
+					<label><strong>信 用 卡</strong></label>
+                    </div>
+
+                    <div class="form_row">
+                    <input type="radio" name="pay" value="cod" class="number_input" />
+					<label><strong>货 到 付 款</strong></label>
+                    </div>
+                    
+                    <div class="form_row">
+                    <a href="dealPay.jsp?id=<%=id %>" class="prod_buy">支 付</a>
+                    </div>      
+                    
+					</form>
+					
+                </div> 
+                               
             </div>
                               
         </div>
@@ -134,24 +125,12 @@ close();
 
  <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div>  
-		<input type="text" name="search" class="search_input" value=""/>
-		<a href="search.jsp" class="prod_details">搜 索</a>
-        <br/><br/>
-     
-   		<div class="shopping_cart">
-        	<div class="title_box">购 物 车</div>
-            
-            <div class="cart_details">
-            
-			<br/>
-            <span class="border_cart"></span>
-            总 价:<span class="price">￥ 0</span>
-            </div>
-            
-            <div class="cart_icon"><a href="checkout.jsp" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
-        
-        </div>
+		<div class="title_box">商 品 搜 索</div><br/>		
+		<form method="post" action="dealSearch.jsp">				  
+			<input type="text" name="search"/>
+			<br/><br/>
+			<input type="submit" value="搜索"/>			
+        </form>
    
    </div><!-- end of right content -->   
         
@@ -159,7 +138,7 @@ close();
    
    <div class="footer">
    
-        <p>中财二手服装交易网. All Rights Reserved 2017</p>
+        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
 

@@ -55,6 +55,7 @@ close();
 	Item i = new Item();
 	String id = request.getParameter("itemid");
 	i = conn.getItem(id);
+	boolean favored = conn.chkFavor(username, id);
 %>
 
 <div id="main_container">
@@ -128,7 +129,8 @@ close();
                  <a href="javascript:popImage('images/p1.jpg')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="images/p1.jpg" alt="" title="" border="0" /></a>
                  
                  </div>
-                     <div class="details_big_box">
+                 <div class="details_big_box">
+                 	 <form method="post" action="dealOrder.jsp?id=<%=id %>" name="orderForm">
                          <div class="product_title_big"><%=i.getitemname() %></div>
                          <div class="specifications">
 							卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
@@ -144,9 +146,22 @@ close();
                          <label>数量: </label>
 						 <input type="text" name="buynumber" class="number_input" value="1"/>
 						 <br/><br/>
-                         <a href="addtocart.jsp" class="prod_buy">加入购物车</a>
-                         <a href="dealFavor.jsp?id=<%=id %>" class="prod_favor">收 藏</a>
-                     </div>                        
+                         <input type="submit" value="买买买"/>
+                         
+                     <%
+                         if(favored){
+                        	 out.println("<a href='dealUnfavor.jsp?id=");
+                             out.println(id);
+                             out.println("'>取消收藏</a>");		 
+                         }
+                         else{
+                             out.println("<a href='dealFavor.jsp?id=");
+                             out.println(id);
+                             out.println("'>收 藏</a>");
+                         }
+                     %>
+                     </form>    
+                 </div>                        
             </div>
                               
         </div>
@@ -155,31 +170,20 @@ close();
 
  <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div>  
-		<input type="text" name="search" class="search_input" value=""/>
-		<a href="search.jsp" class="prod_details">搜 索</a>
-        <br/><br/>
-     
-   		<div class="shopping_cart">
-        	<div class="title_box">购 物 车</div>
-            
-            <div class="cart_details">
-            <br/>
-            <span class="border_cart"></span>
-           	 总 价:<span class="price">￥ 0</span>
-            </div>
-            
-            <div class="cart_icon"><a href="#" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
+		<div class="title_box">商 品 搜 索</div><br/>		
+		<form method="post" action="dealSearch.jsp">				  
+			<input type="text" name="search"/>
+			<br/><br/>
+			<input type="submit" value="搜索"/>			
+        </form>
         
-        </div>
-   
    </div><!-- end of right content -->   
         
    </div><!-- end of main content -->
    
    <div class="footer">
    
-        <p>中财二手服装交易网. All Rights Reserved 2017</p>
+        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
 

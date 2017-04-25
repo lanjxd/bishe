@@ -131,8 +131,7 @@ close();
                          <label>数量: </label>
 						 <input type="text" name="number" class="number_input" value="1"/>
 						 <br/><br/>
-                         <a href="login.jsp" class="prod_buy">加入购物车</a>
-                         <a href="login.jsp" class="prod_favor">收 藏</a>
+                         <a href="login.jsp" class="prod_buy">买买买</a>
                      </div>                        
             </div>
                               
@@ -142,31 +141,20 @@ close();
 
  <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div>  
-		<input type="text" name="search" class="search_input" value=""/>
-		<a href="search.jsp" class="prod_details">搜 索</a>
-        <br/><br/>
-     
-   		<div class="shopping_cart">
-        	<div class="title_box">购 物 车</div>
-            
-            <div class="cart_details">
-            <br/>
-            <span class="border_cart"></span>
-            总 价:<span class="price">￥ 0</span>
-            </div>
-            
-            <div class="cart_icon"><a href="#" title=""><img src="images/shoppingcart.png" alt="" title="" width="35" height="35" border="0" /></a></div>
+		<div class="title_box">商 品 搜 索</div><br/>		
+		<form method="post" action="dealSearch.jsp">				  
+			<input type="text" name="search"/>
+			<br/><br/>
+			<input type="submit" value="搜索"/>			
+        </form>
         
-        </div>
-   
    </div><!-- end of right content -->   
         
    </div><!-- end of main content -->
    
    <div class="footer">
    
-        <p>中财二手服装交易网. All Rights Reserved 2017</p>
+        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
 

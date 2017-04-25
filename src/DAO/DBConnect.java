@@ -14,7 +14,7 @@ public class DBConnect {
 	}
 	
 	public boolean chkUser(String username, String userpwd) throws Exception{		
-		String chkStr = "Select * from user where username = '" + username + "' and userpwd = '" + userpwd + "'";
+		String chkStr = "Select * from `user` where username = '" + username + "' and userpwd = '" + userpwd + "'";
 		Connection conn = this.Connect2MySQL();		
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(chkStr);
@@ -36,7 +36,7 @@ public class DBConnect {
 	}
 	
 	public boolean isUserExist(String username) throws Exception{		
-		String Str = "Select * from user where username = '" + username + "'";
+		String Str = "Select * from `user` where username = '" + username + "'";
 		Connection conn = this.Connect2MySQL();		
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(Str);		
@@ -47,7 +47,7 @@ public class DBConnect {
 	}
 
 	public User saveUser(String username) throws Exception {		
-		String str = "Select * from user where username = '" + username + "'";		
+		String str = "Select * from `user` where username = '" + username + "'";		
 		Connection conn = this.Connect2MySQL();		
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);			
@@ -85,7 +85,7 @@ public class DBConnect {
 	}
 	
 	public void alterUserInfo(String username, String userpwd, String usernick, String usermail, String userphone, String useradd) throws Exception{		
-		String alterStr = "UPDATE user SET userpwd='" + userpwd + "', usernick='" + usernick + "', usermail='" +  usermail + "', userphone='" + userphone + "', useradd='" + useradd + "' WHERE username='" + username + "'";
+		String alterStr = "UPDATE `user` SET userpwd='" + userpwd + "', usernick='" + usernick + "', usermail='" +  usermail + "', userphone='" + userphone + "', useradd='" + useradd + "' WHERE username='" + username + "'";
 		System.out.println(alterStr);		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
@@ -113,7 +113,7 @@ public class DBConnect {
 	}
 	
 	public Item getItem(String itemid) throws Exception {		
-		String str = "Select * from item where itemid = " + itemid ;
+		String str = "Select * from `item` where itemid = " + itemid ;
 		Connection conn = this.Connect2MySQL();	
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
@@ -135,7 +135,7 @@ public class DBConnect {
 	
 	public ArrayList<Item> getAllItem() throws Exception {
 		ArrayList<Item> itemlist = new ArrayList<Item>();
-		String Str = "SELECT * FROM item";	
+		String Str = "SELECT * FROM `item`";	
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(Str);	
@@ -157,6 +157,17 @@ public class DBConnect {
 		return itemlist;
 	}
 	
+	public boolean chkFavor(String favoruser, String favoritem) throws Exception{		
+		String Str = "Select * from `favor` where favoruser = '" + favoruser + "' and favoritem = " + favoritem;
+		Connection conn = this.Connect2MySQL();		
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);		
+		if(rs.next()){
+			return true;
+		}
+		return false;			
+	}
+	
 	public void favor(String favoruser, String favoritem) throws Exception {
 		java.util.Date now = new java.util.Date();
 		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
@@ -173,9 +184,19 @@ public class DBConnect {
 		conn.close();
 	}
 	
+	public void unfavor(String favoruser, String favoritem) throws Exception {
+		String cancelStr = "delete from `favor` where favoruser = '" + favoruser + "' and favoritem = " + favoritem;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(cancelStr);
+		System.out.println(cancelStr);
+		stmt.close();
+		conn.close();
+	}
+	
 	public ArrayList<Favor> getMyfavor(String favoruser) throws Exception {
 		ArrayList<Favor> myfavor = new ArrayList<Favor>();
-		String Str = "SELECT * FROM favor where favoruser = '" + favoruser + "'";	
+		String Str = "SELECT * FROM `favor` where favoruser = '" + favoruser + "'";	
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(Str);	
@@ -189,6 +210,69 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 		return myfavor;
+	}
+	
+	public void newOrder(String orderitem, String buyername, String sellername, String ordercount, String ordersum, String ordercond) throws Exception {
+		java.util.Date now = new java.util.Date();
+		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
+		String str = "INSERT INTO `bishe`.`order` (`orderitem`, `buyername`, `sellername`, `ordercount`, `ordersum`, `ordercond`, `ordertime`) VALUES (?,?,?,?,?,?,?);";		
+		Connection conn = this.Connect2MySQL();
+		PreparedStatement ps = conn.prepareStatement(str);
+		ps.setString(1, orderitem);
+		ps.setString(2, buyername);
+		ps.setString(3, sellername);
+		ps.setString(4, ordercount);
+		ps.setString(5, ordersum);
+		ps.setString(6, ordercond);
+		ps.setTimestamp(7, ts);
+		if(ps.executeUpdate()==1){
+			System.out.println("new order created");
+		}
+		ps.close();
+		conn.close();
+	}
+	
+	public void cancelOrder(String orderid) throws Exception {
+		String cancelStr = "delete from `order` where orderid = " + orderid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(cancelStr);
+		System.out.println(cancelStr);
+		stmt.close();
+		conn.close();
+	}
+	
+	public ArrayList<Order> getMyorder(String username) throws Exception {
+		ArrayList<Order> myorder = new ArrayList<Order>();
+		String Str = "SELECT * FROM `order` where buyername = '" + username + "'";
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);	
+		while(rs.next()){
+			Order d = new Order();
+			d.setorderid(rs.getString("orderid"));
+			d.setorderitem(rs.getString("orderitem"));
+			d.setsellername(rs.getString("sellername"));
+			d.setordercount(rs.getString("ordercount"));
+			d.setordersum(rs.getString("ordersum"));
+			d.setordercond(rs.getString("ordercond"));
+			d.setordertime(rs.getString("ordertime"));
+			myorder.add(d);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return myorder;
+	}
+	
+	public void payOrder(String orderid) throws Exception {
+		String alterStr = "update `order` set ordercond = 'Î´·¢»õ' where orderid = " + orderid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		System.out.println(alterStr);
+		stmt.close();
+		conn.close();
 	}
 	
 }
