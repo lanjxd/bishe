@@ -54,7 +54,7 @@ response.setContentType("text/html; charset=utf-8");
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">结 算</span>
+    导 航：<span class="current">付 款</span>
     </div>        
     
    <div class="left_content">
@@ -126,7 +126,7 @@ response.setContentType("text/html; charset=utf-8");
  <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="dealSearch.jsp">				  
+		<form method="post" action="searchResult1.jsp">				  
 			<input type="text" name="search"/>
 			<br/><br/>
 			<input type="submit" value="搜索"/>			

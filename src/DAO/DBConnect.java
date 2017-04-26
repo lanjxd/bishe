@@ -275,4 +275,28 @@ public class DBConnect {
 		conn.close();
 	}
 	
+	public ArrayList<Item> getSearch(String search) throws Exception {
+		ArrayList<Item> searchlist = new ArrayList<Item>();
+		String searchStr = "SELECT * FROM `item` WHERE itemname LIKE '%" + search + "%'";	
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(searchStr);	
+		while(rs.next()){
+			Item i = new Item();
+			i.setitemid(rs.getString("itemid"));
+			i.setitemname(rs.getString("itemname"));
+			i.setitemcate(rs.getString("itemcate"));
+			i.setitemcond(rs.getString("itemcond"));
+			i.setitemprice(rs.getString("itemprice"));
+			i.setitemcount(rs.getString("itemcount"));
+			i.setiteminfo(rs.getString("iteminfo"));
+			i.setitemseller(rs.getString("itemseller"));
+			searchlist.add(i);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return searchlist;
+	}
+	
 }

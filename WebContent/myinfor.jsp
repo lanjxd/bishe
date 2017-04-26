@@ -97,7 +97,7 @@ response.setContentType("text/html; charset=utf-8");
 					
                     <div class="form_row">
                     <label><strong>密 码:</strong></label>
-                    <input type="password" class="contact_input" name="u_pwd" value="<%=userpwd %>"/>
+                    <input type="password" class="contact_input" name="u_pwd" value="<%=userpwd %>" required="required"/>
                     </div>
 
 
@@ -136,7 +136,7 @@ response.setContentType("text/html; charset=utf-8");
 <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="dealSearch.jsp">				  
+		<form method="post" action="searchResult1.jsp">				  
 			<input type="text" name="search"/>
 			<br/><br/>
 			<input type="submit" value="搜索"/>			

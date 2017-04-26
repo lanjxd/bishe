@@ -142,7 +142,7 @@ close();
  <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="dealSearch.jsp">				  
+		<form method="post" action="searchResult.jsp">				  
 			<input type="text" name="search"/>
 			<br/><br/>
 			<input type="submit" value="搜索"/>			

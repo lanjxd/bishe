@@ -88,27 +88,27 @@ response.setContentType("text/html; charset=utf-8");
                     <form method="post" action="dealUpload.jsp" name="uploadForm">       
                     <div class="form_row">
                     <label><strong>名 称:</strong></label>
-                    <input type="text" class="contact_input" name="i_name"/>
+                    <input type="text" class="contact_input" name="i_name" required="required"/>
                     </div>  
 
                     <div class="form_row">
                     <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate"/>
+                    <input type="text" class="contact_input" name="i_cate" required="required"/>
                     </div>
 
                     <div class="form_row">
                     <label><strong>状 态:</strong></label>
-                    <input type="text" class="contact_input" name="i_cond"/>
+                    <input type="text" class="contact_input" name="i_cond" required="required"/>
                     </div>
 					
 					<div class="form_row">
                     <label><strong>单 价:</strong></label>
-                    <input type="text" class="contact_input" name="i_price"/>
+                    <input type="text" class="contact_input" name="i_price" required="required"/>
                     </div>
 
 					<div class="form_row">
                     <label><strong>数 量:</strong></label>
-                    <input type="text" class="contact_input" name="i_count"/>
+                    <input type="text" class="contact_input" name="i_count" required="required"/>
                     </div>
 
                     <div class="form_row">
@@ -132,7 +132,7 @@ response.setContentType("text/html; charset=utf-8");
 <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="dealSearch.jsp">				  
+		<form method="post" action="searchResult1.jsp">				  
 			<input type="text" name="search"/>
 			<br/><br/>
 			<input type="submit" value="搜索"/>			

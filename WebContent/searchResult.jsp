@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*, java.util.ArrayList" %>
 <% 
 request.setCharacterEncoding("UTF-8"); 
 response.setCharacterEncoding("UTF-8"); 
@@ -10,6 +10,14 @@ response.setContentType("text/html; charset=utf-8");
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
+
+<%
+	DBConnect conn = new DBConnect();
+	ArrayList<Item> itemlist = new ArrayList<Item>();
+	String search = request.getParameter("search");
+	itemlist = conn.getSearch(search);
+    Item i = new Item();
+%>
 
 <div id="main_container">
 
@@ -39,13 +47,13 @@ response.setContentType("text/html; charset=utf-8");
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">用 户 登 录</span>
+    导 航：<span class="current">搜 索</span>
     </div>        
     
    <div class="left_content">
     <div class="title_box">分 类</div>
     
-        <ul class="left_menu">
+       <ul class="left_menu">
          <li class="odd"><a href="#">潮流女装</a></li>
         <li class="even"><a href="#">时尚男装</a></li>
          <li class="odd"><a href="#">羽绒服</a></li>
@@ -63,37 +71,35 @@ response.setContentType("text/html; charset=utf-8");
    </div><!-- end of left content --> 
 
    <div class="center_content">
-   
-   	<div class="center_title_bar">登 录</div>
     
-    	<div class="prod_box_big">
-      
-            <div class="center_prod_box_big">            
-
-                 <form method="post" action="dealLogin.jsp" name="loginForm" class="contact_form">         
-						<div class="form_row">
-						<label><strong>用户名:</strong></label>
-						<input type="text" class="contact_input" name="u_name" required="required"/>
-						</div>  
-
-						<div class="form_row">
-						<label><strong>密 码:</strong></label>
-						<input type="password" class="contact_input" name="u_pwd" required="required"/>
-						</div>
-
-						<div class="form_row">
-						<input type="submit" value="登录"/>
-						</div>      
-                 </form>  
-              
-            </div>
-                                 
-        </div>
+   	<div class="center_title_bar">"<%=search %>" 的搜索结果</div>
     
-   
+    <%
+    
+    	for(int j = itemlist.size(); j > 0 ; j--){
+    		
+    		i = itemlist.get(j-1);
+    		
+    		out.println("<div class='prod_box'>");
+            out.println("<div class='center_prod_box'>");
+            out.println("<div class='product_title'>");
+            out.println("<a href='item.jsp?itemid=");
+            out.println(j);
+            out.println("'>");
+            out.println(i.getitemname());
+            out.println("</a></div>");
+            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
+            out.println("<div class='prod_price'><span class='price'>￥");
+            out.println(i.getitemprice());
+            out.println("</span></div></div></div>");
+            
+    	}
+    
+ 	%>
+        
    </div><!-- end of center content -->
 
-<div class="right_content">
+ <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
 		<form method="post" action="searchResult.jsp">				  
@@ -101,7 +107,7 @@ response.setContentType("text/html; charset=utf-8");
 			<br/><br/>
 			<input type="submit" value="搜索"/>			
         </form>
-        
+     
    </div><!-- end of right content -->   
         
    </div><!-- end of main content -->
