@@ -4,7 +4,6 @@ public class User {
 	
 	private String username;
 	private String userpwd;
-	private String usernick;
 	private String useradd;
 	private String usermail;
 	private String userphone;
@@ -27,12 +26,6 @@ public class User {
 	}
 	public void setUserpwd(String userpwd) {
 		this.userpwd = userpwd;
-	}
-	public String getUsernick() {
-		return usernick;
-	}
-	public void setUsernick(String usernick) {
-		this.usernick = usernick;
 	}
 	public String getUseradd() {
 		return useradd;

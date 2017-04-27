@@ -18,7 +18,7 @@ response.setContentType("text/html; charset=utf-8");
 		
 	DBConnect conn = new DBConnect();
 
-	conn.alterUserInfo(username, userpwd, usernick, usermail, userphone, useradd);
+	conn.alterUserInfo(username, userpwd, usermail, userphone, useradd);
 	
 	out.println("<script language='javascript'>alert('用户信息修改成功！请重新登录！');window.location.href='login.jsp';</script>");
 %>

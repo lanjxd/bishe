@@ -47,8 +47,14 @@ height:36px;
 background:url(images/menu_bg.gif) repeat-x;
 }
 ul.menu {
-list-style-type:none; float:left; display:block; width:982px; 
-margin:0px; padding:0px;background:url(images/menu_bg.gif) repeat-x;}
+list-style-type:none; 
+float:left; 
+display:block; 
+width:982px; 
+margin:0px; 
+padding:0px;
+background:url(images/menu_bg.gif) repeat-x;
+}
 
 ul.menu li {
 display:inline;
@@ -62,18 +68,33 @@ height:36px;
 float:left;
 background:url(images/menu_divider.gif) no-repeat center;
 }
-ul.menu li.username {
+.username {
 display:inline;
 font-size:24px;
 line-height:36px;
 float:right;
+text-decoration:none;
 color:#66ccff;
 }
 a.nav:link, a.nav:visited {
-display:block; float:left; padding:0px 8px 0px 8px; margin:0 14px 0 14px;height:36px;text-decoration:none;color:#fff;}
+display:block; 
+float:left; 
+padding:0px 8px 0px 8px; 
+margin:0 14px 0 14px;
+height:36px;
+text-decoration:none;
+color:#fff;
+}
 
 a.nav:hover{
-display:block; float:left; padding:0px 8px 0px 8px; margin:0 14px 0 14px;height:36px;text-decoration:none;color:#199ECD;}
+display:block; 
+float:left; 
+padding:0px 8px 0px 8px; 
+margin:0 14px 0 14px;
+height:36px;
+text-decoration:none;
+color:#199ECD;
+}
 
 /*----------------crumb_navigation-------------*/
 .crumb_navigation{
@@ -220,7 +241,7 @@ a.prod_favor{
 width:75px;
 height:24px;
 display:block;
-float:left;
+float:right;
 background:url(images/link_bg.gif) no-repeat center;
 margin:2px 5px 0 0;
 text-align:center;

@@ -19,10 +19,6 @@ response.setContentType("text/html; charset=utf-8");
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
     </div>
     
    <div id="main_content"> 
@@ -80,13 +76,15 @@ response.setContentType("text/html; charset=utf-8");
                     <label><strong>*密 码:</strong></label>
                     <input type="password" class="contact_input" name="u_pwd" required="required"/>
                     </div>
-
-
-                    <div class="form_row">
-                    <label><strong>昵 称:</strong></label>
-                    <input type="text" class="contact_input" name="u_nick"/>
+                  	
+                  	<div class="form_row">
+                    <label><strong>*用户类型:</strong></label>
+                    <select class="contact_input" name="u_auth" required="required">
+					<option value="1">买 家</option>
+					<option value="2">卖 家</option>
+					</select>
                     </div>
-                    
+                  	
                     <div class="form_row">
                     <label><strong>电子邮箱:</strong></label>
                     <input type="text" class="contact_input" name="u_mail"/>

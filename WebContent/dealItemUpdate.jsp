@@ -9,21 +9,19 @@ response.setContentType("text/html; charset=utf-8");
 </head>
 <body>
 <%
-	User u = new User();
-	u = (User)session.getAttribute("currentUser");
-	String username = u.getUsername();
-	
 	String itemname = request.getParameter("i_name");
 	String itemcate = request.getParameter("i_cate");
 	String itemcond = request.getParameter("i_cond");
 	String itemprice = request.getParameter("i_price");
 	String itemcount = request.getParameter("i_count");
 	String iteminfo = request.getParameter("i_info");
-	
+	String itemid = request.getParameter("id");
+		
 	DBConnect conn = new DBConnect();
+
+	conn.alterItemInfo(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, itemid);
 	
-	conn.uploadItem(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, username);	
-	out.println("<script language='javascript'>alert('发布成功！');window.location.href='myitem.jsp';</script>");
+	out.println("<script language='javascript'>alert('物品信息修改成功！');window.location.href='myitem.jsp';</script>");
 %>
 </body>
 </html>

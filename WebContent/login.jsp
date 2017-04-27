@@ -19,10 +19,6 @@ response.setContentType("text/html; charset=utf-8");
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
     </div>
     
    <div id="main_content"> 

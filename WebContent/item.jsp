@@ -49,7 +49,7 @@ close();
 <%
 	DBConnect conn = new DBConnect(); 
 	Item i = new Item();
-	i = conn.getItem(request.getParameter("itemid"));
+	i = conn.getItem(request.getParameter("id"));
 %>
 
 <div id="main_container">
@@ -60,10 +60,6 @@ close();
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
     </div>
     
    <div id="main_content"> 

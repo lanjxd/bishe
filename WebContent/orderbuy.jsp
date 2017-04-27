@@ -15,10 +15,11 @@ response.setContentType("text/html; charset=utf-8");
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();
+	String userauth = u.getUserauth();
 	
 	DBConnect conn = new DBConnect();
 	ArrayList<Order> orderlist = new ArrayList<Order>();
-    orderlist = conn.getMyorder(username);
+    orderlist = conn.getOrderBuy(username);
     Order d = new Order();
 %>
 
@@ -29,33 +30,43 @@ response.setContentType("text/html; charset=utf-8");
         <div class="top_right">
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
-    
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
+      
     </div>
     
    <div id="main_content"> 
-   
-            <div id="menu_tab">
-                    <ul class="menu">
-                         <li><a href="index1.jsp" class="nav">首 页</a></li>
-                         <li class="divider"></li>
-                         <li><a href="upload.jsp" class="nav">发 布 新 商 品</a></li>
-                         <li class="divider"></li>
-                         <li><a href="myorder.jsp" class="nav">我 的 订 单</a></li>
-						 <li class="divider"></li>
-                         <li><a href="myfavor.jsp" class="nav">收 藏 夹</a></li>
-                         <li class="divider"></li>
-                         <li><a href="myinfor.jsp" class="nav">个 人 信 息</a></li>
-						 <li class="divider"></li>
-                         <li><a href="index.jsp" class="nav">登 出</a></li>
-						 <li class="divider"></li>
-						 <li class="username"><%=username %></li>
-                     </ul>
-
-            </div><!-- end of menu tab -->
+    	<div id="menu_tab">
+        	<ul class="menu">
+            	<li><a href="index1.jsp" class="nav">首 页</a></li>
+                <li class="divider"></li>
+                         
+		<%
+                    
+			if(userauth.equals("1")){
+				out.println("<li><a href='orderbuy.jsp' class='nav'>我 的 订 单</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='myfavor.jsp' class='nav'>收 藏 夹</a></li>");								
+			}else if(userauth.equals("2")){
+				out.println("<li><a href='upload.jsp' class='nav'>发 布 新 商 品</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='myitem.jsp' class='nav'>我 的 商 品</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='ordersell.jsp' class='nav'>订 单 管 理</a></li>");
+			}else{
+				out.println("<li><a href='itemlist.jsp' class='nav'>商 品 管 理</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='userlist.jsp' class='nav'>用 户 管 理</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='orderlist.jsp' class='nav'>订 单 管 理</a></li>");
+			}
+                    
+		%>
+       
+                <li class="divider"></li>
+                <li><a href="index.jsp" class="nav">登 出</a></li>
+				<li class="divider"></li>
+				<li><a href="myinfor.jsp" class="username"><%=username %></a></li>
+			</ul>
+		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
     导 航：<span class="current">订 单</span>
@@ -122,12 +133,12 @@ response.setContentType("text/html; charset=utf-8");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>取消订单</a>");
     		}else if(d.getordercond().equals("未发货")){
-    			out.println("<a href='#' class='prod_buy'>提醒卖家发货</a>");
+    			out.println("<a href='#' class='prod_buy'>提醒卖家发货</a>");//TODO:提醒卖家发货
                 out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>取消订单</a>");
     		}else if(d.getordercond().equals("已发货")){
-    			out.println("<a href='#.jsp' class='prod_buy'>确认收货</a>");
+    			out.println("<a href='#.jsp' class='prod_buy'>确认收货</a>");//TODO:确认收货,评价
     		}
     		                             
     		out.println("</div></div></div>");	

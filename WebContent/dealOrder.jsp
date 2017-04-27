@@ -25,7 +25,7 @@ response.setContentType("text/html; charset=utf-8");
 	String ordercond = "未付款";
 	
 	conn.newOrder(orderitem, buyername, sellername, ordercount, ordersum, ordercond);	
-	out.println("<script language='javascript'>window.location.href='myorder.jsp';</script>");
+	out.println("<script language='javascript'>window.location.href='orderbuy.jsp';</script>");
 
 %>
 </body>

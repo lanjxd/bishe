@@ -11,10 +11,10 @@ response.setContentType("text/html; charset=utf-8");
 <%
 	String username = request.getParameter("u_name");
 	String userpwd = request.getParameter("u_pwd");
-	String usernick = request.getParameter("u_nick");	
 	String usermail = request.getParameter("u_mail");	
 	String userphone = request.getParameter("u_phone");
 	String useradd = request.getParameter("u_add");
+	String userauth = request.getParameter("u_auth");
 	
 	DBConnect conn = new DBConnect();
 	
@@ -22,7 +22,7 @@ response.setContentType("text/html; charset=utf-8");
 		out.println("<script language='javascript'>alert('该用户名已存在！');window.location.go(-1);;</script>");
 	}
 	else {
-	conn.createUser(username, userpwd, usernick, usermail, userphone, useradd);	
+	conn.createUser(username, userpwd, usermail, userphone, useradd, userauth);	
 	out.println("<script language='javascript'>alert('注册成功！请登录！');window.location.href='login.jsp';</script>");
 	}
 %>

@@ -19,7 +19,7 @@ response.setContentType("text/html; charset=utf-8");
 	
 	DBConnect conn = new DBConnect();
 	ArrayList<Item> itemlist = new ArrayList<Item>();
-    itemlist = conn.getAllItem();
+	itemlist = conn.getMyitem(username);
     Item i = new Item();
 %>
 
@@ -33,7 +33,7 @@ response.setContentType("text/html; charset=utf-8");
     
     </div>
     
-   	<div id="main_content"> 
+   <div id="main_content"> 
     	<div id="menu_tab">
         	<ul class="menu">
             	<li><a href="index1.jsp" class="nav">首 页</a></li>
@@ -69,12 +69,12 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">首 页</span>
+    导 航：<span class="current">我 的 物 品</span>
     </div>        
     
    <div class="left_content">
     <div class="title_box">分 类</div>
-    	<% //TODO:item category %>
+    
        <ul class="left_menu">
          <li class="odd"><a href="#">潮流女装</a></li>
         <li class="even"><a href="#">时尚男装</a></li>
@@ -88,13 +88,13 @@ response.setContentType("text/html; charset=utf-8");
         <li class="even"><a href="#">连衣裙</a></li>
          <li class="odd"><a href="#">定制制服</a></li>
         <li class="even"><a href="#">修补服务</a></li>
-       </ul> 
+        </ul> 
      
    </div><!-- end of left content --> 
 
    <div class="center_content">
     
-   	<div class="center_title_bar">新 品 发 布</div>
+   	<div class="center_title_bar">我 发 布 的 物 品</div>
     
     <%
     
@@ -105,31 +105,27 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
             out.println("<div class='product_title'>");
-            out.println("<a href='item1.jsp?id=");
-            out.println(i.getitemid());
-            out.println("'>");
             out.println(i.getitemname());
-            out.println("</a></div>");
-            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
+            out.println("</div>");
+            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></div>");
             out.println("<div class='prod_price'><span class='price'>￥");
             out.println(i.getitemprice());
-            out.println("</span></div></div></div>");
+            out.println("</span></div>");            
+            out.println("<a href='deleteItem.jsp?id=");
+            out.println(i.getitemid());
+            out.println("' class='prod_favor'>删除此物品</a>");
+            out.println("<a href='iteminfo.jsp?id=");
+            out.println(i.getitemid());
+            out.println("' class='prod_details'>更新物品信息</a>");
+            out.println("</div></div>");
             
     	}
     
  	%>
-        
-    	<div class="center_title_bar">为 您 推 荐</div>   
-    	
-    <%
-    
-    	//TODO:customized recommendation
-    
-    %>
-    
+      
    </div><!-- end of center content -->
 
- <div class="right_content">
+	<div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
 		<form method="post" action="searchResult1.jsp">				  
@@ -138,15 +134,15 @@ response.setContentType("text/html; charset=utf-8");
 			<input type="submit" value="搜索"/>			
         </form>
    
-   </div><!-- end of right content -->   
+	</div><!-- end of right content -->   
         
-   </div><!-- end of main content -->
+	</div><!-- end of main content -->
    
-   <div class="footer">
+    <div class="footer">
    
         <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
-   </div>                 
+    </div>                 
 
 
 </div>

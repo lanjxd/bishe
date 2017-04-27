@@ -27,10 +27,6 @@ response.setContentType("text/html; charset=utf-8");
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
     </div>
     
    <div id="main_content"> 
@@ -84,7 +80,7 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<div class='center_prod_box'>");
             out.println("<div class='product_title'>");
             out.println("<a href='item.jsp?itemid=");
-            out.println(j);
+            out.println(i.getitemid());
             out.println("'>");
             out.println(i.getitemname());
             out.println("</a></div>");

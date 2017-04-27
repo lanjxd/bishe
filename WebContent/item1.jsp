@@ -50,10 +50,11 @@ close();
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();
+	String userauth = u.getUserauth();
 	
 	DBConnect conn = new DBConnect(); 
 	Item i = new Item();
-	String id = request.getParameter("itemid");
+	String id = request.getParameter("id");
 	i = conn.getItem(id);
 	boolean favored = conn.chkFavor(username, id);
 %>
@@ -73,25 +74,39 @@ close();
     </div>
     
    <div id="main_content"> 
-   
-            <div id="menu_tab">
-                    <ul class="menu">
-                         <li><a href="index1.jsp" class="nav">首 页</a></li>
-                         <li class="divider"></li>
-                         <li><a href="upload.jsp" class="nav">发 布 新 商 品</a></li>
-                         <li class="divider"></li>
-                         <li><a href="myorder.jsp" class="nav">我 的 订 单</a></li>
-						 <li class="divider"></li>
-                         <li><a href="myfavor.jsp" class="nav">收 藏 夹</a></li>
-                         <li class="divider"></li>
-                         <li><a href="myinfor.jsp" class="nav">个 人 信 息</a></li>
-						 <li class="divider"></li>
-                         <li><a href="index.jsp" class="nav">登 出</a></li>
-						 <li class="divider"></li>
-						 <li class="username"><%=username %></li>
-                     </ul>
-
-            </div><!-- end of menu tab -->
+    	<div id="menu_tab">
+        	<ul class="menu">
+            	<li><a href="index1.jsp" class="nav">首 页</a></li>
+                <li class="divider"></li>
+                         
+		<%
+                    
+			if(userauth.equals("1")){
+				out.println("<li><a href='orderbuy.jsp' class='nav'>我 的 订 单</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='myfavor.jsp' class='nav'>收 藏 夹</a></li>");								
+			}else if(userauth.equals("2")){
+				out.println("<li><a href='upload.jsp' class='nav'>发 布 新 商 品</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='myitem.jsp' class='nav'>我 的 商 品</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='ordersell.jsp' class='nav'>订 单 管 理</a></li>");
+			}else{
+				out.println("<li><a href='itemlist.jsp' class='nav'>商 品 管 理</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='userlist.jsp' class='nav'>用 户 管 理</a></li>");
+				out.println("<li class='divider'></li>");
+				out.println("<li><a href='orderlist.jsp' class='nav'>订 单 管 理</a></li>");
+			}
+                    
+		%>
+       
+                <li class="divider"></li>
+                <li><a href="index.jsp" class="nav">登 出</a></li>
+				<li class="divider"></li>
+				<li><a href="myinfor.jsp" class="username"><%=username %></a></li>
+			</ul>
+		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
     导 航：<span class="current">商 品 详 情</span>

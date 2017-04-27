@@ -6,7 +6,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <html>
 <head>
-<title>中 财 二 手 义 卖</title>
+<title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -18,9 +18,9 @@ response.setContentType("text/html; charset=utf-8");
 	String userauth = u.getUserauth();
 	
 	DBConnect conn = new DBConnect();
-	ArrayList<Item> itemlist = new ArrayList<Item>();
-    itemlist = conn.getAllItem();
-    Item i = new Item();
+	ArrayList<Order> orderlist = new ArrayList<Order>();
+    orderlist = conn.getOrderSell(username);
+    Order d = new Order();
 %>
 
 <div id="main_container">
@@ -30,10 +30,10 @@ response.setContentType("text/html; charset=utf-8");
         <div class="top_right">
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
-    
+      
     </div>
     
-   	<div id="main_content"> 
+   <div id="main_content"> 
     	<div id="menu_tab">
         	<ul class="menu">
             	<li><a href="index1.jsp" class="nav">首 页</a></li>
@@ -69,13 +69,13 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">首 页</span>
+    导 航：<span class="current">订 单</span>
     </div>        
     
    <div class="left_content">
     <div class="title_box">分 类</div>
-    	<% //TODO:item category %>
-       <ul class="left_menu">
+    
+        <ul class="left_menu">
          <li class="odd"><a href="#">潮流女装</a></li>
         <li class="even"><a href="#">时尚男装</a></li>
          <li class="odd"><a href="#">羽绒服</a></li>
@@ -88,45 +88,62 @@ response.setContentType("text/html; charset=utf-8");
         <li class="even"><a href="#">连衣裙</a></li>
          <li class="odd"><a href="#">定制制服</a></li>
         <li class="even"><a href="#">修补服务</a></li>
-       </ul> 
-     
+        </ul> 
+    
    </div><!-- end of left content --> 
 
    <div class="center_content">
-    
-   	<div class="center_title_bar">新 品 发 布</div>
-    
-    <%
-    
-    	for(int j = itemlist.size(); j > 0 ; j--){
+   
+   	<div class="center_title_bar">我的订单</div>
+   	
+   	<%
+   	
+   		for(int i = orderlist.size(); i > 0 ; i--){
     		
-    		i = itemlist.get(j-1);
-    		
-    		out.println("<div class='prod_box'>");
-            out.println("<div class='center_prod_box'>");
-            out.println("<div class='product_title'>");
-            out.println("<a href='item1.jsp?id=");
-            out.println(i.getitemid());
-            out.println("'>");
-            out.println(i.getitemname());
-            out.println("</a></div>");
-            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></a></div>");
-            out.println("<div class='prod_price'><span class='price'>￥");
-            out.println(i.getitemprice());
-            out.println("</span></div></div></div>");
-            
-    	}
+    		d = orderlist.get(i-1);
+    		String itemname = conn.getItem(d.getorderitem()).getitemname();
+    		String buyer = d.getbuyername();
     
- 	%>
-        
-    	<div class="center_title_bar">为 您 推 荐</div>   
-    	
-    <%
-    
-    	//TODO:customized recommendation
-    
-    %>
-    
+    		out.println("<div class='prod_box_big'>");	
+    		out.println("<div class='center_prod_box_big'>");
+    		out.println("<div class='details_big_box'>");
+    		out.println("<a href='item1.jsp?itemid=");
+            out.println(d.getorderitem());
+            out.println("' class='product_title_big'>");
+            out.println(itemname);
+            out.println("</a>");
+    		out.println("<div class='specifications'>");     
+    		out.println("<br/>买 家: <span class='blue'>");     
+    		out.println(buyer);
+    		out.println("<br/>数 量: <span class='blue'>￥ ");            
+    		out.println(d.getordercount());
+    		out.println("<br/>订单总价: <span class='blue'>￥ ");            
+    		out.println(d.getordersum());
+    		out.println("<br/>下单时间: <span class='blue'>￥ ");            
+    		out.println(d.getordertime());
+    		out.println("</span><br/>");               	
+    		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
+    		out.println(d.getordercond());				
+    		out.println("</span></div></div>");
+    		if(d.getordercond().equals("等待买家付款")){
+                out.println("<a href='cancelOrder.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>取消订单</a>");
+    		}else if(d.getordercond().equals("可以发货")){
+    			//TODO:发货
+                out.println("<a href='cancelOrder.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>取消订单</a>");
+    		}else if(d.getordercond().equals("等待买家收货")){
+				//TODO:?
+    		}
+    		                             
+    		out.println("</div></div></div>");	
+                              
+   		}
+   	
+   %>
+   
    </div><!-- end of center content -->
 
  <div class="right_content">
@@ -137,7 +154,7 @@ response.setContentType("text/html; charset=utf-8");
 			<br/><br/>
 			<input type="submit" value="搜索"/>			
         </form>
-   
+        
    </div><!-- end of right content -->   
         
    </div><!-- end of main content -->

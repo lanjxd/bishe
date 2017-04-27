@@ -26,10 +26,6 @@ response.setContentType("text/html; charset=utf-8");
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
     
-        <div id="logo">
-            <!--<a href="index.jsp"><img src="images/logo.png" alt="" title="" border="0" width="200" height="100" /></a>-->
-	    </div>
-  
     </div>
     
    <div id="main_content"> 
@@ -51,7 +47,7 @@ response.setContentType("text/html; charset=utf-8");
     
    <div class="left_content">
     <div class="title_box">分 类</div>
-    
+    	
        <ul class="left_menu">
          <li class="odd"><a href="#">潮流女装</a></li>
         <li class="even"><a href="#">时尚男装</a></li>
@@ -65,7 +61,7 @@ response.setContentType("text/html; charset=utf-8");
         <li class="even"><a href="#">连衣裙</a></li>
          <li class="odd"><a href="#">定制制服</a></li>
         <li class="even"><a href="#">修补服务</a></li>
-        </ul> 
+       </ul> 
      
    </div><!-- end of left content --> 
 
@@ -82,8 +78,8 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
             out.println("<div class='product_title'>");
-            out.println("<a href='item.jsp?itemid=");
-            out.println(j);
+            out.println("<a href='item.jsp?id=");
+            out.println(i.getitemid());
             out.println("'>");
             out.println(i.getitemname());
             out.println("</a></div>");
