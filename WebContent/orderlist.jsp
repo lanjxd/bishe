@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*, java.util.ArrayList" %>
 <% 
 request.setCharacterEncoding("UTF-8"); 
 response.setCharacterEncoding("UTF-8"); 
@@ -6,7 +6,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <html>
 <head>
-<title>中 财 二 手 义 卖</title>
+<title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -17,10 +17,10 @@ response.setContentType("text/html; charset=utf-8");
 	String myname = me.getUsername();
 	String myauth = me.getUserauth();
 	
-	DBConnect conn = new DBConnect(); 
-	Item i = new Item();
-	String id = request.getParameter("id");
-	i = conn.getItem(id);
+	DBConnect conn = new DBConnect();
+	ArrayList<Order> orderlist = new ArrayList<Order>();
+    orderlist = conn.getAllOrder();
+    Order d = new Order();
 %>
 
 <div id="main_container">
@@ -30,7 +30,7 @@ response.setContentType("text/html; charset=utf-8");
         <div class="top_right">
 			<h1>中 财 二 手 义 卖</h1>        
         </div>
-    
+      
     </div>
     
    <div id="main_content"> 
@@ -69,7 +69,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">修 改 物 品 信 息</span>
+    导 航：<span class="current">订 单 管 理</span>
     </div>        
     
    <div class="left_content">
@@ -89,61 +89,55 @@ response.setContentType("text/html; charset=utf-8");
          <li class="odd"><a href="#">定制制服</a></li>
         <li class="even"><a href="#">修补服务</a></li>
         </ul> 
-     
+    
    </div><!-- end of left content --> 
 
    <div class="center_content">
    
-   	<div class="center_title_bar">更 新 物 品 信 息</div>
+   	<div class="center_title_bar">所 有 订 单</div>
+   	
+   	<%
+   	
+   		for(int i = orderlist.size(); i > 0 ; i--){
+    		
+    		d = orderlist.get(i-1);
+    		String itemname = conn.getItem(d.getorderitem()).getitemname();
     
-    	<div class="prod_box_big">
-      
-            <div class="center_prod_box_big">            
-                 
-                <form method="post" action="dealItemUpdate.jsp?id=<%=id %>" name="itemUpdateForm" class="contact_form">       
-                    <div class="form_row">
-                    <label><strong>名 称:</strong></label>
-                    <input type="text" class="contact_input" name="i_name" value="<%=i.getitemname() %>" required="required"/>
-                    </div>  
-
-                    <div class="form_row">
-                    <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate" value="<%=i.getitemcate() %>" required="required"/>
-                    </div>
-
-                    <div class="form_row">
-                    <label><strong>状 态:</strong></label>
-                    <input type="text" class="contact_input" name="i_cond" value="<%=i.getitemcond() %>" required="required"/>
-                    </div>
-					
-					<div class="form_row">
-                    <label><strong>单 价:</strong></label>
-                    <input type="text" class="contact_input" name="i_price" value="<%=i.getitemprice() %>" required="required"/>
-                    </div>
-
-					<div class="form_row">
-                    <label><strong>数 量:</strong></label>
-                    <input type="text" class="contact_input" name="i_count" value="<%=i.getitemcount() %>" required="required"/>
-                    </div>
-
-                    <div class="form_row">
-                    <label><strong>描 述:</strong></label>
-                    <textarea class="contact_textarea" name="i_info"><%=i.getiteminfo() %></textarea>
-                    </div>
-
-                    <div class="form_row">
-                    <input type="submit" value="发布" class="prod_details"/>
-                    </div>      
-                </form>
-                                    
-            </div>
-                                 
-        </div>
-    
+    		out.println("<div class='prod_box_big'>");	
+    		out.println("<div class='center_prod_box_big'>");
+    		out.println("<div class='details_big_box'>");
+    		out.println("<a href='item1.jsp?itemid=");
+            out.println(d.getorderitem());
+            out.println("' class='product_title_big'>");
+            out.println(itemname);
+            out.println("</a>");
+    		out.println("<div class='specifications'>");     
+    		out.println("<br/>买 家: <span class='blue'>");     
+    		out.println(d.getbuyername());
+    		out.println("</span><br/>卖 家: <span class='blue'>");     
+    		out.println(d.getsellername());
+    		out.println("</span><br/>数 量: <span class='blue'>");            
+    		out.println(d.getordercount());
+    		out.println("</span><br/>订单总价: <span class='blue'>￥ ");            
+    		out.println(d.getordersum());
+    		out.println("</span><br/>下单时间: <span class='blue'>");            
+    		out.println(d.getordertime());
+    		out.println("</span><br/>");               	
+    		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
+    		out.println(d.getordercond());				
+    		out.println("</span></div></div>");
+            out.println("<a href='cancelOrder.jsp?id=");
+            out.println(d.getorderid());
+            out.println("' class='prod_buy'>删除订单</a>");    		                             
+    		out.println("</div></div></div>");	
+                              
+   		}
+   	
+   %>
    
    </div><!-- end of center content -->
 
-<div class="right_content">
+ <div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
 		<form method="post" action="searchResult1.jsp">				  

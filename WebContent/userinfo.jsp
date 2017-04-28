@@ -17,10 +17,15 @@ response.setContentType("text/html; charset=utf-8");
 	String myname = me.getUsername();
 	String myauth = me.getUserauth();
 	
-	DBConnect conn = new DBConnect(); 
-	Item i = new Item();
-	String id = request.getParameter("id");
-	i = conn.getItem(id);
+	DBConnect conn = new DBConnect();
+	User u = new User();
+	String username=request.getParameter("username");
+	u = conn.saveUser(username);
+	String userpwd = u.getUserpwd();
+	String usermail = u.getUsermail();
+	String userphone = u.getUserphone();
+	String useradd = u.getUseradd();
+	String userauth = u.getUserauth();
 %>
 
 <div id="main_container">
@@ -69,7 +74,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">修 改 物 品 信 息</span>
+    导 航：<span class="current">用 户 信 息</span>
     </div>        
     
    <div class="left_content">
@@ -94,48 +99,43 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">更 新 物 品 信 息</div>
+   	<div class="center_title_bar">修 改 用 户 信 息</div>
     
     	<div class="prod_box_big">
       
             <div class="center_prod_box_big">            
-                 
-                <form method="post" action="dealItemUpdate.jsp?id=<%=id %>" name="itemUpdateForm" class="contact_form">       
-                    <div class="form_row">
-                    <label><strong>名 称:</strong></label>
-                    <input type="text" class="contact_input" name="i_name" value="<%=i.getitemname() %>" required="required"/>
-                    </div>  
 
+                <form method="post" action="dealUserUpdate.jsp" name="userUpdateForm" class="contact_form">       
                     <div class="form_row">
-                    <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate" value="<%=i.getitemcate() %>" required="required"/>
+                    <label><strong>用户名:</strong></label>
+                    <input type="text" class="contact_input" name="u_name" value="<%=username %>" readonly="readonly"/>
+                    </div> 
+					
+                    <div class="form_row">
+                    <label><strong>密 码:</strong></label>
+                    <input type="password" class="contact_input" name="u_pwd" value="<%=userpwd %>" required="required"/>
                     </div>
 
                     <div class="form_row">
-                    <label><strong>状 态:</strong></label>
-                    <input type="text" class="contact_input" name="i_cond" value="<%=i.getitemcond() %>" required="required"/>
+                    <label><strong>电子邮箱:</strong></label>
+                    <input type="text" class="contact_input" name="u_mail" value="<%=usermail %>"/>
                     </div>
 					
 					<div class="form_row">
-                    <label><strong>单 价:</strong></label>
-                    <input type="text" class="contact_input" name="i_price" value="<%=i.getitemprice() %>" required="required"/>
-                    </div>
-
-					<div class="form_row">
-                    <label><strong>数 量:</strong></label>
-                    <input type="text" class="contact_input" name="i_count" value="<%=i.getitemcount() %>" required="required"/>
+                    <label><strong>联系电话:</strong></label>
+                    <input type="text" class="contact_input" name="u_phone" value="<%=userphone %>"/>
                     </div>
 
                     <div class="form_row">
-                    <label><strong>描 述:</strong></label>
-                    <textarea class="contact_textarea" name="i_info"><%=i.getiteminfo() %></textarea>
+                    <label><strong>收货地址:</strong></label>
+                    <textarea class="contact_textarea" name="u_add"><%=useradd %></textarea>
                     </div>
 
                     <div class="form_row">
-                    <input type="submit" value="发布" class="prod_details"/>
+                    <input type="submit" value="提交" class="prod_details"/>
                     </div>      
                 </form>
-                                    
+             
             </div>
                                  
         </div>
@@ -161,7 +161,6 @@ response.setContentType("text/html; charset=utf-8");
         <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
-
 
 </div>
 <!-- end of main_container -->

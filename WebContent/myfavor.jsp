@@ -12,14 +12,14 @@ response.setContentType("text/html; charset=utf-8");
 <body>
 
 <%
-	User u = new User();
-	u = (User)session.getAttribute("currentUser");
-	String username = u.getUsername();
-	String userauth = u.getUserauth();
+	User me = new User();
+	me = (User)session.getAttribute("currentUser");
+	String myname = me.getUsername();
+	String myauth = me.getUserauth();
 	
 	DBConnect conn = new DBConnect();
 	ArrayList<Favor> favorlist = new ArrayList<Favor>();
-    favorlist = conn.getMyfavor(username);
+    favorlist = conn.getMyfavor(myname);
     Favor f = new Favor();
 %>
 
@@ -41,11 +41,11 @@ response.setContentType("text/html; charset=utf-8");
                          
 		<%
                     
-			if(userauth.equals("1")){
+			if(myauth.equals("1")){
 				out.println("<li><a href='orderbuy.jsp' class='nav'>我 的 订 单</a></li>");
 				out.println("<li class='divider'></li>");
 				out.println("<li><a href='myfavor.jsp' class='nav'>收 藏 夹</a></li>");								
-			}else if(userauth.equals("2")){
+			}else if(myauth.equals("2")){
 				out.println("<li><a href='upload.jsp' class='nav'>发 布 新 商 品</a></li>");
 				out.println("<li class='divider'></li>");
 				out.println("<li><a href='myitem.jsp' class='nav'>我 的 商 品</a></li>");
@@ -64,7 +64,7 @@ response.setContentType("text/html; charset=utf-8");
                 <li class="divider"></li>
                 <li><a href="index.jsp" class="nav">登 出</a></li>
 				<li class="divider"></li>
-				<li><a href="myinfor.jsp" class="username"><%=username %></a></li>
+				<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
 			</ul>
 		</div><!-- end of menu tab -->
             
@@ -107,7 +107,7 @@ response.setContentType("text/html; charset=utf-8");
     		
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
-            out.println("<a href='item1.jsp?itemid=");
+            out.println("<a href='item1.jsp?id=");
             out.println(f.getfavoritem());
             out.println("' class='product_title'>");
             out.println(itemname);

@@ -92,6 +92,38 @@ public class DBConnect {
 		conn.close();
 	}
 	
+	public ArrayList<User> getAllUser() throws Exception {
+		ArrayList<User> userlist = new ArrayList<User>();
+		String str = "Select * from `user`";		
+		Connection conn = this.Connect2MySQL();		
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);			
+		while(rs.next()){	
+			User u = new User();
+			u.setUsername(rs.getString("username"));
+			u.setUsermail(rs.getString("usermail"));
+			u.setUserpwd(rs.getString("userpwd"));
+			u.setUserphone(rs.getString("userphone"));
+			u.setUseradd(rs.getString("useradd"));
+			u.setUserauth(rs.getString("userauth"));
+			userlist.add(u);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return userlist;	
+	}
+	
+	public void deleteUser(String username) throws Exception {
+		String deleteStr = "delete from `user` where username = '" + username + "'";		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(deleteStr);
+		System.out.println(deleteStr);
+		stmt.close();
+		conn.close();
+	}
+	
 	public void uploadItem(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String username) throws Exception {
 		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`) VALUES (?,?,?,?,?,?,?);";		
 		Connection conn = this.Connect2MySQL();
@@ -126,13 +158,13 @@ public class DBConnect {
 		ResultSet rs = stmt.executeQuery(str);
 		Item i = new Item();
 		if(rs.next()){
-		i.setitemname(rs.getString("itemname"));
-		i.setitemcate(rs.getString("itemcate"));
-		i.setitemcond(rs.getString("itemcond"));
-		i.setitemprice(rs.getString("itemprice"));
-		i.setitemcount(rs.getString("itemcount"));
-		i.setiteminfo(rs.getString("iteminfo"));
-		i.setitemseller(rs.getString("itemseller"));
+			i.setitemname(rs.getString("itemname"));
+			i.setitemcate(rs.getString("itemcate"));
+			i.setitemcond(rs.getString("itemcond"));
+			i.setitemprice(rs.getString("itemprice"));
+			i.setitemcount(rs.getString("itemcount"));
+			i.setiteminfo(rs.getString("iteminfo"));
+			i.setitemseller(rs.getString("itemseller"));
 		}
 		rs.close();
 		stmt.close();
@@ -327,6 +359,30 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 		return ordersell;
+	}
+	
+	public ArrayList<Order> getAllOrder() throws Exception {
+		ArrayList<Order> orderall = new ArrayList<Order>();
+		String Str = "SELECT * FROM `order`";
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);	
+		while(rs.next()){
+			Order d = new Order();
+			d.setorderid(rs.getString("orderid"));
+			d.setorderitem(rs.getString("orderitem"));
+			d.setbuyername(rs.getString("buyername"));
+			d.setsellername(rs.getString("sellername"));
+			d.setordercount(rs.getString("ordercount"));
+			d.setordersum(rs.getString("ordersum"));
+			d.setordercond(rs.getString("ordercond"));
+			d.setordertime(rs.getString("ordertime"));
+			orderall.add(d);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return orderall;
 	}
 	
 	public void payOrder(String orderid) throws Exception {

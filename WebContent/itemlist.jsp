@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*, DAO.*, java.util.ArrayList" %>
 <% 
 request.setCharacterEncoding("UTF-8"); 
 response.setCharacterEncoding("UTF-8"); 
@@ -17,10 +17,10 @@ response.setContentType("text/html; charset=utf-8");
 	String myname = me.getUsername();
 	String myauth = me.getUserauth();
 	
-	DBConnect conn = new DBConnect(); 
-	Item i = new Item();
-	String id = request.getParameter("id");
-	i = conn.getItem(id);
+	DBConnect conn = new DBConnect();
+	ArrayList<Item> itemlist = new ArrayList<Item>();
+	itemlist = conn.getAllItem();
+    Item i = new Item();
 %>
 
 <div id="main_container">
@@ -69,13 +69,13 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">修 改 物 品 信 息</span>
+    导 航：<span class="current">物 品 管 理</span>
     </div>        
     
    <div class="left_content">
     <div class="title_box">分 类</div>
     
-        <ul class="left_menu">
+       <ul class="left_menu">
          <li class="odd"><a href="#">潮流女装</a></li>
         <li class="even"><a href="#">时尚男装</a></li>
          <li class="odd"><a href="#">羽绒服</a></li>
@@ -93,57 +93,42 @@ response.setContentType("text/html; charset=utf-8");
    </div><!-- end of left content --> 
 
    <div class="center_content">
-   
-   	<div class="center_title_bar">更 新 物 品 信 息</div>
     
-    	<div class="prod_box_big">
+   	<div class="center_title_bar">已 发 布 的 物 品</div>
+    
+    <%
+    
+    	for(int j = itemlist.size(); j > 0 ; j--){
+    		
+    		i = itemlist.get(j-1);
+    		
+    		out.println("<div class='prod_box'>");
+            out.println("<div class='center_prod_box'>");
+            out.println("<div class='product_title'>");
+            out.println(i.getitemname());
+            out.println("</div>");
+            out.println("<div class='product_img'><img src='images/p1.jpg' border='0'/></div>");
+            out.println("<div class='prod_price'><span class='price'>￥");
+            out.println(i.getitemprice());
+            out.println("</span></div>");
+            out.println("<div class='specifications'><span class='blue'>卖家：");
+            out.println(i.getitemseller());
+            out.println("</span></div>"); 
+            out.println("<a href='deleteItem.jsp?id=");
+            out.println(i.getitemid());
+            out.println("' class='prod_favor'>删除此物品</a>");
+            out.println("<a href='iteminfo.jsp?id=");
+            out.println(i.getitemid());
+            out.println("' class='prod_details'>更新物品信息</a>");
+            out.println("</div></div>");
+            
+    	}
+    
+ 	%>
       
-            <div class="center_prod_box_big">            
-                 
-                <form method="post" action="dealItemUpdate.jsp?id=<%=id %>" name="itemUpdateForm" class="contact_form">       
-                    <div class="form_row">
-                    <label><strong>名 称:</strong></label>
-                    <input type="text" class="contact_input" name="i_name" value="<%=i.getitemname() %>" required="required"/>
-                    </div>  
-
-                    <div class="form_row">
-                    <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate" value="<%=i.getitemcate() %>" required="required"/>
-                    </div>
-
-                    <div class="form_row">
-                    <label><strong>状 态:</strong></label>
-                    <input type="text" class="contact_input" name="i_cond" value="<%=i.getitemcond() %>" required="required"/>
-                    </div>
-					
-					<div class="form_row">
-                    <label><strong>单 价:</strong></label>
-                    <input type="text" class="contact_input" name="i_price" value="<%=i.getitemprice() %>" required="required"/>
-                    </div>
-
-					<div class="form_row">
-                    <label><strong>数 量:</strong></label>
-                    <input type="text" class="contact_input" name="i_count" value="<%=i.getitemcount() %>" required="required"/>
-                    </div>
-
-                    <div class="form_row">
-                    <label><strong>描 述:</strong></label>
-                    <textarea class="contact_textarea" name="i_info"><%=i.getiteminfo() %></textarea>
-                    </div>
-
-                    <div class="form_row">
-                    <input type="submit" value="发布" class="prod_details"/>
-                    </div>      
-                </form>
-                                    
-            </div>
-                                 
-        </div>
-    
-   
    </div><!-- end of center content -->
 
-<div class="right_content">
+	<div class="right_content">
  
 		<div class="title_box">商 品 搜 索</div><br/>		
 		<form method="post" action="searchResult1.jsp">				  
@@ -151,16 +136,16 @@ response.setContentType("text/html; charset=utf-8");
 			<br/><br/>
 			<input type="submit" value="搜索"/>			
         </form>
-        
-   </div><!-- end of right content -->   
-        
-   </div><!-- end of main content -->
    
-   <div class="footer">
+	</div><!-- end of right content -->   
+        
+	</div><!-- end of main content -->
+   
+    <div class="footer">
    
         <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
-   </div>                 
+    </div>                 
 
 
 </div>

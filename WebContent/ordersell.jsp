@@ -12,14 +12,14 @@ response.setContentType("text/html; charset=utf-8");
 <body>
 
 <%
-	User u = new User();
-	u = (User)session.getAttribute("currentUser");
-	String username = u.getUsername();
-	String userauth = u.getUserauth();
+	User me = new User();
+	me = (User)session.getAttribute("currentUser");
+	String myname = me.getUsername();
+	String myauth = me.getUserauth();
 	
 	DBConnect conn = new DBConnect();
 	ArrayList<Order> orderlist = new ArrayList<Order>();
-    orderlist = conn.getOrderSell(username);
+    orderlist = conn.getOrderSell(myname);
     Order d = new Order();
 %>
 
@@ -41,11 +41,11 @@ response.setContentType("text/html; charset=utf-8");
                          
 		<%
                     
-			if(userauth.equals("1")){
+			if(myauth.equals("1")){
 				out.println("<li><a href='orderbuy.jsp' class='nav'>我 的 订 单</a></li>");
 				out.println("<li class='divider'></li>");
 				out.println("<li><a href='myfavor.jsp' class='nav'>收 藏 夹</a></li>");								
-			}else if(userauth.equals("2")){
+			}else if(myauth.equals("2")){
 				out.println("<li><a href='upload.jsp' class='nav'>发 布 新 商 品</a></li>");
 				out.println("<li class='divider'></li>");
 				out.println("<li><a href='myitem.jsp' class='nav'>我 的 商 品</a></li>");
@@ -64,7 +64,7 @@ response.setContentType("text/html; charset=utf-8");
                 <li class="divider"></li>
                 <li><a href="index.jsp" class="nav">登 出</a></li>
 				<li class="divider"></li>
-				<li><a href="myinfor.jsp" class="username"><%=username %></a></li>
+				<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
 			</ul>
 		</div><!-- end of menu tab -->
             
@@ -115,26 +115,26 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='specifications'>");     
     		out.println("<br/>买 家: <span class='blue'>");     
     		out.println(buyer);
-    		out.println("<br/>数 量: <span class='blue'>￥ ");            
+    		out.println("</span><br/>数 量: <span class='blue'>");            
     		out.println(d.getordercount());
-    		out.println("<br/>订单总价: <span class='blue'>￥ ");            
+    		out.println("</span><br/>订单总价: <span class='blue'>￥ ");            
     		out.println(d.getordersum());
-    		out.println("<br/>下单时间: <span class='blue'>￥ ");            
+    		out.println("</span><br/>下单时间: <span class='blue'>");            
     		out.println(d.getordertime());
     		out.println("</span><br/>");               	
     		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
     		out.println(d.getordercond());				
     		out.println("</span></div></div>");
-    		if(d.getordercond().equals("等待买家付款")){
+    		if(d.getordercond().equals("未付款")){
                 out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>取消订单</a>");
-    		}else if(d.getordercond().equals("可以发货")){
+    		}else if(d.getordercond().equals("未发货")){
     			//TODO:发货
                 out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>取消订单</a>");
-    		}else if(d.getordercond().equals("等待买家收货")){
+    		}else if(d.getordercond().equals("未收货")){
 				//TODO:?
     		}
     		                             
