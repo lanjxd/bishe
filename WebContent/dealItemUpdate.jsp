@@ -15,11 +15,15 @@ response.setContentType("text/html; charset=utf-8");
 	String itemprice = request.getParameter("i_price");
 	String itemcount = request.getParameter("i_count");
 	String iteminfo = request.getParameter("i_info");
+	String itemimage = request.getParameter("i_image");
+	if(itemimage.equals("")){
+		itemimage = "images/no_image.png";
+	}
 	String itemid = request.getParameter("id");
-		
+	 		
 	DBConnect conn = new DBConnect();
 
-	conn.alterItemInfo(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, itemid);
+	conn.alterItemInfo(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, itemimage, itemid);
 	
 	out.println("<script language='javascript'>alert('物品信息修改成功！');window.location.href='myitem.jsp';</script>");
 %>

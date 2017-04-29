@@ -22,7 +22,7 @@ response.setContentType("text/html; charset=utf-8");
 		out.println("<script language='javascript'>alert('该用户名已存在！');window.location.go(-1);;</script>");
 	}
 	else {
-	conn.createUser(username, userpwd, usermail, userphone, useradd, userauth);	
+	conn.newUser(username, userpwd, usermail, userphone, useradd, userauth);	
 	out.println("<script language='javascript'>alert('注册成功！请登录！');window.location.href='login.jsp';</script>");
 	}
 %>

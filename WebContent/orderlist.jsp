@@ -106,30 +106,30 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='prod_box_big'>");	
     		out.println("<div class='center_prod_box_big'>");
     		out.println("<div class='details_big_box'>");
-    		out.println("<a href='item1.jsp?itemid=");
+    		out.println("<a href='item1.jsp?id=");
             out.println(d.getorderitem());
             out.println("' class='product_title_big'>");
             out.println(itemname);
             out.println("</a>");
     		out.println("<div class='specifications'>");     
-    		out.println("<br/>买 家: <span class='blue'>");     
+    		out.println("买 家: <span class='blue'>");     
     		out.println(d.getbuyername());
-    		out.println("</span><br/>卖 家: <span class='blue'>");     
+    		out.println("</span>卖 家: <span class='blue'>");     
     		out.println(d.getsellername());
     		out.println("</span><br/>数 量: <span class='blue'>");            
     		out.println(d.getordercount());
-    		out.println("</span><br/>订单总价: <span class='blue'>￥ ");            
+    		out.println("</span>总价: <span class='blue'>￥ ");            
     		out.println(d.getordersum());
     		out.println("</span><br/>下单时间: <span class='blue'>");            
     		out.println(d.getordertime());
-    		out.println("</span><br/>");               	
+    		out.println("</span>");               	
     		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
     		out.println(d.getordercond());				
-    		out.println("</span></div></div>");
+    		out.println("</span></div></div></div>");
             out.println("<a href='cancelOrder.jsp?id=");
             out.println(d.getorderid());
-            out.println("' class='prod_buy'>删除订单</a>");    		                             
-    		out.println("</div></div></div>");	
+            out.println("' class='prod_favor'>删除订单</a>");    		                             
+    		out.println("</div></div>");	
                               
    		}
    	

@@ -66,7 +66,7 @@ public class DBConnect {
 		return u;	
 	}
 	
-	public void createUser(String username, String userpwd, String usermail, String userphone, String useradd, String userauth) throws Exception {
+	public void newUser(String username, String userpwd, String usermail, String userphone, String useradd, String userauth) throws Exception {
 		String str = "INSERT INTO `bishe`.`user` (`username`, `userpwd`, `usermail`, `userphone`, `useradd`, `userauth`) VALUES (?,?,?,?,?,?);";		
 		Connection conn = this.Connect2MySQL();
 		PreparedStatement ps = conn.prepareStatement(str);
@@ -124,8 +124,8 @@ public class DBConnect {
 		conn.close();
 	}
 	
-	public void uploadItem(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String username) throws Exception {
-		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`) VALUES (?,?,?,?,?,?,?);";		
+	public void uploadItem(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String username, String itemimage) throws Exception {
+		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`, `itemimage`) VALUES (?,?,?,?,?,?,?,?);";		
 		Connection conn = this.Connect2MySQL();
 		PreparedStatement ps = conn.prepareStatement(str);
 		ps.setString(1, itemname);
@@ -135,6 +135,7 @@ public class DBConnect {
 		ps.setString(5, itemcount);
 		ps.setString(6, iteminfo);
 		ps.setString(7, username);
+		ps.setString(8, itemimage);
 		if(ps.executeUpdate()==1){
 			System.out.println("new item <" + itemname + "> uploaded");
 		}
@@ -142,8 +143,8 @@ public class DBConnect {
 		conn.close();
 	}
 	
-	public void alterItemInfo(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String itemid) throws Exception{		
-		String alterStr = "UPDATE `item` SET itemname='" + itemname + "', itemcate='" + itemcate + "', itemcond='" + itemcond + "', itemprice=" +  itemprice + ", itemcount=" + itemcount + ", iteminfo='" + iteminfo + "' WHERE itemid=" + itemid;		
+	public void alterItemInfo(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String itemimage, String itemid) throws Exception{		
+		String alterStr = "UPDATE `item` SET itemname='" + itemname + "', itemcate='" + itemcate + "', itemcond='" + itemcond + "', itemprice=" +  itemprice + ", itemcount=" + itemcount + ", iteminfo='" + iteminfo + "', itemimage='" + itemimage + "' WHERE itemid=" + itemid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -165,6 +166,7 @@ public class DBConnect {
 			i.setitemcount(rs.getString("itemcount"));
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
 		}
 		rs.close();
 		stmt.close();
@@ -188,6 +190,7 @@ public class DBConnect {
 			i.setitemcount(rs.getString("itemcount"));
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
 			itemlist.add(i);
 		}
 		rs.close();
@@ -212,6 +215,7 @@ public class DBConnect {
 			i.setitemcount(rs.getString("itemcount"));
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
 			myitemlist.add(i);
 		}
 		rs.close();
@@ -411,6 +415,7 @@ public class DBConnect {
 			i.setitemcount(rs.getString("itemcount"));
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
 			searchlist.add(i);
 		}
 		rs.close();

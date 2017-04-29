@@ -10,6 +10,7 @@ public class Item {
 	private String itemcount;
 	private String iteminfo;
 	private String itemseller;
+	private String itemimage;
 
 	public String getitemid() {
 		return itemid;
@@ -58,6 +59,12 @@ public class Item {
 	}
 	public void setitemseller(String itemseller) {
 		this.itemseller = itemseller;
+	}
+	public String getitemimage() {
+		return itemimage;
+	}
+	public void setitemimage(String itemimage) {
+		this.itemimage = itemimage;
 	}
 }
 

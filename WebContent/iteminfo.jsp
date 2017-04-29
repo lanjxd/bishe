@@ -125,7 +125,12 @@ response.setContentType("text/html; charset=utf-8");
                     <label><strong>数 量:</strong></label>
                     <input type="text" class="contact_input" name="i_count" value="<%=i.getitemcount() %>" required="required"/>
                     </div>
-
+					
+					<div class="form_row">
+                    <label><strong>图片链接:</strong></label>
+                    <input type="text" class="contact_input" name="i_image" value="<%=i.getitemimage() %>"/>
+                    </div>
+					
                     <div class="form_row">
                     <label><strong>描 述:</strong></label>
                     <textarea class="contact_textarea" name="i_info"><%=i.getiteminfo() %></textarea>

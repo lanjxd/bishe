@@ -106,29 +106,29 @@ close();
     	<div class="prod_box_big">
 
             <div class="center_prod_box_big">            
-                 
-                 <div class="product_img_big">
-                 <a href="javascript:popImage('images/p1.jpg')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="images/p1.jpg" alt="" title="" border="0" /></a>
-                 
-                 </div>
-                     <div class="details_big_box">
-                         <div class="product_title_big"><%=i.getitemname() %></div>
-                         <div class="specifications">
-							卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
+				<div>
+                 	<a href="javascript:popImage('<%=i.getitemimage() %>')" title="header=[查看大图] body=[&nbsp;] fade=[on]">
+                 		<img src="<%=i.getitemimage() %>" class="product_img_big"/>
+                 	</a>
+                </div>
+                <div class="details_big_box">
+                    <div class="product_title_big"><%=i.getitemname() %></div>
+                    <div class="specifications">
+						卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
 							
-							库存: <span class="blue"><%=i.getitemcount() %></span><br/>
+						库存: <span class="blue"><%=i.getitemcount() %></span><br/>
 							
-							成色: <span class="blue"><%=i.getitemcond() %></span><br/>
+						成色: <span class="blue"><%=i.getitemcond() %></span><br/>
                             
-							 商品描述: <span class="blue"><%=i.getiteminfo() %></span><br/>
-                         </div>
-                         <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
-						 <br/><br/>
-                         <label>数量: </label>
-						 <input type="text" name="number" class="number_input" value="1"/>
-						 <br/><br/>
-                         <a href="login.jsp" class="prod_buy">买买买</a>
-                     </div>                        
+						 商品描述: <span class="blue"><%=i.getiteminfo() %></span><br/>
+                    </div>
+                    <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
+					<br/>
+                    <label>数量: </label>
+					<input type="text" name="number" class="number_input" value="1"/>
+					<br/><br/>
+                    <a href="login.jsp" class="prod_buy">买买买</a>
+                 </div>                        
             </div>
                               
         </div>
