@@ -57,6 +57,20 @@ close();
 	String id = request.getParameter("id");
 	i = conn.getItem(id);
 	boolean favored = conn.chkFavor(myname, id);
+	
+	String itemcate = i.getitemcate();
+	int cate = Integer.parseInt(itemcate);
+	switch(cate){
+	case 1:itemcate = "图书教辅";break;
+	case 2:itemcate = "数码产品";break;
+	case 3:itemcate = "办公文具";break;
+	case 4:itemcate = "体育器材";break;
+	case 5:itemcate = "生活用品";break;
+	case 6:itemcate = "手工艺品";break;
+	case 7:itemcate = "男 装";break;
+	case 8:itemcate = "女 装";break;
+	case 9:itemcate = "其 它";break;
+	}
 %>
 
 <div id="main_container">
@@ -112,19 +126,16 @@ close();
     <div class="title_box">分 类</div>
     
        <ul class="left_menu">
-         <li class="odd"><a href="#">潮流女装</a></li>
-        <li class="even"><a href="#">时尚男装</a></li>
-         <li class="odd"><a href="#">羽绒服</a></li>
-        <li class="even"><a href="#">秋季外套</a></li>
-         <li class="odd"><a href="#">毛衣</a></li>
-        <li class="even"><a href="#">秋裤</a></li>
-         <li class="odd"><a href="#">长裤</a></li>
-        <li class="even"><a href="#">短裤</a></li>
-         <li class="odd"><a href="#">牛仔裤</a></li>
-        <li class="even"><a href="#">连衣裙</a></li>
-         <li class="odd"><a href="#">定制制服</a></li>
-        <li class="even"><a href="#">修补服务</a></li>
-        </ul> 
+         <li class="odd"><a href="category1.jsp?id=1">图书教辅</a></li>
+        <li class="even"><a href="category1.jsp?id=2">数码产品</a></li>
+         <li class="odd"><a href="category1.jsp?id=3">办公文具</a></li>
+        <li class="even"><a href="category1.jsp?id=4">体育器材</a></li>
+         <li class="odd"><a href="category1.jsp?id=5">生活用品</a></li>
+        <li class="even"><a href="category1.jsp?id=6">手工艺品</a></li>
+         <li class="odd"><a href="category1.jsp?id=7">男 装</a></li>
+        <li class="even"><a href="category1.jsp?id=8">女 装</a></li>
+         <li class="odd"><a href="category1.jsp?id=9">其 它</a></li>        
+       </ul>
     
    </div><!-- end of left content --> 
 
@@ -142,7 +153,7 @@ close();
                  	</a>
                 </div>
                  <div class="details_big_box">
-                 	 <form method="post" action="dealOrder.jsp?id=<%=id %>" name="orderForm">
+                 	 
                          <div class="product_title_big"><%=i.getitemname() %></div>
                          <div class="specifications">
 							卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
@@ -151,29 +162,41 @@ close();
 							
 							成色: <span class="blue"><%=i.getitemcond() %></span><br/>
                             
-							 商品描述: <span class="blue"><%=i.getiteminfo() %></span><br/>
+							分类: <span class="blue"><%=itemcate %></span><br/>
                          </div>
                          <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
 						 <br/>
-                         <label>数量: </label>
-						 <input type="text" name="buynumber" class="number_input" value="1" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
-						 <br/><br/>
-                         <input type="submit" value="买买买"/>
-                         
-                     <%
-                         if(favored){
-                        	 out.println("<a href='dealUnfavor.jsp?id=");
-                             out.println(id);
-                             out.println("'>取消收藏</a>");		 
-                         }
-                         else{
-                             out.println("<a href='dealFavor.jsp?id=");
-                             out.println(id);
-                             out.println("'>收 藏</a>");
+						 
+					 <%	 
+						 if(myauth.equals("1")){
+						 	out.println("<form method='post' action='dealOrder.jsp?id=");
+						 	out.println(id);
+						 	out.println("' name='orderForm'>"); 
+						 	out.println("<label>数量: </label>");                        
+						 	out.println("<input type='text' name='buynumber' class='number_input' value='1' onkeyup=\"value=value.replace(/[^\\d.]/g,\'\')\"/>");
+						 	out.println("<br/><br/>");
+						 	out.println("<input type='submit' value='买买买'/>");
+                         	
+                         	if(favored){
+                        	 	out.println("<a href='dealUnfavor.jsp?id=");
+                             	out.println(id);
+                             	out.println("'>取消收藏</a>");		 
+                         	}
+                         	else{
+                             	out.println("<a href='dealFavor.jsp?id=");
+                             	out.println(id);
+                             	out.println("'>收 藏</a>");
+                         	}
+                         	out.println("</form>");
                          }
                      %>
-                     </form>    
-                 </div>                        
+                         
+                 </div>
+                 <div class="prod_info">
+                 	<span class="info_title">物品详情</span>
+                 	<br/>
+                 	<span class="info_main"><%=i.getiteminfo() %></span>
+                 </div>                         
             </div>
                               
         </div>

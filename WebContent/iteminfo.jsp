@@ -76,19 +76,16 @@ response.setContentType("text/html; charset=utf-8");
     <div class="title_box">分 类</div>
     
         <ul class="left_menu">
-         <li class="odd"><a href="#">潮流女装</a></li>
-        <li class="even"><a href="#">时尚男装</a></li>
-         <li class="odd"><a href="#">羽绒服</a></li>
-        <li class="even"><a href="#">秋季外套</a></li>
-         <li class="odd"><a href="#">毛衣</a></li>
-        <li class="even"><a href="#">秋裤</a></li>
-         <li class="odd"><a href="#">长裤</a></li>
-        <li class="even"><a href="#">短裤</a></li>
-         <li class="odd"><a href="#">牛仔裤</a></li>
-        <li class="even"><a href="#">连衣裙</a></li>
-         <li class="odd"><a href="#">定制制服</a></li>
-        <li class="even"><a href="#">修补服务</a></li>
-        </ul> 
+         <li class="odd"><a href="category1.jsp?id=1">图书教辅</a></li>
+        <li class="even"><a href="category1.jsp?id=2">数码产品</a></li>
+         <li class="odd"><a href="category1.jsp?id=3">办公文具</a></li>
+        <li class="even"><a href="category1.jsp?id=4">体育器材</a></li>
+         <li class="odd"><a href="category1.jsp?id=5">生活用品</a></li>
+        <li class="even"><a href="category1.jsp?id=6">手工艺品</a></li>
+         <li class="odd"><a href="category1.jsp?id=7">男 装</a></li>
+        <li class="even"><a href="category1.jsp?id=8">女 装</a></li>
+         <li class="odd"><a href="category1.jsp?id=9">其 它</a></li>        
+       </ul>
      
    </div><!-- end of left content --> 
 
@@ -107,8 +104,18 @@ response.setContentType("text/html; charset=utf-8");
                     </div>  
 
                     <div class="form_row">
-                    <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate" value="<%=i.getitemcate() %>" required="required"/>
+                    <label><strong>分 类 :</strong></label>
+                    <select class="contact_input" name="i_cate" required="required">
+                    <option value="1">图书教辅</option>
+					<option value="2">数码产品</option>
+					<option value="3">办公文具</option>
+					<option value="4">体育器材</option>
+					<option value="5">生活用品</option>
+					<option value="6">手工艺品</option>
+					<option value="7">男 装</option>
+					<option value="8">女 装</option>
+					<option value="9">其 它</option>					
+                    </select>
                     </div>
 
                     <div class="form_row">

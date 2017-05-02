@@ -102,8 +102,18 @@ response.setContentType("text/html; charset=utf-8");
                     </div>  
 
                     <div class="form_row">
-                    <label><strong>类 型:</strong></label>
-                    <input type="text" class="contact_input" name="i_cate" required="required"/>
+                    <label><strong>分 类 :</strong></label>
+                    <select class="contact_input" name="i_cate" required="required">
+                    <option value="1">图书教辅</option>
+					<option value="2">数码产品</option>
+					<option value="3">办公文具</option>
+					<option value="4">体育器材</option>
+					<option value="5">生活用品</option>
+					<option value="6">手工艺品</option>
+					<option value="7">男 装</option>
+					<option value="8">女 装</option>
+					<option value="9">其 它</option>					
+                    </select>
                     </div>
 
                     <div class="form_row">

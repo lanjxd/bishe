@@ -19,12 +19,22 @@ response.setContentType("text/html; charset=utf-8");
 	
 	DBConnect conn = new DBConnect();
 	ArrayList<Item> itemlist = new ArrayList<Item>();
-	String search = request.getParameter("search");
-	if(search.equals("")){
-		out.println("<script language='javascript'>alert('搜索内容不能为空！');window.location.replace(document.referrer);</script>");
-	}
-	itemlist = conn.getSearch(search);
+	String itemcate = request.getParameter("id");
+	itemlist = conn.getCategory(itemcate);
     Item i = new Item();
+    
+	int cateid = Integer.parseInt(itemcate);
+	switch(cateid){
+	case 1:itemcate = "图书教辅";break;
+	case 2:itemcate = "数码产品";break;
+	case 3:itemcate = "办公文具";break;
+	case 4:itemcate = "体育器材";break;
+	case 5:itemcate = "生活用品";break;
+	case 6:itemcate = "手工艺品";break;
+	case 7:itemcate = "男 装";break;
+	case 8:itemcate = "女 装";break;
+	case 9:itemcate = "其 它";break;
+	}
 %>
 
 <div id="main_container">
@@ -73,7 +83,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">搜 索</span>
+    导 航：<span class="current"><%=itemcate %></span>
     </div>        
     
    <div class="left_content">
@@ -89,7 +99,7 @@ response.setContentType("text/html; charset=utf-8");
          <li class="odd"><a href="category1.jsp?id=7">男 装</a></li>
         <li class="even"><a href="category1.jsp?id=8">女 装</a></li>
          <li class="odd"><a href="category1.jsp?id=9">其 它</a></li>        
-       </ul>
+       </ul> 
      
    </div><!-- end of left content --> 
 
@@ -97,7 +107,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
     
-   	<div class="center_title_bar">"<%=search %>" 的搜索结果</div>
+   	<div class="center_title_bar">"<%=itemcate %>" 分类下的所有物品</div>
     
     <%
     

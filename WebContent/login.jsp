@@ -42,19 +42,16 @@ response.setContentType("text/html; charset=utf-8");
     <div class="title_box">分 类</div>
     
         <ul class="left_menu">
-         <li class="odd"><a href="#">潮流女装</a></li>
-        <li class="even"><a href="#">时尚男装</a></li>
-         <li class="odd"><a href="#">羽绒服</a></li>
-        <li class="even"><a href="#">秋季外套</a></li>
-         <li class="odd"><a href="#">毛衣</a></li>
-        <li class="even"><a href="#">秋裤</a></li>
-         <li class="odd"><a href="#">长裤</a></li>
-        <li class="even"><a href="#">短裤</a></li>
-         <li class="odd"><a href="#">牛仔裤</a></li>
-        <li class="even"><a href="#">连衣裙</a></li>
-         <li class="odd"><a href="#">定制制服</a></li>
-        <li class="even"><a href="#">修补服务</a></li>
-        </ul> 
+         <li class="odd"><a href="category.jsp?id=1">图书教辅</a></li>
+        <li class="even"><a href="category.jsp?id=2">数码产品</a></li>
+         <li class="odd"><a href="category.jsp?id=3">办公文具</a></li>
+        <li class="even"><a href="category.jsp?id=4">体育器材</a></li>
+         <li class="odd"><a href="category.jsp?id=5">生活用品</a></li>
+        <li class="even"><a href="category.jsp?id=6">手工艺品</a></li>
+         <li class="odd"><a href="category.jsp?id=7">男 装</a></li>
+        <li class="even"><a href="category.jsp?id=8">女 装</a></li>
+         <li class="odd"><a href="category.jsp?id=9">其 它</a></li>        
+       </ul> 
      
    </div><!-- end of left content --> 
 

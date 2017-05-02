@@ -14,8 +14,22 @@ response.setContentType("text/html; charset=utf-8");
 <%
 	DBConnect conn = new DBConnect();
 	ArrayList<Item> itemlist = new ArrayList<Item>();
-    itemlist = conn.getAllItem();
+	String itemcate = request.getParameter("id");
+	itemlist = conn.getCategory(itemcate);
     Item i = new Item();
+    
+	int cateid = Integer.parseInt(itemcate);
+	switch(cateid){
+	case 1:itemcate = "图书教辅";break;
+	case 2:itemcate = "数码产品";break;
+	case 3:itemcate = "办公文具";break;
+	case 4:itemcate = "体育器材";break;
+	case 5:itemcate = "生活用品";break;
+	case 6:itemcate = "手工艺品";break;
+	case 7:itemcate = "男 装";break;
+	case 8:itemcate = "女 装";break;
+	case 9:itemcate = "其 它";break;
+	}
 %>
 
 <div id="main_container">
@@ -42,12 +56,12 @@ response.setContentType("text/html; charset=utf-8");
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">首 页</span>
+    导 航：<span class="current"><%=itemcate %></span>
     </div>        
     
    <div class="left_content">
     <div class="title_box">分 类</div>
-    	
+    
        <ul class="left_menu">
          <li class="odd"><a href="category.jsp?id=1">图书教辅</a></li>
         <li class="even"><a href="category.jsp?id=2">数码产品</a></li>
@@ -64,7 +78,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
     
-   	<div class="center_title_bar">新 品 发 布</div>
+   	<div class="center_title_bar">"<%=itemcate %>" 分类下的所有物品</div>
     
     <%
     
@@ -89,7 +103,7 @@ response.setContentType("text/html; charset=utf-8");
     	}
     
  	%>
-       
+        
    </div><!-- end of center content -->
 
  <div class="right_content">

@@ -148,7 +148,7 @@ public class DBConnect {
 	}
 	
 	public void alterItemInfo(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String itemimage, String itemid) throws Exception{		
-		String alterStr = "UPDATE `item` SET itemname='" + itemname + "', itemcate='" + itemcate + "', itemcond='" + itemcond + "', itemprice=" +  itemprice + ", itemcount=" + itemcount + ", iteminfo='" + iteminfo + "', itemimage='" + itemimage + "' WHERE itemid=" + itemid;		
+		String alterStr = "UPDATE `item` SET itemname='" + itemname + "', itemcate=" + itemcate + ", itemcond='" + itemcond + "', itemprice=" +  itemprice + ", itemcount=" + itemcount + ", iteminfo='" + iteminfo + "', itemimage='" + itemimage + "' WHERE itemid=" + itemid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -426,6 +426,31 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 		return searchlist;
+	}
+	
+	public ArrayList<Item> getCategory(String cateid) throws Exception {
+		ArrayList<Item> catelist = new ArrayList<Item>();
+		String cateStr = "SELECT * FROM `item` WHERE itemcate = " + cateid;	
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(cateStr);	
+		while(rs.next()){
+			Item i = new Item();
+			i.setitemid(rs.getString("itemid"));
+			i.setitemname(rs.getString("itemname"));
+			i.setitemcate(rs.getString("itemcate"));
+			i.setitemcond(rs.getString("itemcond"));
+			i.setitemprice(rs.getString("itemprice"));
+			i.setitemcount(rs.getString("itemcount"));
+			i.setiteminfo(rs.getString("iteminfo"));
+			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
+			catelist.add(i);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return catelist;
 	}
 	
 }

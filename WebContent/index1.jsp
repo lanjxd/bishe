@@ -74,20 +74,17 @@ response.setContentType("text/html; charset=utf-8");
     
    <div class="left_content">
     <div class="title_box">分 类</div>
-    	<% //TODO:item category %>
+    
        <ul class="left_menu">
-         <li class="odd"><a href="#">潮流女装</a></li>
-        <li class="even"><a href="#">时尚男装</a></li>
-         <li class="odd"><a href="#">羽绒服</a></li>
-        <li class="even"><a href="#">秋季外套</a></li>
-         <li class="odd"><a href="#">毛衣</a></li>
-        <li class="even"><a href="#">秋裤</a></li>
-         <li class="odd"><a href="#">长裤</a></li>
-        <li class="even"><a href="#">短裤</a></li>
-         <li class="odd"><a href="#">牛仔裤</a></li>
-        <li class="even"><a href="#">连衣裙</a></li>
-         <li class="odd"><a href="#">定制制服</a></li>
-        <li class="even"><a href="#">修补服务</a></li>
+         <li class="odd"><a href="category1.jsp?id=1">图书教辅</a></li>
+        <li class="even"><a href="category1.jsp?id=2">数码产品</a></li>
+         <li class="odd"><a href="category1.jsp?id=3">办公文具</a></li>
+        <li class="even"><a href="category1.jsp?id=4">体育器材</a></li>
+         <li class="odd"><a href="category1.jsp?id=5">生活用品</a></li>
+        <li class="even"><a href="category1.jsp?id=6">手工艺品</a></li>
+         <li class="odd"><a href="category1.jsp?id=7">男 装</a></li>
+        <li class="even"><a href="category1.jsp?id=8">女 装</a></li>
+         <li class="odd"><a href="category1.jsp?id=9">其 它</a></li>        
        </ul> 
      
    </div><!-- end of left content --> 
@@ -104,10 +101,9 @@ response.setContentType("text/html; charset=utf-8");
     		
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
-            out.println("<div class='product_title'>");
-            out.println("<a href='item1.jsp?id=");
+            out.println("<div><a href='item1.jsp?id=");
             out.println(i.getitemid());
-            out.println("'>");
+            out.println("' class='product_title'>");
             out.println(i.getitemname());
             out.println("</a></div>");
             out.println("<img src='");
@@ -121,14 +117,6 @@ response.setContentType("text/html; charset=utf-8");
     
  	%>
         
-    	<div class="center_title_bar">为 您 推 荐</div>   
-    	
-    <%
-    
-    	//TODO:customized recommendation
-    
-    %>
-    
    </div><!-- end of center content -->
 
  <div class="right_content">
