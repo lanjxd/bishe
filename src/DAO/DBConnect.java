@@ -2,8 +2,12 @@ package DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class DBConnect {
+	
+	static String strClassName = DBConnect.class.getName();  
+    static Logger logger = Logger.getLogger(strClassName); 
 
 	public Connection Connect2MySQL() throws Exception{
 		String driver="com.mysql.jdbc.Driver";
@@ -26,7 +30,7 @@ public class DBConnect {
 			u.setUserpwd(rs.getString("userpwd"));
 		}
 		if(u.getUsername().equals(username) && u.getUserpwd().equals(userpwd)){
-			System.out.println("user confirmed");
+			logger.info("user <" + username + "> confirmed");
 			rs.close();
 			stmt.close();
 			conn.close();
@@ -77,7 +81,7 @@ public class DBConnect {
 		ps.setString(5, useradd);
 		ps.setString(6, userauth);
 		if(ps.executeUpdate()==1){
-			System.out.println("new user <" + username + "> created");
+			logger.info("new user <" + username + "> created");
 		}
 		ps.close();
 		conn.close();
@@ -119,7 +123,7 @@ public class DBConnect {
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(deleteStr);
-		System.out.println(deleteStr);
+		logger.warning(deleteStr);
 		stmt.close();
 		conn.close();
 	}
@@ -137,7 +141,7 @@ public class DBConnect {
 		ps.setString(7, username);
 		ps.setString(8, itemimage);
 		if(ps.executeUpdate()==1){
-			System.out.println("new item <" + itemname + "> uploaded");
+			logger.info("new item <" + itemname + "> uploaded");
 		}
 		ps.close();
 		conn.close();
@@ -229,7 +233,7 @@ public class DBConnect {
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(deleteStr);
-		System.out.println(deleteStr);
+		logger.warning(deleteStr);
 		stmt.close();
 		conn.close();
 	}
@@ -255,7 +259,7 @@ public class DBConnect {
 		ps.setString(2, favoritem);
 		ps.setTimestamp(3, ts);
 		if(ps.executeUpdate()==1){
-			System.out.println("itemid " + favoritem + " favored by user <" + favoruser + ">");
+			logger.info("itemid " + favoritem + " favored by user <" + favoruser + ">");
 		}
 		ps.close();
 		conn.close();
@@ -266,7 +270,7 @@ public class DBConnect {
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(cancelStr);
-		System.out.println(cancelStr);
+		logger.warning(cancelStr);
 		stmt.close();
 		conn.close();
 	}
@@ -303,7 +307,7 @@ public class DBConnect {
 		ps.setString(6, ordercond);
 		ps.setTimestamp(7, ts);
 		if(ps.executeUpdate()==1){
-			System.out.println("new order created");
+			logger.info("new order created by <" + buyername + ">");
 		}
 		ps.close();
 		conn.close();
@@ -314,7 +318,7 @@ public class DBConnect {
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(cancelStr);
-		System.out.println(cancelStr);
+		logger.warning(cancelStr);
 		stmt.close();
 		conn.close();
 	}
@@ -394,7 +398,7 @@ public class DBConnect {
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
-		System.out.println(alterStr);
+		logger.info(alterStr);
 		stmt.close();
 		conn.close();
 	}

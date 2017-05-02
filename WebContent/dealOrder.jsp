@@ -18,15 +18,20 @@ response.setContentType("text/html; charset=utf-8");
 	Item i = new Item();
 	String orderitem = request.getParameter("id");
 	i = conn.getItem(orderitem);
-	String sellername = i.getitemseller();
+	String itemcount = i.getitemcount();
 	String ordercount = request.getParameter("buynumber");
-	String itemprice = i.getitemprice();
-	String ordersum = String.valueOf((Double.valueOf(ordercount) * Double.valueOf(itemprice)));
-	String ordercond = "未付款";
+	if(Integer.valueOf(itemcount) < Integer.valueOf(ordercount)){
+		out.println("<script language='javascript'>alert('订单数量超出物品库存！');window.location.replace(document.referrer);</script>");
+	}else{
+		String sellername = i.getitemseller();	
+		String itemprice = i.getitemprice();
+		String ordersum = String.valueOf((Double.valueOf(ordercount) * Double.valueOf(itemprice)));
+		String ordercond = "未付款";
+		
+		conn.newOrder(orderitem, buyername, sellername, ordercount, ordersum, ordercond);	
+		out.println("<script language='javascript'>window.location.href='orderbuy.jsp';</script>");
+	}
 	
-	conn.newOrder(orderitem, buyername, sellername, ordercount, ordersum, ordercond);	
-	out.println("<script language='javascript'>window.location.href='orderbuy.jsp';</script>");
-
 %>
 </body>
 </html>

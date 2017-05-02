@@ -19,12 +19,9 @@ response.setContentType("text/html; charset=utf-8");
 		User currentUser = new User();
 		currentUser = conn.saveUser(username);
 		session.setAttribute("currentUser", currentUser);
-		
-		System.out.println("login success");
 		response.sendRedirect("index1.jsp");
 	}
 	else {
-		System.out.println("login fail");
 		out.println("<script language='javascript'>alert('用户名或密码错误，请重新输入！');window.location.replace(document.referrer);</script>");
 	}
 %>

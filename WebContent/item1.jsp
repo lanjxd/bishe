@@ -63,8 +63,8 @@ close();
 
 	<div id="header">
 
-        <div class="top_right">
-			<h1>中 财 二 手 义 卖</h1>        
+        <div class="top_right" onselectstart="return false">
+			<p>中 财 二 手 义 卖</p>        
         </div>
     
     </div>
@@ -156,7 +156,7 @@ close();
                          <div class="prod_price_big">单价：<span class="price">￥ <%=i.getitemprice() %></span></div>
 						 <br/>
                          <label>数量: </label>
-						 <input type="text" name="buynumber" class="number_input" value="1"/>
+						 <input type="text" name="buynumber" class="number_input" value="1" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
 						 <br/><br/>
                          <input type="submit" value="买买买"/>
                          

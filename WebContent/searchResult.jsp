@@ -23,8 +23,8 @@ response.setContentType("text/html; charset=utf-8");
 
 	<div id="header">
 
-        <div class="top_right">
-			<h1>中 财 二 手 义 卖</h1>        
+        <div class="top_right" onselectstart="return false">
+			<p>中 财 二 手 义 卖</p>        
         </div>
     
     </div>
