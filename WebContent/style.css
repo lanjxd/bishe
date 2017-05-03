@@ -229,8 +229,8 @@ padding:0px;
 margin:0px; 
 }
 .product_title{
+color:#000000;
 display:block;
-color:#ff8a00;
 padding:5px 0;
 margin:0px 10px;
 overflow:hidden;
@@ -299,7 +299,7 @@ color: #006600;
 width:auto;
 height:auto;
 float:left;
-padding:5px;
+padding:5px 15px;
 }
 .center_prod_box_big{
 width:550;
@@ -322,6 +322,13 @@ float:left;
 padding:5px 10px 10px 50px;
 text-align:left;
 }
+.order_big_box{
+width:400px;
+height:auto;
+float:left;
+padding:5px 10px 10px 20px;
+text-align:left;
+}
 .prod_info{
 width:500px;
 height:auto;
@@ -331,7 +338,7 @@ padding:5px;
 border:1px #00ff00 dashed; 
 }
 .product_title_big{
-color:#ff8a00;
+color:#000000;
 margin:5px 0;
 font-weight:bold;
 font-size:15px;
@@ -347,7 +354,14 @@ line-height:15px;
 padding:5px 0 5px 0;
 font-size:16px;
 }
-
+span.donation{
+color:#ff0000;
+font-size:30px;
+font-weight:bold;
+}
+span.red{
+color:#ff0000;
+}
 span.blue{
 color:#159DCC;
 }

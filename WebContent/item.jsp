@@ -51,6 +51,8 @@ close();
 	Item i = new Item();
 	i = conn.getItem(request.getParameter("id"));
 	
+	String donation = conn.getDonation();
+	
 	String itemcate = i.getitemcate();
 	int cate = Integer.parseInt(itemcate);
 	switch(cate){
@@ -94,19 +96,8 @@ close();
     </div>        
     
    <div class="left_content">
-    <div class="title_box">分 类</div>
-    
-       <ul class="left_menu">
-         <li class="odd"><a href="category.jsp?id=1">图书教辅</a></li>
-        <li class="even"><a href="category.jsp?id=2">数码产品</a></li>
-         <li class="odd"><a href="category.jsp?id=3">办公文具</a></li>
-        <li class="even"><a href="category.jsp?id=4">体育器材</a></li>
-         <li class="odd"><a href="category.jsp?id=5">生活用品</a></li>
-        <li class="even"><a href="category.jsp?id=6">手工艺品</a></li>
-         <li class="odd"><a href="category.jsp?id=7">男 装</a></li>
-        <li class="even"><a href="category.jsp?id=8">女 装</a></li>
-         <li class="odd"><a href="category.jsp?id=9">其 它</a></li>        
-       </ul> 
+   
+    	<%@ include file="left_content.jsp" %> 
     
    </div><!-- end of left content --> 
 
@@ -127,7 +118,15 @@ close();
                     <div class="specifications">
 						卖家: <span class="blue"><%=i.getitemseller() %></span><br/>
 							
-						库存: <span class="blue"><%=i.getitemcount() %></span><br/>
+						库存: <span class="blue">
+						<% 
+							if(i.getitemcount().equals("0")){
+								out.println("售罄");
+							}else{
+								out.println(i.getitemcount());
+							}
+						
+						%></span><br/>
 							
 						成色: <span class="blue"><%=i.getitemcond() %></span><br/>
                             
@@ -153,12 +152,7 @@ close();
 
  <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="searchResult.jsp">				  
-			<input type="text" name="search"/>
-			<br/><br/>
-			<input type="submit" value="搜索"/>			
-        </form>
+		<%@ include file="right_content.jsp" %>
         
    </div><!-- end of right content -->   
         

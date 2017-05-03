@@ -21,6 +21,8 @@ response.setContentType("text/html; charset=utf-8");
 	ArrayList<Item> itemlist = new ArrayList<Item>();
     itemlist = conn.getAllItem();
     Item i = new Item();
+    
+    String donation = conn.getDonation();
 %>
 
 <div id="main_container">
@@ -35,37 +37,9 @@ response.setContentType("text/html; charset=utf-8");
     
    	<div id="main_content"> 
     	<div id="menu_tab">
-        	<ul class="menu">
-            	<li><a href="index1.jsp" class="nav">首 页</a></li>
-                <li class="divider"></li>
-                         
-		<%
-                    
-			if(myauth.equals("1")){
-				out.println("<li><a href='orderbuy.jsp' class='nav'>我 的 订 单</a></li>");
-				out.println("<li class='divider'></li>");
-				out.println("<li><a href='myfavor.jsp' class='nav'>收 藏 夹</a></li>");								
-			}else if(myauth.equals("2")){
-				out.println("<li><a href='upload.jsp' class='nav'>发 布 新 商 品</a></li>");
-				out.println("<li class='divider'></li>");
-				out.println("<li><a href='myitem.jsp' class='nav'>我 的 商 品</a></li>");
-				out.println("<li class='divider'></li>");
-				out.println("<li><a href='ordersell.jsp' class='nav'>订 单 管 理</a></li>");
-			}else{
-				out.println("<li><a href='itemlist.jsp' class='nav'>商 品 管 理</a></li>");
-				out.println("<li class='divider'></li>");
-				out.println("<li><a href='userlist.jsp' class='nav'>用 户 管 理</a></li>");
-				out.println("<li class='divider'></li>");
-				out.println("<li><a href='orderlist.jsp' class='nav'>订 单 管 理</a></li>");
-			}
-                    
-		%>
-       
-                <li class="divider"></li>
-                <li><a href="index.jsp" class="nav">登 出</a></li>
-				<li class="divider"></li>
-				<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
-			</ul>
+    	
+        	<%@ include file="menu_tab.jsp" %>
+        	
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
@@ -73,19 +47,8 @@ response.setContentType("text/html; charset=utf-8");
     </div>        
     
    <div class="left_content">
-    <div class="title_box">分 类</div>
-    
-       <ul class="left_menu">
-         <li class="odd"><a href="category1.jsp?id=1">图书教辅</a></li>
-        <li class="even"><a href="category1.jsp?id=2">数码产品</a></li>
-         <li class="odd"><a href="category1.jsp?id=3">办公文具</a></li>
-        <li class="even"><a href="category1.jsp?id=4">体育器材</a></li>
-         <li class="odd"><a href="category1.jsp?id=5">生活用品</a></li>
-        <li class="even"><a href="category1.jsp?id=6">手工艺品</a></li>
-         <li class="odd"><a href="category1.jsp?id=7">男 装</a></li>
-        <li class="even"><a href="category1.jsp?id=8">女 装</a></li>
-         <li class="odd"><a href="category1.jsp?id=9">其 它</a></li>        
-       </ul> 
+   
+    	<%@ include file="left_content1.jsp" %>
      
    </div><!-- end of left content --> 
 
@@ -121,14 +84,9 @@ response.setContentType("text/html; charset=utf-8");
         
    </div><!-- end of center content -->
 
- <div class="right_content">
+   <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="searchResult1.jsp">				  
-			<input type="text" name="search"/>
-			<br/><br/>
-			<input type="submit" value="搜索"/>			
-        </form>
+		<%@ include file="right_content.jsp" %>
    
    </div><!-- end of right content -->   
         

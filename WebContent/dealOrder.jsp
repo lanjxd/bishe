@@ -20,14 +20,16 @@ response.setContentType("text/html; charset=utf-8");
 	i = conn.getItem(orderitem);
 	String itemcount = i.getitemcount();
 	String ordercount = request.getParameter("buynumber");
-	if(Integer.valueOf(itemcount) < Integer.valueOf(ordercount)){
+	int ic = Integer.valueOf(itemcount);
+	int oc = Integer.valueOf(ordercount);
+	if(ic < oc){
 		out.println("<script language='javascript'>alert('订单数量超出物品库存！');window.location.replace(document.referrer);</script>");
 	}else{
 		String sellername = i.getitemseller();	
 		String itemprice = i.getitemprice();
 		String ordersum = String.valueOf((Double.valueOf(ordercount) * Double.valueOf(itemprice)));
 		String ordercond = "未付款";
-		
+				
 		conn.newOrder(orderitem, buyername, sellername, ordercount, ordersum, ordercond);	
 		out.println("<script language='javascript'>window.location.href='orderbuy.jsp';</script>");
 	}

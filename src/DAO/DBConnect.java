@@ -3,6 +3,7 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+//import java.text.*;
 
 public class DBConnect {
 	
@@ -296,9 +297,10 @@ public class DBConnect {
 	public void newOrder(String orderitem, String buyername, String sellername, String ordercount, String ordersum, String ordercond) throws Exception {
 		java.util.Date now = new java.util.Date();
 		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
-		String str = "INSERT INTO `bishe`.`order` (`orderitem`, `buyername`, `sellername`, `ordercount`, `ordersum`, `ordercond`, `ordertime`) VALUES (?,?,?,?,?,?,?);";		
+		String str1 = "INSERT INTO `bishe`.`order` (`orderitem`, `buyername`, `sellername`, `ordercount`, `ordersum`, `ordercond`, `ordertime`) VALUES (?,?,?,?,?,?,?);";		
+		String Str2 = "UPDATE `item` SET itemcount = itemcount - " + ordercount + " WHERE itemid = " + orderitem;
 		Connection conn = this.Connect2MySQL();
-		PreparedStatement ps = conn.prepareStatement(str);
+		PreparedStatement ps = conn.prepareStatement(str1);
 		ps.setString(1, orderitem);
 		ps.setString(2, buyername);
 		ps.setString(3, sellername);
@@ -310,15 +312,56 @@ public class DBConnect {
 			logger.info("new order created by <" + buyername + ">");
 		}
 		ps.close();
+		Statement stmt = conn.createStatement();
+		stmt.execute(Str2);
+		logger.warning(Str2);
+		stmt.close();
 		conn.close();
 	}
 	
-	public void cancelOrder(String orderid) throws Exception {
-		String cancelStr = "delete from `order` where orderid = " + orderid;		
+	public Order getOrder(String orderid) throws Exception {		
+		String str = "Select * from `order` where orderid = " + orderid ;
+		Connection conn = this.Connect2MySQL();	
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		Order d = new Order();
+		if(rs.next()){
+			d.setorderid(rs.getString("orderid"));
+			d.setorderitem(rs.getString("orderitem"));
+			d.setbuyername(rs.getString("buyername"));
+			d.setsellername(rs.getString("sellername"));
+			d.setordercount(rs.getString("ordercount"));
+			d.setordersum(rs.getString("ordersum"));
+			d.setordercond(rs.getString("ordercond"));
+			d.setordertime(rs.getString("ordertime"));
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return d;
+	}
+	
+	public void cancelOrder(String orderid, String ordercount, String orderitem) throws Exception {
+		String Str1 = "UPDATE `item` SET itemcount = itemcount + " + ordercount + " WHERE itemid = " + orderitem; 
+		String Str2 = "delete from `order` where orderid = " + orderid;
+		Connection conn = this.Connect2MySQL();
+		Statement stmt1 = conn.createStatement();
+		stmt1.execute(Str1);
+		logger.warning(Str1);
+		stmt1.close();
+		Statement stmt2 = conn.createStatement();
+		stmt2.execute(Str2);
+		logger.warning(Str2);
+		stmt2.close();
+		conn.close();
+	}
+	
+	public void deleteOrder(String orderid) throws Exception { 
+		String Str = "delete from `order` where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
-		stmt.execute(cancelStr);
-		logger.warning(cancelStr);
+		stmt.execute(Str);
+		logger.warning(Str);
 		stmt.close();
 		conn.close();
 	}
@@ -471,6 +514,26 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 		return catelist;
+	}
+	
+	public String getDonation() throws Exception {
+		Double d_sum = 0.00;
+		String Str = "SELECT ordersum FROM `order`";
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);
+		Order d = new Order();
+		while(rs.next()){			
+			d.setordersum(rs.getString("ordersum"));
+			d_sum += Double.valueOf(d.getordersum());			
+		}
+		//DecimalFormat df = new DecimalFormat(".##");
+		//String donation = df.format(d_sum);
+		String donation = String.valueOf(d_sum);
+		rs.close();
+		stmt.close();
+		conn.close();
+		return donation;
 	}
 	
 }

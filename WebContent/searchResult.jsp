@@ -20,6 +20,8 @@ response.setContentType("text/html; charset=utf-8");
 	}
 	itemlist = conn.getSearch(search);
     Item i = new Item();
+    
+    String donation = conn.getDonation();
 %>
 
 <div id="main_container">
@@ -50,19 +52,8 @@ response.setContentType("text/html; charset=utf-8");
     </div>        
     
    <div class="left_content">
-    <div class="title_box">分 类</div>
-    
-       <ul class="left_menu">
-         <li class="odd"><a href="category.jsp?id=1">图书教辅</a></li>
-        <li class="even"><a href="category.jsp?id=2">数码产品</a></li>
-         <li class="odd"><a href="category.jsp?id=3">办公文具</a></li>
-        <li class="even"><a href="category.jsp?id=4">体育器材</a></li>
-         <li class="odd"><a href="category.jsp?id=5">生活用品</a></li>
-        <li class="even"><a href="category.jsp?id=6">手工艺品</a></li>
-         <li class="odd"><a href="category.jsp?id=7">男 装</a></li>
-        <li class="even"><a href="category.jsp?id=8">女 装</a></li>
-         <li class="odd"><a href="category.jsp?id=9">其 它</a></li>        
-       </ul> 
+   
+    	<%@ include file="left_content.jsp" %>
      
    </div><!-- end of left content --> 
 
@@ -98,14 +89,9 @@ response.setContentType("text/html; charset=utf-8");
         
    </div><!-- end of center content -->
 
- <div class="right_content">
+   <div class="right_content">
  
-		<div class="title_box">商 品 搜 索</div><br/>		
-		<form method="post" action="searchResult.jsp">				  
-			<input type="text" name="search"/>
-			<br/><br/>
-			<input type="submit" value="搜索"/>			
-        </form>
+		<%@ include file="right_content.jsp" %>
      
    </div><!-- end of right content -->   
         
