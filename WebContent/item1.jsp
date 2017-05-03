@@ -180,12 +180,12 @@ close();
                          	if(favored){
                         	 	out.println("<a href='dealUnfavor.jsp?id=");
                              	out.println(id);
-                             	out.println("'>取消收藏</a>");		 
+                             	out.println("' class='prod_favor'>取消收藏</a>");		 
                          	}
                          	else{
                              	out.println("<a href='dealFavor.jsp?id=");
                              	out.println(id);
-                             	out.println("'>收 藏</a>");
+                             	out.println("' class='prod_favor'>收 藏</a>");
                          	}
                          	out.println("</form>");
                          }

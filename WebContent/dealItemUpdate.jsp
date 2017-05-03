@@ -25,7 +25,7 @@ response.setContentType("text/html; charset=utf-8");
 
 	conn.alterItemInfo(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, itemimage, itemid);
 	
-	out.println("<script language='javascript'>alert('物品信息修改成功！');window.location.href='myitem.jsp';</script>");
+	out.println("<script language='javascript'>alert('物品信息修改成功！');window.location.replace(document.referrer);</script>");
 %>
 </body>
 </html>

@@ -403,9 +403,29 @@ public class DBConnect {
 		conn.close();
 	}
 	
+	public void shipment(String orderid) throws Exception {
+		String alterStr = "update `order` set ordercond = '已发货' where orderid = " + orderid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		logger.info(alterStr);
+		stmt.close();
+		conn.close();
+	}
+	
+	public void receipt(String orderid) throws Exception {
+		String alterStr = "update `order` set ordercond = '已收货' where orderid = " + orderid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		logger.info(alterStr);
+		stmt.close();
+		conn.close();
+	}
+	
 	public ArrayList<Item> getSearch(String search) throws Exception {
 		ArrayList<Item> searchlist = new ArrayList<Item>();
-		String searchStr = "SELECT * FROM `item` WHERE itemname LIKE '%" + search + "%'";	
+		String searchStr = "SELECT * FROM `item` WHERE (itemname LIKE '%" + search + "%' OR iteminfo LIKE '%" + search + "%')";	
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(searchStr);	

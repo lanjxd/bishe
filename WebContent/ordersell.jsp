@@ -91,7 +91,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">我的订单</div>
+   	<div class="center_title_bar">我 的 订 单</div>
    	
    	<%
    	
@@ -130,9 +130,9 @@ response.setContentType("text/html; charset=utf-8");
                 out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_favor'>取消订单</a>");
-              	//TODO:发货
-    		}else if(d.getordercond().equals("未收货")){
-				//TODO:?
+                out.println("<a href='confirmShipment.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>确认发货</a>");
     		}
     		                             
     		out.println("</div></div>");	

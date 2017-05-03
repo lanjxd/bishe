@@ -189,7 +189,7 @@ color: #ff8a00;
 .center_content{
 width:600px;
 float:left;
-padding:5px 10px 5px 15px;
+padding:5px 10px;
 }
 .center_title_bar{
 width:575px;
@@ -218,7 +218,7 @@ width:170px;
 height:auto;
 float:left;
 padding:5px;
-margin:5px;
+margin:5px 5px 5px 9px;
 border:1px #ccc solid;
 }
 .center_prod_box{
@@ -229,9 +229,13 @@ padding:0px;
 margin:0px; 
 }
 .product_title{
+display:block;
 color:#ff8a00;
-padding:5px 0 5px 0;
-word-break:break-all;
+padding:5px 0;
+margin:0px 10px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
 font-size:15px;
 }
 .product_img{

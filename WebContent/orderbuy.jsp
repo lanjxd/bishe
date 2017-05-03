@@ -133,9 +133,17 @@ response.setContentType("text/html; charset=utf-8");
                 out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_favor'>取消订单</a>");
-                out.println("<a href='#' class='prod_details'>提醒卖家发货</a>");//TODO:提醒卖家发货
+                out.println("<a href='#' class='prod_details'>提醒卖家发货</a>");
     		}else if(d.getordercond().equals("已发货")){
-    			out.println("<a href='#.jsp' class='prod_details'>确认收货</a>");//TODO:确认收货,评价
+    			out.println("<a href='confirmReceipt.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>确认收货</a>");
+    		}
+    		else if(d.getordercond().equals("已收货")){
+    			//out.println("<a href='comment.jsp?id=");
+                //out.println(d.getorderid());
+                //out.println("' class='prod_details'>评价商品</a>");
+                //TODO:商品评价
     		}
     		                             
     		out.println("</div></div>");	

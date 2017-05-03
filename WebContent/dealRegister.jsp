@@ -19,7 +19,7 @@ response.setContentType("text/html; charset=utf-8");
 	DBConnect conn = new DBConnect();
 	
 	if(conn.isUserExist(username)){
-		out.println("<script language='javascript'>alert('该用户名已存在！');window.location.go(-1);;</script>");
+		out.println("<script language='javascript'>alert('该用户名已存在！');window.location.replace(document.referrer);</script>");
 	}
 	else {
 	conn.newUser(username, userpwd, usermail, userphone, useradd, userauth);	

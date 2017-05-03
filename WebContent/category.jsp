@@ -90,6 +90,8 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<div class='center_prod_box'>");
             out.println("<div><a href='item.jsp?id=");
             out.println(i.getitemid());
+            out.println("' title='");
+            out.println(i.getitemname());
             out.println("' class='product_title'>");
             out.println(i.getitemname());
             out.println("</a></div>");
