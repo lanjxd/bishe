@@ -54,7 +54,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">我 的 订 单</div>
+   		<div class="center_title_bar">我 的 订 单</div>
    	
    	<%
    	
@@ -96,6 +96,10 @@ response.setContentType("text/html; charset=utf-8");
                 out.println("<a href='confirmShipment.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>确认发货</a>");
+    		}else if(d.getordercond().equals("已评价")){
+    			out.println("</span>买家评价:<span class='blue'>");
+                out.println(d.getorderscore());
+                out.println("/ 5</span>");
     		}
     		                             
     		out.println("</div></div>");	

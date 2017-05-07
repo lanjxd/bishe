@@ -11,6 +11,7 @@ public class Order {
 	private String ordertime;
 	private String orderinfo;
 	private String ordercond;
+	private String orderscore;
 
 	public String getorderid() {
 		return orderid;
@@ -65,6 +66,12 @@ public class Order {
 	}
 	public void setordercond(String ordercond) {
 		this.ordercond = ordercond;
+	}
+	public String getorderscore() {
+		return orderscore;
+	}
+	public void setorderscore(String orderscore) {
+		this.orderscore = orderscore;
 	}
 }
 

@@ -54,7 +54,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">所 有 订 单</div>
+   		<div class="center_title_bar">所 有 订 单</div>
    	
    	<%
    	
@@ -86,6 +86,11 @@ response.setContentType("text/html; charset=utf-8");
     		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
     		out.println(d.getordercond());				
     		out.println("</span></div></div></div>");
+    		if(d.getordercond().equals("已评价")){
+    			out.println("</span>买家评价:<span class='blue'>");
+                out.println(d.getorderscore());
+                out.println("/ 5</span>");
+    		}
             out.println("<a href='cancelOrder.jsp?id=");
             out.println(d.getorderid());
             out.println("' class='prod_favor'>删除订单</a>");    		                             

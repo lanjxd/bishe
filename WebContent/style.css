@@ -44,7 +44,6 @@ line-height:90px;
 margin:5px;
 color:#1E90FF;
 }
-
 /*---------------- menu tab----------------------*/
 #menu_tab{
 width:1000px;
@@ -90,7 +89,6 @@ height:36px;
 text-decoration:none;
 color:#fff;
 }
-
 a.nav:hover{
 display:block; 
 float:left; 

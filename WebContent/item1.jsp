@@ -14,7 +14,6 @@ response.setContentType("text/html; charset=utf-8");
 PositionX = 100;
 PositionY = 100;
 
-
 defaultWidth  = 500;
 defaultHeight = 500;
 var AutoClose = true;

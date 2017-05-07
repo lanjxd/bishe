@@ -92,7 +92,7 @@ response.setContentType("text/html; charset=utf-8");
                     </div>
 
                     <div class="form_row">
-                    <input type="submit" value="注 册" class="prod_details"/>
+                    <input type="submit" value="注 册"/>
                     </div>      
                 </form> 
                                     

@@ -334,6 +334,7 @@ public class DBConnect {
 			d.setordersum(rs.getString("ordersum"));
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
+			d.setorderscore(rs.getString("orderscore"));
 		}
 		rs.close();
 		stmt.close();
@@ -381,6 +382,7 @@ public class DBConnect {
 			d.setordersum(rs.getString("ordersum"));
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
+			d.setorderscore(rs.getString("orderscore"));
 			orderbuy.add(d);
 		}
 		rs.close();
@@ -404,6 +406,7 @@ public class DBConnect {
 			d.setordersum(rs.getString("ordersum"));
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
+			d.setorderscore(rs.getString("orderscore"));
 			ordersell.add(d);
 		}
 		rs.close();
@@ -428,6 +431,7 @@ public class DBConnect {
 			d.setordersum(rs.getString("ordersum"));
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
+			d.setorderscore(rs.getString("orderscore"));
 			orderall.add(d);
 		}
 		rs.close();
@@ -458,6 +462,16 @@ public class DBConnect {
 	
 	public void receipt(String orderid) throws Exception {
 		String alterStr = "update `order` set ordercond = '已收货' where orderid = " + orderid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		logger.info(alterStr);
+		stmt.close();
+		conn.close();
+	}
+	
+	public void rateOrder(String orderid, String orderscore) throws Exception {
+		String alterStr = "update `order` set ordercond = '已评价', orderscore = " + orderscore + " where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);

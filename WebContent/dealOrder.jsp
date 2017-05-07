@@ -9,7 +9,7 @@ response.setContentType("text/html; charset=utf-8");
 </head>
 <body>
 <%
-
+	
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String buyername = u.getUsername();
@@ -22,7 +22,9 @@ response.setContentType("text/html; charset=utf-8");
 	String ordercount = request.getParameter("buynumber");
 	int ic = Integer.valueOf(itemcount);
 	int oc = Integer.valueOf(ordercount);
-	if(ic < oc){
+	if(oc == 0){
+		out.println("<script language='javascript'>alert('订单数量不能为0！');window.location.replace(document.referrer);</script>");
+	}else if(ic < oc){
 		out.println("<script language='javascript'>alert('订单数量超出物品库存！');window.location.replace(document.referrer);</script>");
 	}else{
 		String sellername = i.getitemseller();	

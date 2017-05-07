@@ -8,7 +8,7 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 </head>
 <body>
-<%
+<%	
 	User u = new User();
 	u = (User)session.getAttribute("currentUser");
 	String username = u.getUsername();

@@ -8,7 +8,7 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 </head>
 <body>
-<%
+<%	
 	String username = request.getParameter("u_name");
 	String userpwd = request.getParameter("u_pwd");
 	String usermail = request.getParameter("u_mail");	

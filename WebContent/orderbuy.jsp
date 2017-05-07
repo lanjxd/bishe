@@ -54,7 +54,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">我的订单</div>
+   		<div class="center_title_bar">我的订单</div>
    	
    	<%
    	
@@ -89,7 +89,7 @@ response.setContentType("text/html; charset=utf-8");
     			out.println("<a href='cancelOrder.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_favor'>取消订单</a>");
-    			out.println("<a href='pay.jsp?id=");
+    			out.println("<a href='payment.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>选择支付方式</a>");               
     		}else if(d.getordercond().equals("未发货")){    			
@@ -101,19 +101,21 @@ response.setContentType("text/html; charset=utf-8");
     			out.println("<a href='confirmReceipt.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>确认收货</a>");
-    		}
-    		else if(d.getordercond().equals("已收货")){
-    			//out.println("<a href='comment.jsp?id=");
-                //out.println(d.getorderid());
-                //out.println("' class='prod_details'>评价商品</a>");
-                //TODO:商品评价
+    		}else if(d.getordercond().equals("已收货")){
+                out.println("<a href='rating.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>评价商品</a>");
+    		}else if(d.getordercond().equals("已评价")){
+    			out.println("</span>您的评价:<span class='blue'>");
+                out.println(d.getorderscore());
+                out.println("/ 5</span>");
     		}
     		                             
     		out.println("</div></div>");	
                               
    		}
    	
-   %>
+   %>			
    
    </div><!-- end of center content -->
 
