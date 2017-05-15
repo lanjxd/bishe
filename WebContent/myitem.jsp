@@ -44,7 +44,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">我 的 物 品</span>
+    	导 航：<span class="current">我 的 物 品</span>
     </div>        
     
    <div class="left_content">

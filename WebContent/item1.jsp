@@ -92,7 +92,7 @@ close();
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">商 品 详 情</span>
+    	导 航：<span class="current">商 品 详 情</span>
     </div>        
     
    <div class="left_content">
@@ -147,7 +147,7 @@ close();
 						 	out.println("<label>数量: </label>");                        
 						 	out.println("<input type='text' name='buynumber' class='number_input' value='1' onkeyup=\"value=value.replace(/[^\\d.]/g,\'\')\"/>");
 						 	out.println("<br/><br/>");
-						 	out.println("<input type='submit' value='买买买'/>");
+						 	out.println("<input type='submit' value='购 买'/>");
                          	
                          	if(favored){
                         	 	out.println("<a href='dealUnfavor.jsp?id=");

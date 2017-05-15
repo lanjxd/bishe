@@ -58,7 +58,7 @@ response.setContentType("text/html; charset=utf-8");
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current"><%=itemcate %></span>
+    	导 航：<span class="current"><%=itemcate %></span>
     </div>        
     
    <div class="left_content">

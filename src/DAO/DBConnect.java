@@ -3,7 +3,6 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-//import java.text.*;
 
 public class DBConnect {
 	
@@ -200,6 +199,77 @@ public class DBConnect {
 		}
 		rs.close();
 		stmt.close();
+		conn.close();
+		return itemlist;
+	}
+	
+	public ArrayList<Item> getNewItem() throws Exception {
+		ArrayList<Item> itemlist = new ArrayList<Item>();
+		String Str = "SELECT * FROM `item` ORDER BY itemid DESC LIMIT 6";	
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Str);	
+		while(rs.next()){
+			Item i = new Item();
+			i.setitemid(rs.getString("itemid"));
+			i.setitemname(rs.getString("itemname"));
+			i.setitemcate(rs.getString("itemcate"));
+			i.setitemcond(rs.getString("itemcond"));
+			i.setitemprice(rs.getString("itemprice"));
+			i.setitemcount(rs.getString("itemcount"));
+			i.setiteminfo(rs.getString("iteminfo"));
+			i.setitemseller(rs.getString("itemseller"));
+			i.setitemimage(rs.getString("itemimage"));
+			itemlist.add(i);
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return itemlist;
+	}
+	
+	public ArrayList<Item> getRecItem(String username) throws Exception {
+		String Str = "SELECT orderitem FROM `order` WHERE buyername = '" + username + "' ORDER BY ordertime DESC LIMIT 1";
+		Connection conn = this.Connect2MySQL();
+		Statement stmt1 = conn.createStatement();
+		ResultSet rs1 = stmt1.executeQuery(Str);
+		Order lastorder = new Order();
+		while(rs1.next()){
+			lastorder.setorderitem(rs1.getString("orderitem"));
+		}
+		rs1.close();
+		stmt1.close();
+		
+		Str = "SELECT itemcate FROM `item` WHERE itemid = " + lastorder.getorderitem();
+		Statement stmt2 = conn.createStatement();
+		ResultSet rs2 = stmt2.executeQuery(Str);
+		Item lastitem = new Item();
+		while(rs2.next()){
+			lastitem.setitemcate(rs2.getString("itemcate"));
+		}
+		rs2.close();
+		stmt2.close();
+		
+		String cateid = lastitem.getitemcate();	
+		Str = "SELECT * FROM `item` WHERE itemcate = " + cateid + " ORDER BY itemid DESC LIMIT 3";	
+		Statement stmt3 = conn.createStatement();
+		ResultSet rs3 = stmt3.executeQuery(Str);
+		ArrayList<Item> itemlist = new ArrayList<Item>();
+		while(rs3.next()){
+			Item i = new Item();
+			i.setitemid(rs3.getString("itemid"));
+			i.setitemname(rs3.getString("itemname"));
+			i.setitemcate(rs3.getString("itemcate"));
+			i.setitemcond(rs3.getString("itemcond"));
+			i.setitemprice(rs3.getString("itemprice"));
+			i.setitemcount(rs3.getString("itemcount"));
+			i.setiteminfo(rs3.getString("iteminfo"));
+			i.setitemseller(rs3.getString("itemseller"));
+			i.setitemimage(rs3.getString("itemimage"));
+			itemlist.add(i);
+		}
+		rs3.close();
+		stmt3.close();
 		conn.close();
 		return itemlist;
 	}
@@ -541,8 +611,6 @@ public class DBConnect {
 			d.setordersum(rs.getString("ordersum"));
 			d_sum += Double.valueOf(d.getordersum());			
 		}
-		//DecimalFormat df = new DecimalFormat(".##");
-		//String donation = df.format(d_sum);
 		String donation = String.valueOf(d_sum);
 		rs.close();
 		stmt.close();

@@ -91,7 +91,7 @@ close();
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">商 品 详 情</span>
+    	导 航：<span class="current">商 品 详 情</span>
     </div>        
     
    <div class="left_content">
@@ -136,7 +136,7 @@ close();
                     <label>数量: </label>
 					<input type="text" name="number" class="number_input" value="1" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
 					<br/><br/>
-                    <a href="login.jsp" class="prod_buy">买买买</a>
+                    <a href="login.jsp" class="prod_buy">购 买</a>
                  </div>
                  <div class="prod_info">
                  	<span class="info_title">物品详情</span>

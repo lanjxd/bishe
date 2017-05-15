@@ -14,7 +14,7 @@ response.setContentType("text/html; charset=utf-8");
 <%
 	DBConnect conn = new DBConnect();
 	ArrayList<Item> itemlist = new ArrayList<Item>();
-    itemlist = conn.getAllItem();
+    itemlist = conn.getNewItem();
     Item i = new Item();
     
     String donation = conn.getDonation();
@@ -44,7 +44,7 @@ response.setContentType("text/html; charset=utf-8");
             </div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">首 页</span>
+    	导 航：<span class="current">首 页</span>
     </div>        
     
    <div class="left_content">
@@ -56,12 +56,12 @@ response.setContentType("text/html; charset=utf-8");
    <div class="center_content">
     
    	<div class="center_title_bar">新 品 发 布</div>
-    
+    	<div style="height:400px;padding:50px 0;">
     <%
     
-    	for(int j = itemlist.size(); j > 0 ; j--){
+    	for(int j = 0; j < itemlist.size(); j++){
     		
-    		i = itemlist.get(j-1);
+    		i = itemlist.get(j);
     		
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
@@ -82,6 +82,11 @@ response.setContentType("text/html; charset=utf-8");
     	}
     
  	%>
+ 		</div>
+
+ 	<div class="center_title_bar">为 您 推 荐</div>
+ 	
+ 		<div style="font-size:16px;height:20px;padding:50px 0 30px 0;text-align:center;"><p>登录后,系统将根据您最近的购买记录为您推荐相似的商品</p></div>
        
    </div><!-- end of center content -->
 
@@ -98,7 +103,6 @@ response.setContentType("text/html; charset=utf-8");
         <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
    
    </div>                 
-
 
 </div>
 <!-- end of main_container -->

@@ -39,7 +39,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    导 航：<span class="current">发 布 新 商 品</span>
+    	导 航：<span class="current">发 布 新 商 品</span>
     </div>        
     
    <div class="left_content">
