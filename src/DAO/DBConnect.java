@@ -8,7 +8,7 @@ public class DBConnect {
 	
 	static String strClassName = DBConnect.class.getName();  
     static Logger logger = Logger.getLogger(strClassName); 
-
+    //连接数据库
 	public Connection Connect2MySQL() throws Exception{
 		String driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://127.0.0.1:3306/bishe?useUnicode=true&characterEncoding=utf-8&useSSL=false";
@@ -16,7 +16,7 @@ public class DBConnect {
 		Connection conn=DriverManager.getConnection(url, "root", "root");
 		return conn;
 	}
-	
+	//确认用户登录信息是否正确
 	public boolean chkUser(String username, String userpwd) throws Exception{		
 		String chkStr = "Select * from `user` where username = '" + username + "' and userpwd = '" + userpwd + "'";
 		Connection conn = this.Connect2MySQL();		
@@ -38,7 +38,7 @@ public class DBConnect {
 		}
 		return false;			
 	}
-	
+	//确认该用户名是否存在
 	public boolean isUserExist(String username) throws Exception{		
 		String Str = "Select * from `user` where username = '" + username + "'";
 		Connection conn = this.Connect2MySQL();		
@@ -49,7 +49,7 @@ public class DBConnect {
 		}
 		return false;			
 	}
-
+	//获取指定用户信息
 	public User saveUser(String username) throws Exception {		
 		String str = "Select * from `user` where username = '" + username + "'";		
 		Connection conn = this.Connect2MySQL();		
@@ -69,7 +69,7 @@ public class DBConnect {
 		conn.close();
 		return u;	
 	}
-	
+	//添加新用户
 	public void newUser(String username, String userpwd, String usermail, String userphone, String useradd, String userauth) throws Exception {
 		String str = "INSERT INTO `bishe`.`user` (`username`, `userpwd`, `usermail`, `userphone`, `useradd`, `userauth`) VALUES (?,?,?,?,?,?);";		
 		Connection conn = this.Connect2MySQL();
@@ -86,7 +86,7 @@ public class DBConnect {
 		ps.close();
 		conn.close();
 	}
-	
+	//更新用户信息
 	public void alterUserInfo(String username, String userpwd, String usermail, String userphone, String useradd) throws Exception{		
 		String alterStr = "UPDATE `user` SET userpwd='" + userpwd + "', usermail='" +  usermail + "', userphone='" + userphone + "', useradd='" + useradd + "' WHERE username='" + username + "'";		
 		Connection conn = this.Connect2MySQL();
@@ -95,7 +95,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取所有用户信息
 	public ArrayList<User> getAllUser() throws Exception {
 		ArrayList<User> userlist = new ArrayList<User>();
 		String str = "Select * from `user`";		
@@ -117,7 +117,7 @@ public class DBConnect {
 		conn.close();
 		return userlist;	
 	}
-	
+	//删除用户
 	public void deleteUser(String username) throws Exception {
 		String deleteStr = "delete from `user` where username = '" + username + "'";		
 		Connection conn = this.Connect2MySQL();
@@ -127,7 +127,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//添加新物品
 	public void uploadItem(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String username, String itemimage) throws Exception {
 		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`, `itemimage`) VALUES (?,?,?,?,?,?,?,?);";		
 		Connection conn = this.Connect2MySQL();
@@ -146,7 +146,7 @@ public class DBConnect {
 		ps.close();
 		conn.close();
 	}
-	
+	//更新物品信息
 	public void alterItemInfo(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String itemimage, String itemid) throws Exception{		
 		String alterStr = "UPDATE `item` SET itemname='" + itemname + "', itemcate=" + itemcate + ", itemcond='" + itemcond + "', itemprice=" +  itemprice + ", itemcount=" + itemcount + ", iteminfo='" + iteminfo + "', itemimage='" + itemimage + "' WHERE itemid=" + itemid;		
 		Connection conn = this.Connect2MySQL();
@@ -155,7 +155,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取指定物品信息
 	public Item getItem(String itemid) throws Exception {		
 		String str = "Select * from `item` where itemid = " + itemid ;
 		Connection conn = this.Connect2MySQL();	
@@ -177,7 +177,7 @@ public class DBConnect {
 		conn.close();
 		return i;
 	}
-	
+	//获取所有物品信息
 	public ArrayList<Item> getAllItem() throws Exception {
 		ArrayList<Item> itemlist = new ArrayList<Item>();
 		String Str = "SELECT * FROM `item`";	
@@ -202,7 +202,7 @@ public class DBConnect {
 		conn.close();
 		return itemlist;
 	}
-	
+	//获取最新的6个物品信息
 	public ArrayList<Item> getNewItem() throws Exception {
 		ArrayList<Item> itemlist = new ArrayList<Item>();
 		String Str = "SELECT * FROM `item` ORDER BY itemid DESC LIMIT 6";	
@@ -227,7 +227,7 @@ public class DBConnect {
 		conn.close();
 		return itemlist;
 	}
-	
+	//获取推荐的3个物品信息
 	public ArrayList<Item> getRecItem(String username) throws Exception {
 		String Str = "SELECT orderitem FROM `order` WHERE buyername = '" + username + "' ORDER BY ordertime DESC LIMIT 1";
 		Connection conn = this.Connect2MySQL();
@@ -273,7 +273,7 @@ public class DBConnect {
 		conn.close();
 		return itemlist;
 	}
-	
+	//获取指定用户的所有物品信息
 	public ArrayList<Item> getMyitem(String username) throws Exception {
 		ArrayList<Item> myitemlist = new ArrayList<Item>();
 		String Str = "SELECT * FROM `item` WHERE itemseller = '" + username + "'";	
@@ -298,7 +298,7 @@ public class DBConnect {
 		conn.close();
 		return myitemlist;
 	}
-	
+	//删除物品
 	public void deleteItem(String itemid) throws Exception {
 		String deleteStr = "delete from `item` where itemid = " + itemid;		
 		Connection conn = this.Connect2MySQL();
@@ -308,7 +308,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//检查用户是否收藏某物品
 	public boolean chkFavor(String favoruser, String favoritem) throws Exception{		
 		String Str = "Select * from `favor` where favoruser = '" + favoruser + "' and favoritem = " + favoritem;
 		Connection conn = this.Connect2MySQL();		
@@ -319,7 +319,7 @@ public class DBConnect {
 		}
 		return false;			
 	}
-	
+	//添加新收藏
 	public void favor(String favoruser, String favoritem) throws Exception {
 		java.util.Date now = new java.util.Date();
 		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
@@ -335,7 +335,7 @@ public class DBConnect {
 		ps.close();
 		conn.close();
 	}
-	
+	//取消收藏
 	public void unfavor(String favoruser, String favoritem) throws Exception {
 		String cancelStr = "delete from `favor` where favoruser = '" + favoruser + "' and favoritem = " + favoritem;		
 		Connection conn = this.Connect2MySQL();
@@ -345,7 +345,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取用户的所有收藏信息
 	public ArrayList<Favor> getMyfavor(String favoruser) throws Exception {
 		ArrayList<Favor> myfavor = new ArrayList<Favor>();
 		String Str = "SELECT * FROM `favor` where favoruser = '" + favoruser + "'";	
@@ -363,7 +363,7 @@ public class DBConnect {
 		conn.close();
 		return myfavor;
 	}
-	
+	//添加新订单
 	public void newOrder(String orderitem, String buyername, String sellername, String ordercount, String ordersum, String ordercond) throws Exception {
 		java.util.Date now = new java.util.Date();
 		java.sql.Timestamp ts = new java.sql.Timestamp(now.getTime());
@@ -388,7 +388,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取指定订单
 	public Order getOrder(String orderid) throws Exception {		
 		String str = "Select * from `order` where orderid = " + orderid ;
 		Connection conn = this.Connect2MySQL();	
@@ -411,7 +411,7 @@ public class DBConnect {
 		conn.close();
 		return d;
 	}
-	
+	//取消订单
 	public void cancelOrder(String orderid, String ordercount, String orderitem) throws Exception {
 		String Str1 = "UPDATE `item` SET itemcount = itemcount + " + ordercount + " WHERE itemid = " + orderitem; 
 		String Str2 = "delete from `order` where orderid = " + orderid;
@@ -426,7 +426,7 @@ public class DBConnect {
 		stmt2.close();
 		conn.close();
 	}
-	
+	//删除订单
 	public void deleteOrder(String orderid) throws Exception { 
 		String Str = "delete from `order` where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
@@ -436,7 +436,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取买家的订单信息
 	public ArrayList<Order> getOrderBuy(String username) throws Exception {
 		ArrayList<Order> orderbuy = new ArrayList<Order>();
 		String Str = "SELECT * FROM `order` where buyername = '" + username + "'";
@@ -460,7 +460,7 @@ public class DBConnect {
 		conn.close();
 		return orderbuy;
 	}
-	
+	//获取卖家的订单信息
 	public ArrayList<Order> getOrderSell(String username) throws Exception {
 		ArrayList<Order> ordersell = new ArrayList<Order>();
 		String Str = "SELECT * FROM `order` where sellername = '" + username + "'";
@@ -484,7 +484,7 @@ public class DBConnect {
 		conn.close();
 		return ordersell;
 	}
-	
+	//获取所有订单信息
 	public ArrayList<Order> getAllOrder() throws Exception {
 		ArrayList<Order> orderall = new ArrayList<Order>();
 		String Str = "SELECT * FROM `order`";
@@ -509,9 +509,9 @@ public class DBConnect {
 		conn.close();
 		return orderall;
 	}
-	
+	//更新订单状态——已付款
 	public void payOrder(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = 'δ����' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已付款' where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -519,9 +519,9 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//更新订单状态——已发货
 	public void shipment(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '�ѷ���' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已发货' where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -529,9 +529,9 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//更新订单状态——已收货
 	public void receipt(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '���ջ�' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已收货' where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -539,9 +539,9 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//评价订单
 	public void rateOrder(String orderid, String orderscore) throws Exception {
-		String alterStr = "update `order` set ordercond = '������', orderscore = " + orderscore + " where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已评价', orderscore = " + orderscore + " where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -549,7 +549,7 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	
+	//获取搜索结果
 	public ArrayList<Item> getSearch(String search) throws Exception {
 		ArrayList<Item> searchlist = new ArrayList<Item>();
 		String searchStr = "SELECT * FROM `item` WHERE (itemname LIKE '%" + search + "%' OR iteminfo LIKE '%" + search + "%')";	
@@ -574,7 +574,7 @@ public class DBConnect {
 		conn.close();
 		return searchlist;
 	}
-	
+	//获取分类物品信息
 	public ArrayList<Item> getCategory(String cateid) throws Exception {
 		ArrayList<Item> catelist = new ArrayList<Item>();
 		String cateStr = "SELECT * FROM `item` WHERE itemcate = " + cateid;	
@@ -599,7 +599,7 @@ public class DBConnect {
 		conn.close();
 		return catelist;
 	}
-	
+	//获取网站订单总金额
 	public String getDonation() throws Exception {
 		Double d_sum = 0.00;
 		String Str = "SELECT ordersum FROM `order`";
