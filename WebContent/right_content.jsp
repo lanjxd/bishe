@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+		<!-- 界面重用——右侧搜索&义卖统计   -->
 		<div class="title_box">商 品 搜 索</div><br/>		
 		<form method="post" action="searchResult.jsp">				  
 			<input type="text" name="search"/>

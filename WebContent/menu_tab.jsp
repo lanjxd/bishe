@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-		
+		<!-- 界面重用——顶端导航栏[登录后] -->
 		<ul class="menu">
-            	<li><a href="index1.jsp" class="nav">首 页</a></li>
-                <li class="divider"></li>
+            <li><a href="index1.jsp" class="nav">首 页</a></li>
+            <li class="divider"></li>
                          
 		<%
                     
@@ -26,8 +26,8 @@
                     
 		%>
        
-                <li class="divider"></li>
-                <li><a href="index.jsp" class="nav">登 出</a></li>
-				<li class="divider"></li>
-				<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
-			</ul>
+            <li class="divider"></li>
+            <li><a href="index.jsp" class="nav">登 出</a></li>
+			<li class="divider"></li>
+			<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
+		</ul>

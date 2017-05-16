@@ -509,9 +509,9 @@ public class DBConnect {
 		conn.close();
 		return orderall;
 	}
-	//更新订单状态——已付款
+	//更新订单状态——未发货
 	public void payOrder(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '已付款' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '未发货' where orderid = " + orderid;		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
