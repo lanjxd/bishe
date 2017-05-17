@@ -8,6 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">  
+    function confirmDelete(id){  
+    	if(confirm("确认取消?")){  
+        	window.location="cancelOrder.jsp?id="+id;
+        }  
+    }  
+</script>
 </head>
 <body>
 
@@ -86,13 +93,13 @@ response.setContentType("text/html; charset=utf-8");
     		out.println(d.getordercond());				
     		out.println("</span></div></div></div>");
     		if(d.getordercond().equals("未付款")){
-                out.println("<a href='cancelOrder.jsp?id=");
+    			out.println("<a href='javascript:confirmDelete(");
                 out.println(d.getorderid());
-                out.println("' class='prod_favor'>取消订单</a>");
+                out.println(")' class='prod_favor'>取消订单</a>");
     		}else if(d.getordercond().equals("未发货")){   			
-                out.println("<a href='cancelOrder.jsp?id=");
+    			out.println("<a href='javascript:confirmDelete(");
                 out.println(d.getorderid());
-                out.println("' class='prod_favor'>取消订单</a>");
+                out.println(")' class='prod_favor'>取消订单</a>");
                 out.println("<a href='confirmShipment.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>确认发货</a>");

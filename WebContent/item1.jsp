@@ -11,6 +11,12 @@ response.setContentType("text/html; charset=utf-8");
 
 <script type="text/javascript" src="js/boxOver.js"></script>
 <script>
+function confirmDelete(id){  
+	if(confirm("确认取消收藏?")){  
+    	window.location="dealUnfavor.jsp?id="+id;
+    }  
+}  
+
 PositionX = 100;
 PositionY = 100;
 
@@ -150,9 +156,9 @@ close();
 						 	out.println("<input type='submit' value='购 买'/>");
                          	
                          	if(favored){
-                        	 	out.println("<a href='dealUnfavor.jsp?id=");
+                         		out.println("<a href='javascript:confirmDelete(");
                              	out.println(id);
-                             	out.println("' class='prod_favor'>取消收藏</a>");		 
+                             	out.println(")' class='prod_favor'>取消收藏</a>");		 
                          	}
                          	else{
                              	out.println("<a href='dealFavor.jsp?id=");

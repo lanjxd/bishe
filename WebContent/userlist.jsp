@@ -8,6 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>中 财 二 手 义 卖</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">  
+    function confirmDelete(name){  
+    	if(confirm("确认删除?")){  
+        	window.location="deleteUser.jsp?username="+name;
+        }  
+    }  
+</script>
 </head>
 <body>
 
@@ -80,9 +87,9 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<span class='blue'>类型:");
             out.println(usertype);
             out.println("</span></div>");            
-            out.println("<a href='deleteUser.jsp?username=");
+            out.println("<a href=\"javascript:confirmDelete('");
             out.println(au.getUsername());
-            out.println("' class='prod_favor'>删除此用户</a>");
+            out.println("')\" class='prod_favor'>删除此用户</a>");
             out.println("<a href='userinfo.jsp?username=");
             out.println(au.getUsername());
             out.println("' class='prod_details'>更新用户信息</a>");

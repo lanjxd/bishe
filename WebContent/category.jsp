@@ -53,6 +53,8 @@ response.setContentType("text/html; charset=utf-8");
                          <li><a href="login.jsp" class="nav">登 录</a></li>
                          <li class="divider"></li>
                          <li><a href="register.jsp" class="nav">注 册</a></li>
+                         <li class="divider"></li>
+						 <li><a href="#" class="username">当前用户：游客</a></li>
                      </ul>
 
             </div><!-- end of menu tab -->

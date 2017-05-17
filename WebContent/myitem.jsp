@@ -8,6 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>中 财 二 手 义 卖</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">  
+    function confirmDelete(id){  
+    	if(confirm("确认删除?")){  
+        	window.location="deleteItem.jsp?id="+id;
+        }  
+    }  
+</script>
 </head>
 <body>
 
@@ -74,9 +81,9 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<div class='prod_price'><span class='price'>￥");
             out.println(i.getitemprice());
             out.println("</span></div>");            
-            out.println("<a href='deleteItem.jsp?id=");
+            out.println("<a href='javascript:confirmDelete(");
             out.println(i.getitemid());
-            out.println("' class='prod_favor'>删除此物品</a>");
+            out.println(")' class='prod_favor'>删除此物品</a>");
             out.println("<a href='iteminfo.jsp?id=");
             out.println(i.getitemid());
             out.println("' class='prod_details'>更新物品信息</a>");

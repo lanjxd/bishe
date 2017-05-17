@@ -86,6 +86,8 @@ close();
                          <li><a href="login.jsp" class="nav">登 录</a></li>
                          <li class="divider"></li>
                          <li><a href="register.jsp" class="nav">注 册</a></li>
+                         <li class="divider"></li>
+						 <li><a href="#" class="username">当前用户：游客</a></li>
                      </ul>
 
             </div><!-- end of menu tab -->
@@ -136,7 +138,7 @@ close();
                     <label>数量: </label>
 					<input type="text" name="number" class="number_input" value="1" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
 					<br/><br/>
-                    <a href="login.jsp" class="prod_buy">购 买</a>
+                    <a href="login.jsp" class="prod_buy" onclick="alert('游客请先登录！')">购 买</a>
                  </div>
                  <div class="prod_info">
                  	<span class="info_title">物品详情</span>

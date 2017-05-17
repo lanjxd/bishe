@@ -29,5 +29,5 @@
             <li class="divider"></li>
             <li><a href="index.jsp" class="nav">登 出</a></li>
 			<li class="divider"></li>
-			<li><a href="myinfor.jsp" class="username"><%=myname %></a></li>
+			<li><a href="myinfor.jsp" class="username">当前用户：<%=myname %></a></li>
 		</ul>

@@ -8,6 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>收藏夹</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">  
+    function confirmDelete(id){  
+    	if(confirm("确认取消收藏?")){  
+        	window.location="dealUnfavor.jsp?id="+id;
+        }  
+    }  
+</script>  
 </head>
 <body>
 
@@ -83,10 +90,10 @@ response.setContentType("text/html; charset=utf-8");
             out.println(itemprice);
             out.println("</span><br/>收藏时间: <span class='blue'>");	
             out.println(f.getfavortime());
-            out.println("</span><br/></div>");	
-            out.println("<a href='dealUnfavor.jsp?id=");
+            out.println("</span><br/></div>");
+            out.println("<a href='javascript:confirmDelete(");
             out.println(f.getfavoritem());
-            out.println("' class='prod_favor'>取消收藏</a>");
+            out.println(")' class='prod_favor'>取消收藏</a>");
             out.println("</div>");
             out.println("</div>");
             

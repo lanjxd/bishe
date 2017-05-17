@@ -8,6 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript">  
+    function confirmDelete(id){  
+    	if(confirm("确认删除?")){  
+        	window.location="cancelOrder.jsp?id="+id;
+        }  
+    }  
+</script>
 </head>
 <body>
 
@@ -91,9 +98,9 @@ response.setContentType("text/html; charset=utf-8");
                 out.println(d.getorderscore());
                 out.println("/ 5</span>");
     		}
-            out.println("<a href='cancelOrder.jsp?id=");
+    		out.println("<a href='javascript:confirmDelete(");
             out.println(d.getorderid());
-            out.println("' class='prod_favor'>删除订单</a>");    		                             
+            out.println(")' class='prod_favor'>删除订单</a>");    		                             
     		out.println("</div></div>");	
                               
    		}

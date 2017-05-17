@@ -2,7 +2,7 @@ body
 {
 background:url(images/bg.jpg) repeat-x #e4e9ec top;
 padding:0;
-font-family:"Microsoft YaHei", "Î¢ÈíÑÅºÚ", STXihei, "»ªÎÄÏ¸ºÚ";
+font-family:"Microsoft YaHei", "Î¢ï¿½ï¿½ï¿½Åºï¿½", STXihei, "ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½";
 font-size:12px;
 margin:0px auto;
 color:#000;
@@ -74,8 +74,8 @@ background:url(images/menu_divider.gif) no-repeat center;
 }
 .username {
 display:inline;
-font-size:24px;
-line-height:36px;
+font-size:20px;
+line-height:32px;
 float:right;
 text-decoration:none;
 color:#80ffff;
