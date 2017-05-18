@@ -27,7 +27,7 @@ response.setContentType("text/html; charset=utf-8");
 	DBConnect conn = new DBConnect();
 	
 	conn.uploadItem(itemname, itemcate, itemcond, itemprice, itemcount, iteminfo, username, itemimage);	
-	out.println("<script language='javascript'>alert('发布成功！');window.location.href='myitem.jsp';</script>");
+	out.println("<script language='javascript'>alert('物品信息已提交，请等待审核通过！');window.location.href='myitem.jsp';</script>");
 %>
 </body>
 </html>

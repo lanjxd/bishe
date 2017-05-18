@@ -21,7 +21,10 @@ response.setContentType("text/html; charset=utf-8");
 	ArrayList<Item> itemlist1 = new ArrayList<Item>();
 	ArrayList<Item> itemlist2 = new ArrayList<Item>();
     itemlist1 = conn.getNewItem();
-    itemlist2 = conn.getRecItem(myname);
+    if(myauth.equals("1")){
+    	itemlist2 = conn.getRecItem(myname);
+    }
+    
     Item i = new Item();
     
     String donation = conn.getDonation();
@@ -88,29 +91,29 @@ response.setContentType("text/html; charset=utf-8");
  	<div class="center_title_bar">为 您 推 荐</div>
  		<div style="padding:50px 0 30px 0;">
     <%
-    	
-    	for(int k = 0; k < itemlist2.size(); k++){
-    		
-    		i = itemlist2.get(k);
-    		
-    		out.println("<div class='prod_box'>");
-            out.println("<div class='center_prod_box'>");
-            out.println("<div><a href='item1.jsp?id=");
-            out.println(i.getitemid());
-            out.println("' title='");
-            out.println(i.getitemname());
-            out.println("' class='product_title'>");
-            out.println(i.getitemname());
-            out.println("</a></div>");
-            out.println("<img src='");
-            out.println(i.getitemimage());
-            out.println("' class='product_img'/>");
-            out.println("<div class='prod_price'><span class='price'>￥");
-            out.println(i.getitemprice());
-            out.println("</span></div></div></div>");
-            
+    	if(itemlist2 != null){
+    		for(int k = 0; k < itemlist2.size(); k++){
+        		
+        		i = itemlist2.get(k);
+        		
+        		out.println("<div class='prod_box'>");
+                out.println("<div class='center_prod_box'>");
+                out.println("<div><a href='item1.jsp?id=");
+                out.println(i.getitemid());
+                out.println("' title='");
+                out.println(i.getitemname());
+                out.println("' class='product_title'>");
+                out.println(i.getitemname());
+                out.println("</a></div>");
+                out.println("<img src='");
+                out.println(i.getitemimage());
+                out.println("' class='product_img'/>");
+                out.println("<div class='prod_price'><span class='price'>￥");
+                out.println(i.getitemprice());
+                out.println("</span></div></div></div>");
+                
+        	}
     	}
-    
  	%>
  		</div>
         
@@ -118,7 +121,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
    
    </div><!-- end of right content -->   
         
@@ -126,7 +129,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

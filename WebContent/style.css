@@ -2,7 +2,7 @@ body
 {
 background:url(images/bg.jpg) repeat-x #e4e9ec top;
 padding:0;
-font-family:"Microsoft YaHei", "΢���ź�", STXihei, "����ϸ��";
+font-family:"Microsoft YaHei", STXihei;
 font-size:12px;
 margin:0px auto;
 color:#000;
@@ -13,6 +13,17 @@ margin:0px;
 }
 a{
 text-decoration:none;
+}
+.cart_table{
+text-align:center;
+border:1px #666 solid;
+margin:50px 20px;
+padding:5px;
+width:550px;
+}
+.cart_row{
+height:30px;
+background-color:#ccc;
 }
 #main_container{
 width:1000px;
@@ -236,6 +247,16 @@ text-overflow:ellipsis;
 white-space:nowrap;
 font-size:15px;
 }
+.product_title_red{
+color:#ff0000;
+display:block;
+padding:5px 0;
+margin:0px 10px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+font-size:15px;
+}
 .product_img{
 width:120px;
 height:120px;
@@ -262,8 +283,9 @@ height:24px;
 display:block;
 float:right;
 background:url(images/link_bg.gif) no-repeat center;
-margin:2px 5px 0 0;
+margin:2px;
 text-align:center;
+font-size:12px;
 line-height:24px;
 text-decoration:none;
 color:#159dcc;
@@ -274,8 +296,9 @@ height:24px;
 display:block;
 float:right;
 background:url(images/link_bg.gif) no-repeat center;
-margin:2px 5px 0 0;
+margin:2px;
 text-align:center;
+font-size:12px;
 line-height:24px;
 text-decoration:none;
 color:#ff0000;
@@ -286,8 +309,9 @@ height:24px;
 display:block;
 float:left;
 background:url(images/link_bg.gif) no-repeat center;
-margin:2px 0 0 5px;
+margin:2px;
 text-align:center;
+font-size:12px;
 line-height:24px;
 text-decoration:none;
 color: #006600;

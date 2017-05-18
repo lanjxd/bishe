@@ -129,7 +129,7 @@ public class DBConnect {
 	}
 	//添加新物品
 	public void uploadItem(String itemname, String itemcate, String itemcond, String itemprice, String itemcount, String iteminfo, String username, String itemimage) throws Exception {
-		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`, `itemimage`) VALUES (?,?,?,?,?,?,?,?);";		
+		String str = "INSERT INTO `bishe`.`item` (`itemname`, `itemcate`, `itemcond`, `itemprice`, `itemcount`, `iteminfo`, `itemseller`, `itemimage`, `itemauth`) VALUES (?,?,?,?,?,?,?,?,0);";		
 		Connection conn = this.Connect2MySQL();
 		PreparedStatement ps = conn.prepareStatement(str);
 		ps.setString(1, itemname);
@@ -155,6 +155,15 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
+	//审核物品
+	public void verifyItem(String itemid) throws Exception{
+		String alterStr = "UPDATE `item` SET itemauth = 1 WHERE itemid=" + itemid;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		stmt.close();
+		conn.close();
+	}
 	//获取指定物品信息
 	public Item getItem(String itemid) throws Exception {		
 		String str = "Select * from `item` where itemid = " + itemid ;
@@ -163,6 +172,7 @@ public class DBConnect {
 		ResultSet rs = stmt.executeQuery(str);
 		Item i = new Item();
 		if(rs.next()){
+			i.setitemid(rs.getString("itemid"));
 			i.setitemname(rs.getString("itemname"));
 			i.setitemcate(rs.getString("itemcate"));
 			i.setitemcond(rs.getString("itemcond"));
@@ -171,6 +181,7 @@ public class DBConnect {
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
 			i.setitemimage(rs.getString("itemimage"));
+			i.setitemauth(rs.getString("itemauth"));
 		}
 		rs.close();
 		stmt.close();
@@ -195,6 +206,7 @@ public class DBConnect {
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
 			i.setitemimage(rs.getString("itemimage"));
+			i.setitemauth(rs.getString("itemauth"));
 			itemlist.add(i);
 		}
 		rs.close();
@@ -205,7 +217,7 @@ public class DBConnect {
 	//获取最新的6个物品信息
 	public ArrayList<Item> getNewItem() throws Exception {
 		ArrayList<Item> itemlist = new ArrayList<Item>();
-		String Str = "SELECT * FROM `item` ORDER BY itemid DESC LIMIT 6";	
+		String Str = "SELECT * FROM `item` WHERE itemauth = 1 ORDER BY itemid DESC LIMIT 6";	
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(Str);	
@@ -251,7 +263,7 @@ public class DBConnect {
 		stmt2.close();
 		
 		String cateid = lastitem.getitemcate();	
-		Str = "SELECT * FROM `item` WHERE itemcate = " + cateid + " ORDER BY itemid DESC LIMIT 3";	
+		Str = "SELECT * FROM `item` WHERE (itemcate = " + cateid + " AND itemauth = 1) ORDER BY itemid DESC LIMIT 3";
 		Statement stmt3 = conn.createStatement();
 		ResultSet rs3 = stmt3.executeQuery(Str);
 		ArrayList<Item> itemlist = new ArrayList<Item>();
@@ -291,6 +303,7 @@ public class DBConnect {
 			i.setiteminfo(rs.getString("iteminfo"));
 			i.setitemseller(rs.getString("itemseller"));
 			i.setitemimage(rs.getString("itemimage"));
+			i.setitemauth(rs.getString("itemauth"));
 			myitemlist.add(i);
 		}
 		rs.close();
@@ -338,6 +351,16 @@ public class DBConnect {
 	//取消收藏
 	public void unfavor(String favoruser, String favoritem) throws Exception {
 		String cancelStr = "delete from `favor` where favoruser = '" + favoruser + "' and favoritem = " + favoritem;		
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(cancelStr);
+		logger.warning(cancelStr);
+		stmt.close();
+		conn.close();
+	}
+	//清空收藏夹
+	public void clearAllFavor(String favoruser) throws Exception {
+		String cancelStr = "delete from `favor` where favoruser = '" + favoruser + "'";		
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(cancelStr);
@@ -405,6 +428,7 @@ public class DBConnect {
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
 			d.setorderscore(rs.getString("orderscore"));
+			d.setordercomment(rs.getString("ordercomment"));
 		}
 		rs.close();
 		stmt.close();
@@ -416,14 +440,12 @@ public class DBConnect {
 		String Str1 = "UPDATE `item` SET itemcount = itemcount + " + ordercount + " WHERE itemid = " + orderitem; 
 		String Str2 = "delete from `order` where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
-		Statement stmt1 = conn.createStatement();
-		stmt1.execute(Str1);
+		Statement stmt = conn.createStatement();
+		stmt.execute(Str1);
 		logger.warning(Str1);
-		stmt1.close();
-		Statement stmt2 = conn.createStatement();
-		stmt2.execute(Str2);
+		stmt.execute(Str2);
 		logger.warning(Str2);
-		stmt2.close();
+		stmt.close();
 		conn.close();
 	}
 	//删除订单
@@ -453,6 +475,7 @@ public class DBConnect {
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
 			d.setorderscore(rs.getString("orderscore"));
+			d.setordercomment(rs.getString("ordercomment"));
 			orderbuy.add(d);
 		}
 		rs.close();
@@ -477,6 +500,7 @@ public class DBConnect {
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
 			d.setorderscore(rs.getString("orderscore"));
+			d.setordercomment(rs.getString("ordercomment"));
 			ordersell.add(d);
 		}
 		rs.close();
@@ -502,6 +526,7 @@ public class DBConnect {
 			d.setordercond(rs.getString("ordercond"));
 			d.setordertime(rs.getString("ordertime"));
 			d.setorderscore(rs.getString("orderscore"));
+			d.setordercomment(rs.getString("ordercomment"));
 			orderall.add(d);
 		}
 		rs.close();
@@ -511,7 +536,7 @@ public class DBConnect {
 	}
 	//更新订单状态——未发货
 	public void payOrder(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '未发货' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '未发货' where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -521,7 +546,7 @@ public class DBConnect {
 	}
 	//更新订单状态——已发货
 	public void shipment(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '已发货' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已发货' where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -531,7 +556,7 @@ public class DBConnect {
 	}
 	//更新订单状态——已收货
 	public void receipt(String orderid) throws Exception {
-		String alterStr = "update `order` set ordercond = '已收货' where orderid = " + orderid;		
+		String alterStr = "update `order` set ordercond = '已收货' where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
@@ -539,13 +564,36 @@ public class DBConnect {
 		stmt.close();
 		conn.close();
 	}
-	//评价订单
-	public void rateOrder(String orderid, String orderscore) throws Exception {
-		String alterStr = "update `order` set ordercond = '已评价', orderscore = " + orderscore + " where orderid = " + orderid;		
+	//更新订单状态——已评价
+	public void rateOrder(String orderid, String orderscore, String ordercomment) throws Exception {
+		String alterStr = "update `order` set ordercond = '已评价', orderscore = " + orderscore + ", ordercomment = '" + ordercomment + "' where orderid = " + orderid;
 		Connection conn = this.Connect2MySQL();
 		Statement stmt = conn.createStatement();
 		stmt.execute(alterStr);
 		logger.info(alterStr);
+		stmt.close();
+		conn.close();
+	}
+	//更新订单状态——申请退货
+	public void applyReturn(String orderid) throws Exception {
+		String alterStr = "update `order` set ordercond = '申请退货' where orderid = " + orderid;
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(alterStr);
+		logger.info(alterStr);
+		stmt.close();
+		conn.close();
+	}
+	//更新订单状态——已退货
+	public void confirmReturn(String orderid, String ordercount, String orderitem) throws Exception {
+		String Str1 = "UPDATE `item` SET itemcount = itemcount + " + ordercount + " WHERE itemid = " + orderitem; 
+		String Str2 = "update `order` set ordercond = '已退货' where orderid = " + orderid;
+		Connection conn = this.Connect2MySQL();
+		Statement stmt = conn.createStatement();
+		stmt.execute(Str1);
+		logger.warning(Str1);
+		stmt.execute(Str2);
+		logger.warning(Str2);
 		stmt.close();
 		conn.close();
 	}

@@ -9,13 +9,11 @@ response.setContentType("text/html; charset=utf-8");
 </head>
 <body>
 <%
-	String orderid = request.getParameter("id");
-	String orderscore = request.getParameter("score");
-	String ordercomment = request.getParameter("comment");
+	String itemid = request.getParameter("id");
 	
 	DBConnect conn = new DBConnect();	
-	conn.rateOrder(orderid, orderscore, ordercomment);	
-	out.println("<script language='javascript'>alert('订单评价成功！');window.location.href='orderbuy.jsp';</script>");
+	conn.verifyItem(itemid);	
+	out.println("<script language='javascript'>alert('审核成功！');window.location.replace(document.referrer);</script>");
 %>
 </body>
 </html>

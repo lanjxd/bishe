@@ -12,6 +12,7 @@ public class Order {
 	private String orderinfo;
 	private String ordercond;
 	private String orderscore;
+	private String ordercomment;
 
 	public String getorderid() {
 		return orderid;
@@ -72,6 +73,12 @@ public class Order {
 	}
 	public void setorderscore(String orderscore) {
 		this.orderscore = orderscore;
+	}
+	public String getordercomment() {
+		return ordercomment;
+	}
+	public void setordercomment(String ordercomment) {
+		this.ordercomment = ordercomment;
 	}
 }
 

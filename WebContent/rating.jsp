@@ -62,28 +62,18 @@ response.setContentType("text/html; charset=utf-8");
 					<form method="post" action="dealRating.jsp?id=<%=id %>" name="ratingForm">
 					
                     <div class="form_row">
+                    <label><strong>综合评价:</strong></label>
                     <input type="radio" name="score" value="1" class="number_input" checked/>
-					<label><strong>1:很不满意</strong></label>
-                    </div> 
-					
-					<div class="form_row">
+					<label><strong>好评</strong></label>
                     <input type="radio" name="score" value="2" class="number_input" />
-					<label><strong>2:不满意</strong></label>
-                    </div>
-					
-                    <div class="form_row">
+					<label><strong>中评</strong></label>
                     <input type="radio" name="score" value="3" class="number_input" />
-					<label><strong>3:一般</strong></label>
+					<label><strong>差评</strong></label>
                     </div>
 
                     <div class="form_row">
-                    <input type="radio" name="score" value="4" class="number_input" />
-					<label><strong>4:满意</strong></label>
-                    </div>
-                    
-                    <div class="form_row">
-                    <input type="radio" name="score" value="5" class="number_input" />
-					<label><strong>5:很满意</strong></label>
+                    <label><strong>详细评价:</strong></label>
+                    <textarea class="contact_textarea" name="comment"></textarea>
                     </div>
                     
                     <div class="form_row">
@@ -102,7 +92,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
    
    </div><!-- end of right content -->   
         
@@ -110,7 +100,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

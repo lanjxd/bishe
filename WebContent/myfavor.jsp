@@ -61,7 +61,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">我收藏的商品</div>
+   	<div class="center_title_bar">我收藏的商品<a href="dealUnfavorAll.jsp" class="prod_favor">清空收藏夹</a></div>
     
     	<%
     
@@ -91,6 +91,9 @@ response.setContentType("text/html; charset=utf-8");
             out.println("</span><br/>收藏时间: <span class='blue'>");	
             out.println(f.getfavortime());
             out.println("</span><br/></div>");
+            out.println("<a href='mycart.jsp?id=");
+		 	out.println(f.getfavoritem());
+		 	out.println("&action=add' class='prod_buy'>添加到购物车</a>");
             out.println("<a href='javascript:confirmDelete(");
             out.println(f.getfavoritem());
             out.println(")' class='prod_favor'>取消收藏</a>");
@@ -105,7 +108,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -113,7 +116,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

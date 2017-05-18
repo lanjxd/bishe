@@ -103,7 +103,7 @@ response.setContentType("text/html; charset=utf-8");
                     </div>
 
                     <div class="form_row">
-                    <input type="submit" value="发布" class="prod_details"/>
+                    <input type="submit" value="发布"/>
                     </div>      
                 </form>
                                     
@@ -116,7 +116,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -124,7 +124,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

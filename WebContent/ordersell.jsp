@@ -9,8 +9,8 @@ response.setContentType("text/html; charset=utf-8");
 <title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript">  
-    function confirmDelete(id){  
-    	if(confirm("确认取消?")){  
+    function confirmCancel(id){  
+    	if(confirm("确认取消订单?")){  
         	window.location="cancelOrder.jsp?id="+id;
         }  
     }  
@@ -70,6 +70,9 @@ response.setContentType("text/html; charset=utf-8");
     		d = orderlist.get(i-1);
     		String itemname = conn.getItem(d.getorderitem()).getitemname();
     		String buyer = d.getbuyername();
+    		User u = new User();
+    		u = conn.saveUser(buyer);
+    		String add = u.getUseradd();
     
     		out.println("<div class='prod_box_big'>");	
     		out.println("<div class='center_prod_box_big'>");
@@ -80,9 +83,11 @@ response.setContentType("text/html; charset=utf-8");
             out.println(itemname);
             out.println("</a>");
     		out.println("<div class='specifications'>");     
-    		out.println("买 家: <span class='blue'>");     
+    		out.println("买 家: <span class='blue'><a href='javascript:alert(\"收货地址：");     
+    		out.println(add);
+    		out.println("\");'>");
     		out.println(buyer);
-    		out.println("</span>数 量: <span class='blue'>");            
+    		out.println("</a></span>数 量: <span class='blue'>");            
     		out.println(d.getordercount());
     		out.println("</span>总价: <span class='blue'>￥ ");            
     		out.println(d.getordersum());
@@ -93,22 +98,26 @@ response.setContentType("text/html; charset=utf-8");
     		out.println(d.getordercond());				
     		out.println("</span></div></div></div>");
     		if(d.getordercond().equals("未付款")){
-    			out.println("<a href='javascript:confirmDelete(");
+    			out.println("<a href='javascript:confirmCancel(");
                 out.println(d.getorderid());
                 out.println(")' class='prod_favor'>取消订单</a>");
     		}else if(d.getordercond().equals("未发货")){   			
-    			out.println("<a href='javascript:confirmDelete(");
+    			out.println("<a href='javascript:confirmCancel(");
                 out.println(d.getorderid());
                 out.println(")' class='prod_favor'>取消订单</a>");
                 out.println("<a href='confirmShipment.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>确认发货</a>");
-    		}else if(d.getordercond().equals("已评价")){
-    			out.println("</span>买家评价:<span class='blue'>");
-                out.println(d.getorderscore());
-                out.println("/ 5</span>");
+    		}else if(d.getordercond().equals("申请退货")){ 
+                out.println("<a href='confirmReturn.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>同意退货</a>");
     		}
-    		                             
+    		if(d.getorderscore() != null){
+    			out.println("<a href='comment.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>查看评价</a>");
+    		}
     		out.println("</div></div>");	
                               
    		}
@@ -119,7 +128,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -127,7 +136,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

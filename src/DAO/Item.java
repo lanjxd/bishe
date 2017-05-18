@@ -11,6 +11,7 @@ public class Item {
 	private String iteminfo;
 	private String itemseller;
 	private String itemimage;
+	private String itemauth;
 
 	public String getitemid() {
 		return itemid;
@@ -65,6 +66,12 @@ public class Item {
 	}
 	public void setitemimage(String itemimage) {
 		this.itemimage = itemimage;
+	}
+	public String getitemauth() {
+		return itemauth;
+	}
+	public void setitemauth(String itemauth) {
+		this.itemauth = itemauth;
 	}
 }
 

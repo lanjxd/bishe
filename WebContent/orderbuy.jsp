@@ -9,11 +9,16 @@ response.setContentType("text/html; charset=utf-8");
 <title>订单</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript">  
-    function confirmDelete(id){  
-    	if(confirm("确认取消?")){  
+    function confirmCancel(id){  
+    	if(confirm("确认取消订单?")){  
         	window.location="cancelOrder.jsp?id="+id;
         }  
-    }  
+    }
+    function confirmReturn(id){  
+    	if(confirm("确认向卖家申请退货?")){  
+        	window.location="apply4Return.jsp?id="+id;
+        }
+    }
 </script>
 </head>
 <body>
@@ -93,14 +98,14 @@ response.setContentType("text/html; charset=utf-8");
     		out.println(d.getordercond());				
     		out.println("</span></div></div></div>");
     		if(d.getordercond().equals("未付款")){
-    			out.println("<a href='javascript:confirmDelete(");
+    			out.println("<a href='javascript:confirmCancel(");
                 out.println(d.getorderid());
                 out.println(")' class='prod_favor'>取消订单</a>");
     			out.println("<a href='payment.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>选择支付方式</a>");               
     		}else if(d.getordercond().equals("未发货")){    			
-    			out.println("<a href='javascript:confirmDelete(");
+    			out.println("<a href='javascript:confirmCancel(");
                 out.println(d.getorderid());
                 out.println(")' class='prod_favor'>取消订单</a>");
                 out.println("<a href='#' class='prod_details'>提醒卖家发货</a>");
@@ -109,13 +114,17 @@ response.setContentType("text/html; charset=utf-8");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>确认收货</a>");
     		}else if(d.getordercond().equals("已收货")){
+    			out.println("<a href='javascript:confirmReturn(");
+                out.println(d.getorderid());
+                out.println(")' class='prod_favor'>申请退货</a>");
                 out.println("<a href='rating.jsp?id=");
                 out.println(d.getorderid());
                 out.println("' class='prod_details'>评价商品</a>");
-    		}else if(d.getordercond().equals("已评价")){
-    			out.println("</span>您的评价:<span class='blue'>");
-                out.println(d.getorderscore());
-                out.println("/ 5</span>");
+    		}
+    		if(d.getorderscore() != null){
+    			out.println("<a href='comment.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>查看评价</a>");
     		}
     		                             
     		out.println("</div></div>");	
@@ -128,7 +137,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -136,7 +145,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

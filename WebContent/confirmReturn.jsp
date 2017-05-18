@@ -8,7 +8,7 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 </head>
 <body>
-<%	
+<%
 	String orderid = request.getParameter("id");
 	
 	DBConnect conn = new DBConnect();
@@ -16,13 +16,8 @@ response.setContentType("text/html; charset=utf-8");
 	String ordercount = d.getordercount();
 	String orderitem = d.getorderitem();
 	String ordercond = d.getordercond();
-	if(ordercond.equals("已退货")||ordercond.equals("已收货")||ordercond.equals("已评价")){
-		conn.deleteOrder(orderid);
-		out.println("<script language='javascript'>alert('已删除订单！');window.location.replace(document.referrer);</script>");
-	}else{
-		conn.cancelOrder(orderid, ordercount, orderitem);
-		out.println("<script language='javascript'>alert('已取消订单！');window.location.replace(document.referrer);</script>");
-	}
+	conn.confirmReturn(orderid, ordercount, orderitem);
+	out.println("<script language='javascript'>alert('退货成功！');window.location.href='ordersell.jsp';</script>");
 %>
 </body>
 </html>

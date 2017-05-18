@@ -8,47 +8,21 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <title>商品详情</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-
-<script type="text/javascript" src="js/boxOver.js"></script>
 <script>
-function confirmDelete(id){  
+function confirmUnfavor(id){  
 	if(confirm("确认取消收藏?")){  
     	window.location="dealUnfavor.jsp?id="+id;
-    }  
-}  
+    }
+}
 
-PositionX = 100;
-PositionY = 100;
-
-defaultWidth  = 500;
-defaultHeight = 500;
-var AutoClose = true;
-
-if (parseInt(navigator.appVersion.charAt(0))>=4){
-var isNN=(navigator.appName=="Netscape")?1:0;
-var isIE=(navigator.appName.indexOf("Microsoft")!=-1)?1:0;}
-var optNN='scrollbars=no,width='+defaultWidth+',height='+defaultHeight+',left='+PositionX+',top='+PositionY;
-var optIE='scrollbars=no,width=150,height=100,left='+PositionX+',top='+PositionY;
-function popImage(imageURL,imageTitle){
-if (isNN){imgWin=window.open('about:blank','',optNN);}
-if (isIE){imgWin=window.open('about:blank','',optIE);}
-with (imgWin.document){
-writeln('<html><head><title>Loading...</title><style>body{margin:0px;}</style>');writeln('<sc'+'ript>');
-writeln('var isNN,isIE;');writeln('if (parseInt(navigator.appVersion.charAt(0))>=4){');
-writeln('isNN=(navigator.appName=="Netscape")?1:0;');writeln('isIE=(navigator.appName.indexOf("Microsoft")!=-1)?1:0;}');
-writeln('function reSizeToImage(){');writeln('if (isIE){');writeln('window.resizeTo(300,300);');
-writeln('width=300-(document.body.clientWidth-document.images[0].width);');
-writeln('height=300-(document.body.clientHeight-document.images[0].height);');
-writeln('window.resizeTo(width,height);}');writeln('if (isNN){');       
-writeln('window.innerWidth=document.images["George"].width;');writeln('window.innerHeight=document.images["George"].height;}}');
-writeln('function doTitle(){document.title="'+imageTitle+'";}');writeln('</sc'+'ript>');
-if (!AutoClose) writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();doTitle();self.focus()">')
-else writeln('</head><body bgcolor=ffffff scroll="no" onload="reSizeToImage();doTitle();self.focus()" onblur="self.close()">');
-writeln('<img name="George" src='+imageURL+' style="display:block"></body></html>');
-close();		
-}}
+function confirmDelete(id){  
+	if(confirm("确认删除?")){  
+    	window.location="deleteItem.jsp?id="+id;
+    }
+}
 </script>
 </head>
+
 <body>
 
 <%
@@ -116,10 +90,10 @@ close();
             <div class="center_prod_box_big">            
                  
                  <div>
-                 	<a href="javascript:popImage('<%=i.getitemimage() %>')" title="header=[查看大图] body=[&nbsp;] fade=[on]">
+                 	<a href="<%=i.getitemimage() %>" target="_blank" title="查看大图">
                  		<img src="<%=i.getitemimage() %>" class="product_img_big"/>
                  	</a>
-                </div>
+                 </div>
                  <div class="details_big_box">
                  	 
                          <div class="product_title_big"><%=i.getitemname() %></div>
@@ -147,16 +121,12 @@ close();
 						 
 					 <%	 
 						 if(myauth.equals("1")){
-						 	out.println("<form method='post' action='dealOrder.jsp?id=");
+						 	out.println("<a href='mycart.jsp?id=");
 						 	out.println(id);
-						 	out.println("' name='orderForm'>"); 
-						 	out.println("<label>数量: </label>");                        
-						 	out.println("<input type='text' name='buynumber' class='number_input' value='1' onkeyup=\"value=value.replace(/[^\\d.]/g,\'\')\"/>");
-						 	out.println("<br/><br/>");
-						 	out.println("<input type='submit' value='购 买'/>");
+						 	out.println("&action=add' class='prod_buy'>添加到购物车</a>");
                          	
                          	if(favored){
-                         		out.println("<a href='javascript:confirmDelete(");
+                         		out.println("<a href='javascript:confirmUnfavor(");
                              	out.println(id);
                              	out.println(")' class='prod_favor'>取消收藏</a>");		 
                          	}
@@ -166,6 +136,13 @@ close();
                              	out.println("' class='prod_favor'>收 藏</a>");
                          	}
                          	out.println("</form>");
+                         }else if(myauth.equals("0")||i.getitemseller().equals(myname)){
+                        	 out.println("<a href='javascript:confirmDelete(");
+                             out.println(id);
+                             out.println(")' class='prod_favor'>删除此物品</a>");
+                             out.println("<a href='iteminfo.jsp?id=");
+                             out.println(id);
+                             out.println("' class='prod_details'>更新物品信息</a>");
                          }
                      %>
                          
@@ -183,7 +160,7 @@ close();
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -191,7 +168,7 @@ close();
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

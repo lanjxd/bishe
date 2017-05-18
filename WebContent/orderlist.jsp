@@ -89,19 +89,19 @@ response.setContentType("text/html; charset=utf-8");
     		out.println(d.getordersum());
     		out.println("</span><br/>下单时间: <span class='blue'>");            
     		out.println(d.getordertime());
-    		out.println("</span>");               	
-    		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");				
-    		out.println(d.getordercond());				
+    		out.println("</span>");
+    		out.println("<div class='prod_price_big'>订单状态：<span class='price'>");
+    		out.println(d.getordercond());
     		out.println("</span></div></div></div>");
-    		if(d.getordercond().equals("已评价")){
-    			out.println("</span>买家评价:<span class='blue'>");
-                out.println(d.getorderscore());
-                out.println("/ 5</span>");
+    		if(d.getorderscore() != null){
+    			out.println("<a href='comment.jsp?id=");
+                out.println(d.getorderid());
+                out.println("' class='prod_details'>查看评价</a>");
     		}
     		out.println("<a href='javascript:confirmDelete(");
             out.println(d.getorderid());
-            out.println(")' class='prod_favor'>删除订单</a>");    		                             
-    		out.println("</div></div>");	
+            out.println(")' class='prod_favor'>删除订单</a>");
+    		out.println("</div></div>");
                               
    		}
    	
@@ -111,7 +111,7 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
         
    </div><!-- end of right content -->   
         
@@ -119,7 +119,7 @@ response.setContentType("text/html; charset=utf-8");
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

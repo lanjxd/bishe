@@ -6,7 +6,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <html>
 <head>
-<title>结算</title>
+<title>商品评价</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -20,6 +20,16 @@ response.setContentType("text/html; charset=utf-8");
 	
 	DBConnect conn = new DBConnect();
     String donation = conn.getDonation();
+    Order r = new Order();
+    r = conn.getOrder(id);
+    String comment = r.getordercomment();
+    String rating = r.getorderscore();
+    int score = Integer.parseInt(rating);
+    switch(score){
+    case 1:rating = "好评";break;
+    case 2:rating = "中评";break;
+    case 3:rating = "差评";break;
+    }
 %>
 
 <div id="main_container">
@@ -40,7 +50,7 @@ response.setContentType("text/html; charset=utf-8");
 		</div><!-- end of menu tab -->
             
     <div class="crumb_navigation">
-    	导 航：<span class="current">付 款</span>
+    	导 航：<span class="current">评 价</span>
     </div>        
     
    <div class="left_content">
@@ -51,40 +61,24 @@ response.setContentType("text/html; charset=utf-8");
 
    <div class="center_content">
    
-   	<div class="center_title_bar">选 择 支 付 方 式</div>
+   	<div class="center_title_bar">买 家 评 价</div>
     
     	<div class="prod_box_big">
 
-            <div class="center_prod_box_big">   
+            <div class="center_prod_box_big">
 			
                 <div class="contact_form">
                     
 					<form>
-					
                     <div class="form_row">
-                    <input type="radio" name="pay" value="alipay" class="number_input" checked/>
-					<label><strong>支 付 宝</strong></label>
-                    </div> 
-					
-					<div class="form_row">
-                    <input type="radio" name="pay" value="wechat" class="number_input" />
-					<label><strong>微 信</strong></label>
+                    <label><strong>综合评价:</strong></label>
+					<span class="blue"><%=rating %></span>
                     </div>
 					
                     <div class="form_row">
-                    <input type="radio" name="pay" value="credit" class="number_input" />
-					<label><strong>信 用 卡</strong></label>
+                    <label><strong>详细评价:</strong></label>
+                    <textarea class="contact_textarea" readonly="readonly"><%=comment %></textarea>
                     </div>
-
-                    <div class="form_row">
-                    <input type="radio" name="pay" value="cod" class="number_input" />
-					<label><strong>货 到 付 款</strong></label>
-                    </div>
-                    
-                    <div class="form_row">
-                    <a href="dealPay.jsp?id=<%=id %>" class="prod_buy">支 付</a>
-                    </div>      
-                    
 					</form>
 					
                 </div> 

@@ -12,8 +12,8 @@ response.setContentType("text/html; charset=utf-8");
     function confirmDelete(id){  
     	if(confirm("确认删除?")){  
         	window.location="deleteItem.jsp?id="+id;
-        }  
-    }  
+        }
+    }
 </script>
 </head>
 <body>
@@ -71,9 +71,17 @@ response.setContentType("text/html; charset=utf-8");
     		
     		out.println("<div class='prod_box'>");
             out.println("<div class='center_prod_box'>");
-            out.println("<div class='product_title'>");
+            out.println("<div><a href='item1.jsp?id=");
+            out.println(i.getitemid());
+            out.println("' title='");
             out.println(i.getitemname());
-            out.println("</div>");
+            if(i.getitemauth().equals("1")){
+            	out.println("' class='product_title'>");
+            }else{
+            	out.println("' class='product_title_red'>");
+            }
+            out.println(i.getitemname());
+            out.println("</a></div>");
             out.println("<img src='");
             out.println(i.getitemimage());
             out.println("' class='product_img'/>");
@@ -86,9 +94,15 @@ response.setContentType("text/html; charset=utf-8");
             out.println("<a href='javascript:confirmDelete(");
             out.println(i.getitemid());
             out.println(")' class='prod_favor'>删除此物品</a>");
-            out.println("<a href='iteminfo.jsp?id=");
-            out.println(i.getitemid());
-            out.println("' class='prod_details'>更新物品信息</a>");
+            if(i.getitemauth().equals("0")){
+            	out.println("<a href='verifyItem.jsp?id=");
+                out.println(i.getitemid());
+                out.println("' class='prod_details'>审核通过</a>");
+            }else{
+            	out.println("<a href='iteminfo.jsp?id=");
+                out.println(i.getitemid());
+                out.println("' class='prod_details'>更新物品信息</a>");
+            }
             out.println("</div></div>");
             
     	}
@@ -99,7 +113,7 @@ response.setContentType("text/html; charset=utf-8");
 
 	<div class="right_content">
  
-		<%@ include file="right_content.jsp" %>
+		<%@ include file="right_content1.jsp" %>
    
 	</div><!-- end of right content -->   
         
@@ -107,7 +121,7 @@ response.setContentType("text/html; charset=utf-8");
    
     <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
     </div>                 
 
