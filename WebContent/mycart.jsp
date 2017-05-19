@@ -96,7 +96,8 @@ List<CartItem> items = c.getItems();
 			<input type="hidden" name="action" value="update"/>  
 			<table class="cart_table">
 			<tr class="form_row">   
-        		<td>名称</td>  
+        		<td>名称</td>
+        		<td>库存</td>  
         		<td>数量</td>  
         		<td>单价</td>  
         		<td>总价</td>  
@@ -109,7 +110,8 @@ List<CartItem> items = c.getItems();
         %>
           
             <tr class="cart_row">  
-                <td><%=ci.getItem().getitemname() %></td>  
+                <td><%=ci.getItem().getitemname() %></td>
+                <td><%=ci.getItem().getitemcount() %></td>  
                 <td>  
                     <input type="text" size=1 name="<%="i" + ci.getItem().getitemid() %>" value="<%=ci.getCount() %>"   
                         onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;"  
@@ -125,15 +127,14 @@ List<CartItem> items = c.getItems();
  		%>
  			
  			<tr>  
-        		<td colspan=2 align="right"><span class="blue">购物车物品总价：</span></td>
-        		<td></td>  
-        		<td colspan=2 align="left"><span class="price">￥<%=c.getTotalPrice() %></span></td>  
+        		<td colspan=5 align="right"><span class="blue">购物车物品总价：</span></td> 
+        		<td><span class="price">￥<%=c.getTotalPrice() %></span></td>  
     		</tr>
     		<tr>  
     			<td>  
              		<a href="mycart.jsp?action=clear" class="prod_favor">清空购物车</a>   
         		</td>
-        		<td colspan=3></td>  
+        		<td colspan=4></td>  
         		<td>  
             		<a href="dealOrder.jsp" class="prod_buy">创建订单</a>
         		</td>  
@@ -153,7 +154,7 @@ List<CartItem> items = c.getItems();
    
    <div class="footer">
    
-        <p>中 财 二 手 义 卖. All Rights Reserved 2017</p>
+        <%@ include file="footer.jsp" %>
    
    </div>                 
 

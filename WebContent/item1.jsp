@@ -121,16 +121,19 @@ function confirmDelete(id){
 						 
 					 <%	 
 						 if(myauth.equals("1")){
-						 	out.println("<a href='mycart.jsp?id=");
-						 	out.println(id);
-						 	out.println("&action=add' class='prod_buy'>添加到购物车</a>");
-                         	
+							if(i.getitemcount().equals("0")){
+								out.println("<a href='#' class='prod_buy'>无货</a>");
+							}else{
+								out.println("<a href='mycart.jsp?id=");
+							 	out.println(id);
+							 	out.println("&action=add' class='prod_buy'>添加到购物车</a>");
+							}
+						 	
                          	if(favored){
                          		out.println("<a href='javascript:confirmUnfavor(");
                              	out.println(id);
                              	out.println(")' class='prod_favor'>取消收藏</a>");		 
-                         	}
-                         	else{
+                         	}else{
                              	out.println("<a href='dealFavor.jsp?id=");
                              	out.println(id);
                              	out.println("' class='prod_favor'>收 藏</a>");
@@ -142,7 +145,7 @@ function confirmDelete(id){
                              out.println(")' class='prod_favor'>删除此物品</a>");
                              out.println("<a href='iteminfo.jsp?id=");
                              out.println(id);
-                             out.println("' class='prod_details'>更新物品信息</a>");
+                             out.println("' class='prod_buy'>更新物品信息</a>");
                          }
                      %>
                          

@@ -69,6 +69,19 @@ response.setContentType("text/html; charset=utf-8");
     		
     		d = orderlist.get(i-1);
     		String itemname = conn.getItem(d.getorderitem()).getitemname();
+    		
+    		String buyer = d.getbuyername();
+    		User bu = new User();
+    		bu = conn.saveUser(buyer);
+    		String b_add = bu.getUseradd();
+    		String b_phone = bu.getUserphone();
+    		String b_mail = bu.getUsermail();
+    		
+    		String seller = d.getsellername();
+    		User su = new User();
+    		su = conn.saveUser(seller);
+    		String s_phone = su.getUserphone();
+    		String s_mail = su.getUsermail();
     
     		out.println("<div class='prod_box_big'>");	
     		out.println("<div class='center_prod_box_big'>");
@@ -79,11 +92,21 @@ response.setContentType("text/html; charset=utf-8");
             out.println(itemname);
             out.println("</a>");
     		out.println("<div class='specifications'>");     
-    		out.println("买 家: <span class='blue'>");     
-    		out.println(d.getbuyername());
-    		out.println("</span>卖 家: <span class='blue'>");     
-    		out.println(d.getsellername());
-    		out.println("</span><br/>数 量: <span class='blue'>");            
+    		out.println("买 家: <span class='blue'><a href='javascript:alert(\"收货地址：");     
+    		out.println(b_add);
+    		out.println("\\n联系电话：");
+    		out.println(b_phone);
+    		out.println("\\n联系邮箱：");
+    		out.println(b_mail);
+    		out.println("\");' title='点击显示买家联系方式'>");     
+    		out.println(buyer);
+    		out.println("</a></span>卖 家: <span class='blue'><a href='javascript:alert(\"联系电话：");     
+    		out.println(s_phone);
+    		out.println("\\n联系邮箱：");
+    		out.println(s_mail);
+    		out.println("\");' title='点击显示卖家联系方式'>");     
+    		out.println(seller);
+    		out.println("</a></span><br/>数 量: <span class='blue'>");            
     		out.println(d.getordercount());
     		out.println("</span>总价: <span class='blue'>￥ ");            
     		out.println(d.getordersum());

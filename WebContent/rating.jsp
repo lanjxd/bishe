@@ -63,12 +63,9 @@ response.setContentType("text/html; charset=utf-8");
 					
                     <div class="form_row">
                     <label><strong>综合评价:</strong></label>
-                    <input type="radio" name="score" value="1" class="number_input" checked/>
-					<label><strong>好评</strong></label>
-                    <input type="radio" name="score" value="2" class="number_input" />
-					<label><strong>中评</strong></label>
-                    <input type="radio" name="score" value="3" class="number_input" />
-					<label><strong>差评</strong></label>
+                    <input type="radio" name="score" value="1" checked/>好评
+                    <input type="radio" name="score" value="2"/>中评
+                    <input type="radio" name="score" value="3"/>差评
                     </div>
 
                     <div class="form_row">
